@@ -1,0 +1,63 @@
+# Batch 1 · present, preterite, imperfect · standard Colombian Spanish (tú / usted)
+
+# topic: apartment
+p0001 | The lift isn't working today
+  El ascensor:w:ascensor#lift no funciona:v:funcionar.pres.usted hoy:w:hoy#today
+p0002 | The doorman takes in the parcels
+  El portero:w:portero#doorman recibe:v:recibir.pres.usted los paquetes:w:paquete#parcel.p
+p0003 | We have to pay the building service charge
+  Tenemos:v:tener.pres.nosotros que pagar:i:pagar la administración:w:administración#service-charge +c:tener-que@0-1
+p0004 | The neighbour's dog makes a lot of noise
+  El perro:w:perro#dog del vecino:w:vecino#neighbour hace:v:hacer.pres.usted mucho:a:mucho#much.m.s ruido:w:ruido#noise
+p0005 | The residents' meeting is on Saturday
+  La asamblea:w:asamblea#assembly de copropietarios:w:copropietario#co-owner.p es:v:ser.pres.usted el sábado:w:sábado#saturday
+p0006 | Water was coming in through the window
+  Entraba:v:entrar.impf.usted agua:w:agua#water por la ventana:w:ventana#window
+p0007 | The building used to have a gym
+  El edificio:w:edificio#building tenía:v:tener.impf.usted un gimnasio:w:gimnasio#gym
+p0008 | I left the keys at reception
+  Dejé:v:dejar.pret.yo las llaves:w:llave#key.p en la portería:w:portería#reception
+p0009 | Does the apartment have parking?
+  ¿El apartamento:w:apartamento#apartment tiene:v:tener.pres.usted parqueadero?:w:parqueadero#parking
+p0010 | The water heater broke yesterday
+  El calentador:w:calentador#water-heater se dañó:v:dañar.pret.usted ayer:w:ayer#yesterday
+p0011 | We used to live on the tenth floor
+  Vivíamos:v:vivir.impf.nosotros en el décimo:a:décimo#tenth.m.s piso:w:piso#floor
+p0012 | The cleaner comes on Tuesdays
+  La señora:w:señora#lady del aseo:w:aseo#cleaning viene:v:venir.pres.usted los martes:w:martes#tuesday
+p0013 | Could you open the door for me, please?
+  ¿Me puede:v:poder.pres.usted abrir:i:abrir la puerta,:w:puerta#door por_favor?:w:por_favor#please
+p0014 | There was no electricity all morning
+  No había:v:haber.impf.usted luz:w:luz#electricity toda:a:todo#all.f.s la mañana:w:mañana#morning
+p0015 | I'm going to change the lock
+  Voy:v:ir.pres.yo a cambiar:i:cambiar la cerradura:w:cerradura#lock +c:ir-a@0-1
+
+# topic: renovations
+p0016 | The builders arrived late again
+  Los maestros:w:maestro#builder.p llegaron:v:llegar.pret.ellos tarde:w:tarde#late otra_vez:w:otra_vez#again
+p0017 | How much does it cost to paint the living room?
+  ¿Cuánto cuesta:v:costar.pres.usted pintar:i:pintar la sala?:w:sala#living-room
+p0018 | They're installing the new kitchen tomorrow
+  Mañana:w:mañana#tomorrow instalan:v:instalar.pres.ellos la cocina:w:cocina#kitchen nueva:a:nuevo#new.f.s
+p0019 | The quote included the materials
+  La cotización:w:cotización#quote incluía:v:incluir.impf.usted los materiales:w:material#material.p
+p0020 | I need a plumber
+  Necesito:v:necesitar.pres.yo un plomero:w:plomero#plumber
+p0021 | The wall had a big crack
+  La pared:w:pared#wall tenía:v:tener.impf.usted una grieta:w:grieta#crack grande:a:grande#big.f.s
+p0022 | We chose white tiles
+  Escogimos:v:escoger.pret.nosotros baldosas:w:baldosa#tile.p blancas:a:blanco#white.f.p
+p0023 | The architect sent the plans yesterday
+  El arquitecto:w:arquitecto#architect mandó:v:mandar.pret.usted los planos:w:plano#plan.p ayer:w:ayer#yesterday
+p0024 | The noise starts at eight
+  El ruido:w:ruido#noise empieza:v:empezar.pres.usted a las ocho:w:ocho#eight
+p0025 | Who fixed the leak?
+  ¿Quién arregló:v:arreglar.pret.usted la fuga?:w:fuga#leak
+p0026 | The bathroom was very small
+  El baño:w:baño#bathroom era:v:ser.impf.usted muy pequeño:a:pequeño#small.m.s
+p0027 | The building work is taking ages
+  La obra:w:obra#building-work se demora:v:demorar.pres.usted mucho:w:mucho#a-lot
+p0028 | They used to work until six
+  Trabajaban:v:trabajar.impf.ellos hasta las seis:w:seis#six
+p0029 | I didn't like the colour
+  No me gustó:v:gustar.pret.usted el color:w:color#colour +c:me-gusta@1-2

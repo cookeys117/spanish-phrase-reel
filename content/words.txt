@@ -1,0 +1,181 @@
+# key (lemma#meaning) | pos | English | gender (nouns) or agreement group (adjectives) | note
+# adjective groups: oa (cansado/a) · e (grande) · cons (fácil, azul) · cons-a (español/a) · inv (naranja)
+# _ inside a key = a space (multi-word items)
+
+# --- apartment ---
+ascensor#lift | noun | lift / elevator | m
+hoy#today | adv | today
+portero#doorman | noun | doorman | m
+paquete#parcel | noun | parcel | m
+administración#service-charge | noun | building service charge | f | Colombian: the monthly building fee
+perro#dog | noun | dog | m
+vecino#neighbour | noun | neighbour | m
+mucho#much | adj | much / a lot of | oa
+mucho#a-lot | adv | a lot
+ruido#noise | noun | noise | m
+asamblea#assembly | noun | residents' meeting | f
+copropietario#co-owner | noun | co-owner | m
+sábado#saturday | noun | Saturday | m
+agua#water | noun | water | f | feminine, but takes el: el agua
+ventana#window | noun | window | f
+edificio#building | noun | building | m
+gimnasio#gym | noun | gym | m
+llave#key | noun | key | f
+portería#reception | noun | building reception / front desk | f | Colombian
+apartamento#apartment | noun | flat / apartment | m
+parqueadero#parking | noun | car park / parking space | m | Colombian
+calentador#water-heater | noun | water heater | m
+ayer#yesterday | adv | yesterday
+décimo#tenth | adj | tenth | oa
+piso#floor | noun | floor (storey) | m
+señora#lady | noun | lady / Mrs | f
+aseo#cleaning | noun | cleaning | m | la señora del aseo = the cleaner (Colombian)
+martes#tuesday | noun | Tuesday | m
+puerta#door | noun | door | f
+por_favor#please | expr | please
+luz#electricity | noun | electricity / light | f
+todo#all | adj | all / the whole | oa
+mañana#morning | noun | morning | f
+cerradura#lock | noun | lock | f
+
+# --- renovations ---
+maestro#builder | noun | builder | m | Colombian: maestro (de obra)
+tarde#late | adv | late
+otra_vez#again | expr | again
+sala#living-room | noun | living room | f
+mañana#tomorrow | adv | tomorrow
+cocina#kitchen | noun | kitchen | f
+nuevo#new | adj | new | oa
+cotización#quote | noun | quote (estimate) | f
+material#material | noun | material | m
+plomero#plumber | noun | plumber | m
+pared#wall | noun | wall | f
+grieta#crack | noun | crack | f
+grande#big | adj | big | e
+baldosa#tile | noun | tile | f
+blanco#white | adj | white | oa
+arquitecto#architect | noun | architect | m
+plano#plan | noun | plan (drawing) | m
+ocho#eight | num | eight
+fuga#leak | noun | leak | f
+baño#bathroom | noun | bathroom | m
+pequeño#small | adj | small | oa
+obra#building-work | noun | building work | f
+seis#six | num | six
+color#colour | noun | colour | m
+
+# --- health ---
+cabeza#head | noun | head | f
+cita#appointment | noun | appointment | f
+médico#doctor | noun | doctor | m
+examen#test | noun | (medical) test / exam | m | plural=exámenes
+mal#badly | adv | badly
+anoche#last-night | adv | last night
+fiebre#fever | noun | fever | f
+mareado#dizzy | adj | dizzy | oa
+droguería#pharmacy | noun | chemist / pharmacy | f | Colombian
+nueve#nine | num | nine
+pastilla#pill | noun | pill / tablet | f
+cada#each | det | each / every
+hora#hour | noun | hour | f
+niño#child | noun | child (boy) | m
+seguro#insurance | noun | insurance | m
+operación#operation | noun | operation | f
+espalda#back | noun | back | f
+urgencias#emergency-room | noun | A&E / emergency room | f
+enfermera#nurse | noun | nurse | f
+amable#kind | adj | kind | e
+fórmula#prescription | noun | prescription | f | Colombian: la fórmula (médica)
+
+# --- restaurants ---
+cuenta#bill | noun | bill (restaurant) | f
+regáleme#can-I-have | expr | could I have… (polite request) | | Colombian
+tinto#black-coffee | noun | black coffee | m | Colombian, NOT red wine
+dos#two | num | two
+sopa#soup | noun | soup | f
+comida#food | noun | food | f
+delicioso#delicious | adj | delicious | oa
+restaurante#restaurant | noun | restaurant | m
+servicio#service-charge | noun | service charge / tip | m
+incluido#included | adj | included | oa
+mesero#waiter | noun | waiter | m | Colombian
+bebida#drink | noun | drink | f
+hambre#hunger | noun | hunger | f | tener hambre = to be hungry
+mesa#table | noun | table | f
+cuatro#four | num | four
+siempre#always | adv | always
+lleno#full | adj | full | oa
+postre#dessert | noun | dessert | m
+demasiado#too-much | adv | too much
+pescado#fish | noun | fish (as food) | m
+cocinero#cook | noun | cook / chef | m
+ajo#garlic | noun | garlic | m
+
+# --- shopping ---
+camisa#shirt | noun | shirt | f
+zapato#shoe | noun | shoe | m
+barato#cheap | adj | cheap | oa
+tarjeta#card | noun | card | f
+verdura#vegetable | noun | vegetable | f
+mercado#market | noun | market | m
+talla#size | noun | size (clothes) | f
+domicilio#home-delivery | noun | home delivery | m | Colombian
+supermercado#supermarket | noun | supermarket | m
+siete#seven | num | seven
+chaqueta#jacket | noun | jacket | f
+porque#because | conj | because
+todo#everything | pron | everything
+caro#expensive | adj | expensive | oa
+año#year | noun | year | m
+pasado#last | adj | last (previous) | oa
+regalo#present | noun | present / gift | m
+hermana#sister | noun | sister | f
+centro_comercial#shopping-centre | noun | shopping centre | m
+azul#blue | adj | blue | cons
+tienda#shop | noun | shop | f
+pan#bread | noun | bread | m
+fresco#fresh | adj | fresh | oa
+
+# --- banking & paperwork ---
+cuenta#account | noun | (bank) account | f
+banco#bank | noun | bank | m
+documento#document | noun | document | m
+cajero#cash-machine | noun | cash machine / ATM | m
+plata#money | noun | money | f | Colombian everyday word for money
+recibo#utility-bill | noun | utility bill | m | Colombian: el recibo de la luz
+formulario#form | noun | form | m
+número#number | noun | number | m
+pasaporte#passport | noun | passport | m
+fila#queue | noun | queue | f
+largo#long | adj | long | oa | false friend: largo = long, NOT large
+comisión#fee | noun | fee / commission | f
+transferencia#transfer | noun | transfer | f
+cédula#ID-card | noun | ID card | f | Colombian
+visa#visa | noun | visa | f
+tres#three | num | three
+mes#month | noun | month | m
+contrato#contract | noun | contract | m
+temprano#early | adv | early
+
+# --- social ---
+fin_de_semana#weekend | noun | weekend | m
+viernes#friday | noun | Friday | m
+hermano#brother | noun | brother | m
+chévere#great | adj | great / cool | e | Colombian
+qué_pena#sorry | expr | sorry / how embarrassing | | Colombian
+de_pronto#maybe | expr | maybe | | Colombian sense (elsewhere: suddenly)
+domingo#sunday | noun | Sunday | m
+amigo#friend | noun | friend | m
+noche#night | noun | night | f
+casa#house | noun | house / home | f
+Bogotá#Bogota | name | Bogotá
+chiste#joke | noun | joke | m
+fiesta#party | noun | party | f
+todos#everyone | pron | everyone
+mismo#same | adj | same | oa
+tiempo#time | noun | time | m
+fútbol#football | noun | football | m
+celular#mobile-phone | noun | mobile phone | m | Colombian
+carro#car | noun | car | m | Colombian
+verdad#truth | noun | truth | f
+nombre#name | noun | name | m

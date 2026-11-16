@@ -1,0 +1,63 @@
+# Batch 1 · present, preterite, imperfect · standard Colombian Spanish (tú / usted)
+
+# topic: health
+p0030 | My head hurts
+  Me duele:v:doler.pres.usted la cabeza:w:cabeza#head +c:me-duele@0-1
+p0031 | I have an appointment with the doctor
+  Tengo:v:tener.pres.yo cita:w:cita#appointment con el médico:w:médico#doctor
+p0032 | The doctor ordered some tests
+  El médico:w:médico#doctor pidió:v:pedir.pret.usted unos exámenes:w:examen#test.p
+p0033 | I slept badly last night
+  Dormí:v:dormir.pret.yo mal:w:mal#badly anoche:w:anoche#last-night
+p0034 | Do you have a temperature?
+  ¿Usted tiene:v:tener.pres.usted fiebre?:w:fiebre#fever
+p0035 | I used to feel dizzy in the mornings
+  Me sentía:v:sentir.impf.yo mareado:a:mareado#dizzy.m.s por la mañana:w:mañana#morning
+p0036 | The chemist closes at nine
+  La droguería:w:droguería#pharmacy cierra:v:cerrar.pres.usted a las nueve:w:nueve#nine
+p0037 | You have to take this pill every eight hours
+  Tiene:v:tener.pres.usted que tomar:i:tomar esta pastilla:w:pastilla#pill cada:w:cada#each ocho:w:ocho#eight horas:w:hora#hour.p +c:tener-que@0-1
+p0038 | When I was a child I used to get ill a lot
+  Cuando era:v:ser.impf.yo niño:w:niño#child me enfermaba:v:enfermar.impf.yo mucho:w:mucho#a-lot
+p0039 | The insurance didn't cover the operation
+  El seguro:w:seguro#insurance no cubrió:v:cubrir.pret.usted la operación:w:operación#operation
+p0040 | My back used to hurt a lot
+  Me dolía:v:doler.impf.usted mucho:w:mucho#a-lot la espalda:w:espalda#back +c:me-duele@0-1
+p0041 | We went to A&E
+  Fuimos:v:ir.pret.nosotros a urgencias:w:urgencias#emergency-room
+p0042 | The nurse is very kind
+  La enfermera:w:enfermera#nurse es:v:ser.pres.usted muy amable:a:amable#kind.f.s
+p0043 | I need the doctor's prescription
+  Necesito:v:necesitar.pres.yo la fórmula:w:fórmula#prescription del médico:w:médico#doctor
+
+# topic: restaurants
+p0044 | The bill, please
+  La cuenta,:w:cuenta#bill por_favor:w:por_favor#please
+p0045 | A black coffee, please
+  Regáleme:w:regáleme#can-I-have un tinto,:w:tinto#black-coffee por_favor:w:por_favor#please
+p0046 | We ordered two soups
+  Pedimos:v:pedir.pret.nosotros dos:w:dos#two sopas:w:sopa#soup.p
+p0047 | The food was delicious
+  La comida:w:comida#food estaba:v:estar.impf.usted deliciosa:a:delicioso#delicious.f.s
+p0048 | What do you recommend?
+  ¿Qué me recomienda?:v:recomendar.pres.usted
+p0049 | We used to have lunch in this restaurant
+  Almorzábamos:v:almorzar.impf.nosotros en este restaurante:w:restaurante#restaurant
+p0050 | Is the service charge included?
+  ¿El servicio:w:servicio#service-charge está:v:estar.pres.usted incluido?:a:incluido#included.m.s
+p0051 | The waiter forgot the drinks
+  El mesero:w:mesero#waiter olvidó:v:olvidar.pret.usted las bebidas:w:bebida#drink.p
+p0052 | I'm not very hungry
+  No tengo:v:tener.pres.yo mucha:a:mucho#much.f.s hambre:w:hambre#hunger
+p0053 | We booked a table for four
+  Reservamos:v:reservar.pret.nosotros una mesa:w:mesa#table para cuatro:w:cuatro#four
+p0054 | The restaurant was always full
+  El restaurante:w:restaurante#restaurant siempre:w:siempre#always estaba:v:estar.impf.usted lleno:a:lleno#full.m.s
+p0055 | Do you want dessert?
+  ¿Tú quieres:v:querer.pres.tu postre?:w:postre#dessert
+p0056 | They charged us too much
+  Nos cobraron:v:cobrar.pret.ellos demasiado:w:demasiado#too-much
+p0057 | I prefer the fish
+  Prefiero:v:preferir.pres.yo el pescado:w:pescado#fish
+p0058 | The cook used to use a lot of garlic
+  El cocinero:w:cocinero#cook cocinaba:v:cocinar.impf.usted con mucho:a:mucho#much.m.s ajo:w:ajo#garlic

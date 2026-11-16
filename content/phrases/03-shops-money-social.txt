@@ -1,0 +1,101 @@
+# Batch 1 · present, preterite, imperfect · standard Colombian Spanish (tú / usted)
+
+# topic: shopping
+p0059 | How much is this?
+  ¿Cuánto vale:v:valer.pres.usted esto?
+p0060 | I'm looking for a shirt
+  Busco:v:buscar.pres.yo una camisa:w:camisa#shirt
+p0061 | These shoes were really cheap
+  Estos zapatos:w:zapato#shoe.p estaban:v:estar.impf.ellos muy baratos:a:barato#cheap.m.p
+p0062 | Can I pay by card?
+  ¿Puedo:v:poder.pres.yo pagar:i:pagar con tarjeta?:w:tarjeta#card
+p0063 | I bought vegetables at the market
+  Compré:v:comprar.pret.yo verduras:w:verdura#vegetable.p en el mercado:w:mercado#market
+p0064 | They didn't have my size
+  No tenían:v:tener.impf.ellos mi talla:w:talla#size
+p0065 | Do you deliver?
+  ¿Ustedes hacen:v:hacer.pres.ellos domicilios?:w:domicilio#home-delivery.p
+p0066 | The supermarket opens at seven
+  El supermercado:w:supermercado#supermarket abre:v:abrir.pres.usted a las siete:w:siete#seven
+p0067 | I returned the jacket because it was small
+  Devolví:v:devolver.pret.yo la chaqueta:w:chaqueta#jacket porque:w:porque#because era:v:ser.impf.usted pequeña:a:pequeño#small.f.s
+p0068 | Everything was more expensive last year
+  Todo:w:todo#everything era:v:ser.impf.usted más caro:a:caro#expensive.m.s el año:w:año#year pasado:a:pasado#last.m.s
+p0069 | I need to buy a present for my sister
+  Necesito:v:necesitar.pres.yo comprar:i:comprar un regalo:w:regalo#present para mi hermana:w:hermana#sister
+p0070 | We spent too much at the shopping centre
+  Gastamos:v:gastar.pret.nosotros demasiado:w:demasiado#too-much en el centro_comercial:w:centro_comercial#shopping-centre
+p0071 | Do you have it in blue?
+  ¿La tiene:v:tener.pres.usted en azul?:a:azul#blue.f.s
+p0072 | The shop used to sell fresh bread
+  La tienda:w:tienda#shop vendía:v:vender.impf.usted pan:w:pan#bread fresco:a:fresco#fresh.m.s
+
+# topic: banking
+p0073 | I want to open an account
+  Quiero:v:querer.pres.yo abrir:i:abrir una cuenta:w:cuenta#account
+p0074 | The bank asked for a lot of documents
+  El banco:w:banco#bank pidió:v:pedir.pret.usted muchos:a:mucho#much.m.p documentos:w:documento#document.p
+p0075 | Do I have to sign here?
+  ¿Tengo:v:tener.pres.yo que firmar:i:firmar aquí? +c:tener-que@0-1
+p0076 | The cash machine didn't give me the money
+  El cajero:w:cajero#cash-machine no me dio:v:dar.pret.usted la plata:w:plata#money
+p0077 | The appointment was at nine
+  La cita:w:cita#appointment era:v:ser.impf.usted a las nueve:w:nueve#nine
+p0078 | We paid the electricity bill
+  Pagamos:v:pagar.pret.nosotros el recibo:w:recibo#utility-bill de la luz:w:luz#electricity
+p0079 | The form asks for the passport number
+  El formulario:w:formulario#form pide:v:pedir.pres.usted el número:w:número#number de pasaporte:w:pasaporte#passport
+p0080 | The queue was very long
+  La fila:w:fila#queue estaba:v:estar.impf.usted muy larga:a:largo#long.f.s
+p0081 | They charge a fee for each transfer
+  Cobran:v:cobrar.pres.ellos una comisión:w:comisión#fee por cada:w:cada#each transferencia:w:transferencia#transfer
+p0082 | I lost my ID card
+  Perdí:v:perder.pret.yo la cédula:w:cédula#ID-card
+p0083 | The visa used to take three months
+  La visa:w:visa#visa demoraba:v:demorar.impf.usted tres:w:tres#three meses:w:mes#month.p
+p0084 | Could you explain the contract to me?
+  ¿Me puede:v:poder.pres.usted explicar:i:explicar el contrato?:w:contrato#contract
+p0085 | The bank closes early on Saturdays
+  El banco:w:banco#bank cierra:v:cerrar.pres.usted temprano:w:temprano#early los sábados:w:sábado#saturday.p
+
+# topic: social
+p0086 | What did you do at the weekend?
+  ¿Qué hiciste:v:hacer.pret.tu el fin_de_semana?:w:fin_de_semana#weekend
+p0087 | We used to go out every Friday
+  Salíamos:v:salir.impf.nosotros todos:a:todo#all.m.p los viernes:w:viernes#friday
+p0088 | I met your brother yesterday
+  Conocí:v:conocer.pret.yo a tu hermano:w:hermano#brother ayer:w:ayer#yesterday
+p0089 | Your apartment is great!
+  ¡Qué chévere:a:chévere#great.m.s tu apartamento!:w:apartamento#apartment
+p0090 | Sorry, I'm late
+  Qué_pena,:w:qué_pena#sorry llegué:v:llegar.pret.yo tarde:w:tarde#late
+p0091 | Maybe we'll see each other on Sunday
+  De_pronto:w:de_pronto#maybe nos vemos:v:ver.pres.nosotros el domingo:w:domingo#sunday
+p0092 | My friends were dancing all night
+  Mis amigos:w:amigo#friend.p bailaban:v:bailar.impf.ellos toda:a:todo#all.f.s la noche:w:noche#night
+p0093 | Do you want to come to my house?
+  ¿Quieres:v:querer.pres.tu venir:i:venir a mi casa?:w:casa#house
+p0094 | We had a lot of fun
+  Nos divertimos:v:divertir.pret.nosotros mucho:w:mucho#a-lot
+p0095 | She used to live in Bogotá
+  Ella vivía:v:vivir.impf.usted en Bogotá:w:Bogotá#Bogota
+p0096 | I didn't get the joke
+  No entendí:v:entender.pret.yo el chiste:w:chiste#joke
+p0097 | They invited us to a party
+  Nos invitaron:v:invitar.pret.ellos a una fiesta:w:fiesta#party
+p0098 | Everyone was talking at the same time
+  Todos:w:todos#everyone hablaban:v:hablar.impf.ellos al mismo:a:mismo#same.m.s tiempo:w:tiempo#time
+p0099 | How long have you been living here?
+  ¿Hace:v:hacer.pres.usted cuánto vive:v:vivir.pres.usted aquí? +c:hace-tiempo@0-1
+p0100 | We used to play football on Sundays
+  Jugábamos:v:jugar.impf.nosotros fútbol:w:fútbol#football los domingos:w:domingo#sunday.p
+p0101 | I found my phone in the car
+  Encontré:v:encontrar.pret.yo mi celular:w:celular#mobile-phone en el carro:w:carro#car
+p0102 | They came very late
+  Vinieron:v:venir.pret.ellos muy tarde:w:tarde#late
+p0103 | Where were you yesterday?
+  ¿Dónde estabas:v:estar.impf.tu ayer?:w:ayer#yesterday
+p0104 | He told me the truth
+  Me dijo:v:decir.pret.usted la verdad:w:verdad#truth
+p0105 | I always forget his name
+  Siempre:w:siempre#always olvido:v:olvidar.pres.yo su nombre:w:nombre#name

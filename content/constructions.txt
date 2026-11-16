@@ -1,0 +1,6 @@
+# id | Spanish pattern | English
+tener-que | tener que + infinitive | to have to
+ir-a | ir a + infinitive | going to (future)
+me-duele | me duele(n) + body part | my … hurts
+me-gusta | me gusta(n) | I like (literally: it pleases me)
+hace-tiempo | hace + time  /  ¿hace cuánto…? | ago / how long
