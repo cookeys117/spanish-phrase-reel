@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161616" media="(prefers-color-scheme: dark)">
+<title>Phrase Reel</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="app/style.css">
+</head>
+<body>
+<div id="app">
+  <div id="ban" class="ban" role="button" tabindex="0"></div>
+  <div class="row top">
+    <button id="mnu" class="ib" aria-label="Menu"><i data-ic="menu-2"></i></button>
+    <div class="seg"><button id="mA">Auto</button><button id="mM">Manual</button></div>
+    <button id="ord" class="small"></button>
+  </div>
+  <div class="row dotsrow"><div id="dots" class="dots"></div><span id="status" class="status"></span></div>
+  <div id="card" class="card"></div>
+  <div class="hints"><div class="lb">Notes</div><div id="hn"></div></div>
+  <p id="legend" class="legend"></p>
+  <div class="bar">
+    <button id="prv" aria-label="Previous card"><i data-ic="player-track-prev"></i></button>
+    <button id="pp" aria-label="Play or pause"><i data-ic="player-play"></i></button>
+    <button id="nxt" aria-label="Next card"><i data-ic="player-track-next"></i></button>
+    <button id="add" aria-label="Add my phrase" class="soon"><i data-ic="plus"></i></button>
+    <button id="qz" class="soon wide"><i data-ic="cards"></i> Quiz</button>
+  </div>
+  <div id="ov" class="ov"></div>
+  <div id="sh" class="sheet" role="dialog" aria-modal="true"></div>
+  <div id="toast" class="toast"></div>
+  <div id="start" class="start"><div class="startbox"><p class="muted">Loading phrases…</p></div></div>
+</div>
+<script type="module" src="app/app.mjs"></script>
+</body>
+</html>

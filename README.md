@@ -5,8 +5,9 @@ spaced repetition underneath, plus an endless vocabulary quiz. Standard Colombia
 
 The full design is in the Claude project doc `plan/phrase-reel-decisions.md`.
 
-**Status: Phase 0 (foundations).** No app screens yet; this is the engine, the content format,
-the validator, the first phrase batch and the audio script.
+**Status: Phase 1 (reel prototype).** Open the app at
+**https://cookeys117.github.io/spanish-phrase-reel/** on the PC or phone. Progress is saved in that
+browser only until sync arrives in Phase 3 (Menu → Export makes a backup file).
 
 ## What's here
 
@@ -18,12 +19,15 @@ the validator, the first phrase batch and the audio script.
 | `tools/build.mjs` | Validates every phrase and writes `build/library.json`, the file the app reads. |
 | `tools/review.mjs` | Writes `build/review.html`, a colour-coded list of every phrase for checking a batch. |
 | `tools/make_audio.py` | Makes the MP3s with Azure (run on your PC, see below). |
-| `tests/` | Engine tests. |
+| `index.html`, `app/` | The app: reel screen (`app.mjs`), scheduling and the ladder (`scheduler.mjs`), audio playback (`player.mjs`). |
+| `audio/` | The phrase MP3s and their manifest. |
+| `tests/` | Engine and scheduler tests. |
 
 ## Commands (Node 18+)
 
 ```
 node tests/engine.test.mjs     # engine tests
+node tests/scheduler.test.mjs  # ladder / phrase-choice tests
 node tools/build.mjs           # validate content -> build/library.json + build/report.txt
 node tools/review.mjs          # build/review.html
 ```
