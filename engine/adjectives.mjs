@@ -61,7 +61,7 @@ export function adjAnalysis(lemma, group, g = 'm', n = 's', short = false){
     parts = [[form.slice(0, -end.length), ''], [end, 'reg']];
   } else if((group === 'e' || group === 'cons') && n === 'p'){
     const end = form.endsWith('es') && !lemma.endsWith('e') ? (lemma.endsWith('z') ? 'ces' : 'es') : 's';
-    parts = [[form.slice(0, -end.length), ''], [end, lemma.endsWith('z') ? 'irr' : 'reg']];
+    parts = [[form.slice(0, -end.length), ''], [end, lemma.endsWith('z') ? 'stem' : 'reg']];
   } else if(group === 'cons-a' && g === 'f'){
     const end = n === 's' ? 'a' : 'as';
     parts = [[form.slice(0, -end.length), ''], [end, 'irr']];

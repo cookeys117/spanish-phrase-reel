@@ -295,6 +295,20 @@ function stemChangeOnlyForm(v, tense, person){
  * Method: compare with the fully regular form; the shared beginning is plain,
  * the part that differs is irregular, and a shared regular ending is blue.
  */
+/** True when this cell comes from a genuinely irregular source (not just a stem or spelling change). */
+function fromIrregularSource(inf, tense, idx){
+  if(IRREGULAR_FULL[inf] && tense !== 'subj') return true;
+  if(tense === 'subj' && (IRREG_SUBJ[inf] || YO_PRES_IRREG[inf])) return true;
+  if(tense === 'pres' && idx === 0 && YO_PRES_IRREG[inf]) return true;
+  if(tense === 'pret' && IRREG_PRETERITE_STEM[inf]) return true;
+  if((tense === 'fut' || tense === 'cond') && IRREG_FUT_STEM[inf]) return true;
+  return false;
+}
+
+/**
+ * Colour classes: 'reg' = regular ending (green), 'stem' = stem or spelling change (blue),
+ * 'irr' = truly irregular part (red), '' = plain.
+ */
 export function segment(inf, tense, person){
   const form = conjugate(inf, tense, person);
   const reg = regularForm(inf, tense, person);
@@ -309,7 +323,7 @@ export function segment(inf, tense, person){
     const fromVowel = v.stemChange.split('-')[0];           // e | o | u
     const i = oldRoot.lastIndexOf(fromVowel);               // the vowel that changes
     const len = newRoot.length - oldRoot.length + 1;        // ie/ue = 2, i/u = 1
-    return [[newRoot.slice(0, i), ''], [newRoot.slice(i, i + len), 'irr'], [newRoot.slice(i + len), ''], [end, 'reg']]
+    return [[newRoot.slice(0, i), ''], [newRoot.slice(i, i + len), 'stem'], [newRoot.slice(i + len), ''], [end, 'reg']]
       .filter(x => x[0]);
   }
   let p = 0;
@@ -318,7 +332,7 @@ export function segment(inf, tense, person){
   while(s < form.length - p && s < reg.length - p && form[form.length-1-s] === reg[reg.length-1-s]) s++;
   const parts = [];
   if(p) parts.push([form.slice(0, p), '']);
-  parts.push([form.slice(p, form.length - s), 'irr']);
+  parts.push([form.slice(p, form.length - s), fromIrregularSource(inf, tense, PERSON_IDX[person]) ? 'irr' : 'stem']);
   if(s){
     const suffix = form.slice(form.length - s);
     if(s >= end.length){

@@ -1,12 +1,12 @@
 :root{
   --bg:#fff; --surface:#f5f4f0; --text:#1f1e1c; --muted:#77756f; --faint:#a6a49d; --line:#e4e2dc; --line2:#cfccc4;
-  --en:#e6f1fb; --es:#f6d9e4; --reg:#2f7fd6; --irr:#d4542b; --hook:#7f77dd;
+  --en:#e6f1fb; --es:#f6d9e4; --reg:#1d6b0c; --stem:#1f6fd1; --irr:#d42a2a; --hook:#7f77dd;
   --green-bg:#dcefc6; --green:#3b6d11; --red-bg:#f9d6d6; --red:#a32d2d; --accent:#185fa5;
   --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root{ --bg:#161616; --surface:#222; --text:#eeece6; --muted:#a3a19a; --faint:#77756f; --line:#2f2e2c; --line2:#45433f;
-    --en:#16324f; --es:#4d2234; --reg:#7fb6f0; --irr:#f0997b; --hook:#afa9ec;
+    --en:#16324f; --es:#4d2234; --reg:#9fd27a; --stem:#85b7eb; --irr:#f58a8a; --hook:#afa9ec;
     --green-bg:#27500a; --green:#c0dd97; --red-bg:#5c1d1d; --red:#f7c1c1; --accent:#85b7eb; }
 }
 *{ box-sizing:border-box; }
@@ -37,8 +37,9 @@ button:active{ transform:scale(.98); }
 .tk{ border-radius:6px; padding:0 2px; cursor:pointer; border-bottom:1.5px dotted var(--line2); -webkit-touch-callout:none; position:relative; }
 .tk.g{ background:var(--green-bg); } .tk.r{ background:var(--red-bg); } .tk.hk{ border-bottom:2px solid var(--hook); }
 .tk sup{ font-size:10px; color:var(--faint); margin-left:1px; }
-.reg{ color:var(--reg); } .irr{ color:var(--irr); }
+.reg{ color:var(--reg); } .stem{ color:var(--stem); } .irr{ color:var(--irr); }
 .noreg .reg{ color:inherit; }
+.irr, .stem{ font-weight:500; }
 .hints{ margin:4px 14px 0; flex:1; overflow:auto; } #hn{ font-size:14px; line-height:1.5; color:var(--muted); } #hn div{ margin-bottom:6px; } #hn b{ color:var(--text); font-weight:500; }
 .legend{ margin:0 14px 8px; font-size:11px; color:var(--faint); }
 .bar{ display:flex; gap:6px; padding:10px 12px calc(14px + env(safe-area-inset-bottom)); border-top:0.5px solid var(--line); }
@@ -72,3 +73,5 @@ textarea{ width:100%; min-height:70px; font:inherit; font-size:14px; padding:8px
 .ic{ width:1.15em; height:1.15em; vertical-align:-0.2em; flex:none; }
 .bar .ic{ width:22px; height:22px; } .ban .ic{ width:16px; height:16px; } .ban .chev{ margin-left:auto; color:var(--faint); }
 .ct tr > :first-child{ position:sticky; left:0; background:var(--bg); z-index:1; }
+.vcat{ font-size:14px; font-style:italic; font-weight:400; }
+.vc-irr{ color:var(--irr); } .vc-reg{ color:var(--reg); } .vc-stem{ color:var(--stem); }

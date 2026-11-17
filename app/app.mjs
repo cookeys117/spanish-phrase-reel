@@ -55,7 +55,9 @@ function todaysTheme(){
 }
 
 /* ---------------- choosing cards ---------------- */
+const forced = new URLSearchParams(location.search).get('ph');   // ?ph=p0059 opens that phrase first (for testing)
 function newCard(){
+  if(forced && !history.length && byId[forced]) return { phrase: byId[forced], slot: 'forced', inst: `${device}-${Date.now()}`, ratings: {} };
   const recent = history.map(c => c.phrase.id);
   const dueRe = requeue.findIndex(r => r.at <= cardCounter);
   const requeueItem = dueRe >= 0 ? requeue.splice(dueRe, 1)[0].item : null;
@@ -208,7 +210,7 @@ function renderAll(){
     const v = Object.values(c.ratings);
     return `<span class="dot ${v.includes('r') ? 'r' : v.includes('g') ? 'g' : ''} ${start + k === pos ? 'cur' : ''}" data-j="${start + k}"></span>`;
   }).join('');
-  $('legend').innerHTML = `<span class="reg">regular</span> · <span class="irr">irregular</span> · tap a word = knew it · hold = more`;
+  $('legend').innerHTML = `<span class="reg">regular</span> · <span class="stem">stem / spelling change</span> · <span class="irr">irregular</span> · tap = knew it · hold = more`;
 }
 
 /* ---------------- sheets ---------------- */
@@ -246,14 +248,20 @@ function openPanel(idx){
   const word = t.t.slice((t.pre || '').length, t.t.length - (t.post || '').length);
   const isVerb = t.verb && t.verb.tense !== 'inf';
   const cons = (c.phrase.constructions || []).filter(k => k.tokens.includes(idx));
-  let h = `<div class="head"><h3>${esc(word)}</h3>${closeBtn}</div><p class="m">${esc(t.m || '')}</p><p class="info">${esc(t.info || '')}</p>`;
+  const VCAT = { regular: ['regular', 'vc-reg'], 'stem-change': ['stem-changing', 'vc-stem'], 'spelling-change': ['spelling change', 'vc-stem'], irregular: ['irregular', 'vc-irr'] };
+  let h;
+  if(t.verb){
+    const [lab, cls] = VCAT[lib.verbs[t.verb.inf]?.cat] || ['', ''];
+    h = `<div class="head"><h3>${esc(t.verb.inf)} <span class="vcat ${cls}">(${lab})</span></h3>${closeBtn}</div><p class="m" style="margin-bottom:10px">${esc(t.m || '')}</p>`;
+  } else {
+    h = `<div class="head"><h3>${esc(word)}</h3>${closeBtn}</div><p class="m">${esc(t.m || '')}</p><p class="info">${esc(t.info || '')}</p>`;
+  }
   h += `<div class="negs">` + (isVerb
     ? `<button class="mb red" data-neg="form">${ic('x')}Didn't know the form</button><button class="mb red" data-neg="meaning">${ic('x')}Didn't know the meaning</button>`
     : `<button class="mb red" data-neg="all">${ic('x')}Didn't know it</button>`) + `</div>`;
   for(const k of cons){ const x = lib.constructions[k.item.slice(2)]; h += `<button class="mb red" data-neg="${k.item}">${ic('x')}Didn't know “${esc(x?.es || k.item)}”</button>`; }
   if(c.ratings[idx]) h += `<button class="mb muted" data-clear>${ic('eraser')}Clear rating</button>`;
-  const CAT = { regular: 'regular verb', 'stem-change': 'stem-changing verb', 'spelling-change': 'spelling-change verb', irregular: 'irregular verb' };
-  if(t.verb) h += `<div class="sec">${esc(t.verb.inf)} · ${esc(lib.verbs[t.verb.inf]?.en || '')} · <b>${CAT[lib.verbs[t.verb.inf]?.cat] || ''}</b></div>` + verbTableHTML(t.verb.inf, t.verb.tense, t.verb.p);
+  if(t.verb) h += `<div style="margin-top:12px"></div>` + verbTableHTML(t.verb.inf, t.verb.tense, t.verb.p);
   if(t.adj) h += `<div class="sec">${esc(t.adj.lemma)} · agreement</div>` + adjTableHTML(t.adj);
   const w = lib.words[(t.items.find(i => i.startsWith('w:')) || '').slice(2)];
   if(w?.note) h += `<div class="sec">Note</div><p class="m">${esc(w.note)}</p>`;

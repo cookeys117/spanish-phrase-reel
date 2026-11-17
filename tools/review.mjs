@@ -31,11 +31,11 @@ table{border-collapse:collapse;width:100%;font-size:15px}
 td,th{border-bottom:1px solid #eee;padding:8px 10px;text-align:left;vertical-align:top}
 th{font-weight:600;font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.04em}
 .es{font-size:17px;background:#fbe7ef}.id,.topic,.tense{color:#888;font-size:13px;white-space:nowrap}
-.tk{border-bottom:1.5px dotted #aaa;cursor:help}.reg{color:#2f7fd6}.irr{color:#d4542b;font-weight:600}
+.tk{border-bottom:1.5px dotted #aaa;cursor:help}.reg{color:#1d6b0c}.stem{color:#1f6fd1;font-weight:600}.irr{color:#d42a2a;font-weight:600}
 @media (prefers-color-scheme:dark){body{background:#1c1c1c;color:#eee}.es{background:#4a2433}td,th{border-color:#333}}
 </style></head><body>
 <h1>Phrase batch review · ${lib.counts.phrases} phrases</h1>
-<p><span class="reg">blue = regular ending</span> · <span class="irr">orange = irregular part</span> ·
+<p><span class="reg">green = regular ending</span> · <span class="stem">blue = stem / spelling change</span> · <span class="irr">red = irregular</span> ·
 dotted words are rateable (hover for meaning and item IDs) · built ${lib.version.slice(0, 16).replace('T', ' ')}</p>
 <table><tr><th>ID</th><th>Topic</th><th>English</th><th>Spanish</th><th>Tense</th></tr>
 ${rows}
