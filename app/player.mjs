@@ -46,12 +46,14 @@ export class Player {
     this.phase = 'ready';
   }
 
-  async start(settings, fromPhase = 'first'){
+  /** opts.phases: run only these phases; opts.onEnd: called instead of onDone (manual mode). */
+  async start(settings, fromPhase = 'first', opts = {}){
     if(!this.card) return;
     const id = ++this.run, alive = () => id === this.run;
     const c = this.card;
-    const order = ['first', 'gap', 'second', 'after'];
-    for(const ph of order.slice(order.indexOf(fromPhase))){
+    const all = ['first', 'gap', 'second', 'after'];
+    const order = opts.phases || all.slice(all.indexOf(fromPhase));
+    for(const ph of order){
       if(!alive()) return;
       this.phase = ph; this.onPhase(ph);
       if(ph === 'first') await this.play(c.first, alive);
@@ -64,6 +66,7 @@ export class Player {
       else if(ph === 'after') await wait(settings.pauseBetween * 1000);
     }
     if(!alive()) return;
+    if(opts.onEnd){ opts.onEnd(); return; }
     this.phase = 'done'; this.onPhase('done'); this.onDone();
   }
 

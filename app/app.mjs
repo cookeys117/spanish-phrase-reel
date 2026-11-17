@@ -28,6 +28,7 @@ const $ = id => document.getElementById(id);
 let lib, byId, states, theme, availableTenses;
 const history = [];               // cards: { phrase, slot, inst, ratings: {tokenIdx: 'g'|'r'} }
 let pos = -1, cardCounter = 0, untouched = 0, playing = false, phase = 'idle', kbd = false;
+let stage = 'asking';             // manual mode: 'asking' (answer hidden) -> 'revealed'
 const requeue = [];               // { item, at }
 const player = new Player(ph => { phase = ph; renderCard(); }, () => onCardDone());
 
@@ -94,20 +95,37 @@ function loadCurrent(){
   const hasUnmasteredIrregular = p.tokens.some(t => (t.items || []).some(i => i.startsWith('vc:') && (states.get(i)?.rung ?? 0) < 3));
   player.load({ first: settings.order === 'en' ? en : es, second: settings.order === 'en' ? es : en, chime: hasUnmasteredIrregular });
 }
+const manual = () => settings.mode === 'manual';
 function startPlaying(fromPhase){
-  playing = true; renderAll();
+  playing = true;
+  if(manual()){
+    // Manual: play the first language, then wait (answer hidden) for a tap to reveal.
+    stage = 'asking'; renderAll();
+    player.start(settings, 'first', { phases: ['first'], onEnd: () => { playing = false; renderAll(); } });
+    return;
+  }
+  renderAll();
   player.start(settings, fromPhase);
+}
+function reveal(){
+  touch();
+  stage = 'revealed'; playing = true; renderAll();
+  player.start(settings, 'second', { phases: ['second'], onEnd: () => { playing = false; markShown(); renderAll(); } });
+}
+function markShown(){
+  const c = cur();
+  if(c && !c.shown){ c.shown = true; logEvent({ ph: c.phrase.id, c: c.inst, r: 'shown' }); refreshStates(); }
 }
 function pausePlaying(){ playing = false; player.pause(); renderAll(); }
 function togglePlay(){
   touch();
+  if(manual()) return stage === 'asking' ? (player.pause(), reveal()) : next();
   if(playing) return pausePlaying();
   if(phase === 'done' || phase === 'after') return next();
   startPlaying(['first', 'gap', 'second'].includes(phase) ? phase : 'first');
 }
 function onCardDone(){
-  const c = cur();
-  if(c && !c.shown){ c.shown = true; logEvent({ ph: c.phrase.id, c: c.inst, r: 'shown' }); refreshStates(); }
+  markShown();
   if(settings.mode === 'auto' && playing){ untouched++; next(); }
   else { playing = false; renderAll(); }
 }
@@ -157,7 +175,8 @@ function renderBanner(){
 function renderCard(){
   const c = cur(); if(!c) return;
   const p = c.phrase;
-  const showSecond = !settings.hideGap || !playing || !['first', 'gap', 'ready', 'idle'].includes(phase);
+  const showSecond = manual() ? stage === 'revealed'
+    : (!settings.hideGap || !playing || !['first', 'gap', 'ready', 'idle'].includes(phase));
   const firstLang = settings.order;
   const speaking = lang => playing && ((phase === 'first' && firstLang === lang) || (phase === 'second' && firstLang !== lang));
   const box = lang => {
@@ -182,13 +201,14 @@ function renderAll(){
   $('mA').classList.toggle('on', settings.mode === 'auto'); $('mM').classList.toggle('on', settings.mode === 'manual');
   $('ord').textContent = settings.order === 'en' ? 'English first' : 'Spanish first';
   $('pp').innerHTML = ic(playing ? 'player-pause' : 'player-play');
-  $('status').textContent = playing ? '' : 'Paused';
+  $('status').textContent = manual() ? (stage === 'asking' ? 'Tap to reveal' : 'Tap for next') : (playing ? '' : 'Paused');
+  if(manual()) $('pp').innerHTML = ic(stage === 'asking' ? 'eye' : 'player-track-next');
   const start = Math.max(0, history.length - 10);
   $('dots').innerHTML = history.slice(start).map((c, k) => {
     const v = Object.values(c.ratings);
     return `<span class="dot ${v.includes('r') ? 'r' : v.includes('g') ? 'g' : ''} ${start + k === pos ? 'cur' : ''}" data-j="${start + k}"></span>`;
   }).join('');
-  $('legend').innerHTML = `<span class="reg">regular</span> · <span class="irr">irregular</span> · tap = knew it · hold = more`;
+  $('legend').innerHTML = `<span class="reg">regular</span> · <span class="irr">irregular</span> · tap a word = knew it · hold = more`;
 }
 
 /* ---------------- sheets ---------------- */
@@ -322,7 +342,7 @@ function openSettings(){
   bind('s_order', v => { settings.order = v; loadCurrent(); });
   bind('s_hide', v => settings.hideGap = v);
   bind('s_gap', v => settings.gapMult = v, x); bind('s_think', v => settings.thinkTime = v, sec); bind('s_pause', v => settings.pauseBetween = v, sec);
-  bind('s_mode', v => settings.mode = v); bind('s_chime', v => settings.chime = v); bind('s_reg', v => settings.regColour = v);
+  bind('s_mode', v => { settings.mode = v; goTo(pos, false); }); bind('s_chime', v => settings.chime = v); bind('s_reg', v => settings.regColour = v);
   bind('s_still', v => settings.stillThere = v, v => v);
   for(const t of ['pres', 'pret', 'impf', 'fut', 'cond', 'subj']) bind('w_' + t, v => settings.weights[t] = v, v => v);
   bind('s_share', v => settings.themeShare = v, pct); bind('s_new', v => settings.newCap = v, v => v);
@@ -357,8 +377,8 @@ function wireInput(){
   $('pp').onclick = togglePlay;
   $('nxt').onclick = () => { touch(); next(); };
   $('prv').onclick = () => { touch(); prev(); };
-  $('mA').onclick = () => { settings.mode = 'auto'; save(KEY.settings, settings); renderAll(); };
-  $('mM').onclick = () => { settings.mode = 'manual'; save(KEY.settings, settings); renderAll(); };
+  $('mA').onclick = () => { if(manual()){ settings.mode = 'auto'; save(KEY.settings, settings); goTo(pos); } };
+  $('mM').onclick = () => { if(!manual()){ settings.mode = 'manual'; save(KEY.settings, settings); goTo(pos); } };
   $('ord').onclick = () => { settings.order = settings.order === 'en' ? 'es' : 'en'; save(KEY.settings, settings); goTo(pos); };
   $('ban').onclick = () => { if(!$('ban').classList.contains('review')) openThemeTable(); };
   $('mnu').onclick = openMenu;
@@ -371,7 +391,7 @@ function wireInput(){
     if($('sh').classList.contains('open')) return;
     if(!$('start').classList.contains('gone')) return;
     const rateable = cur()?.phrase.tokens.map((t, i) => t.items ? i : -1).filter(i => i >= 0) || [];
-    if(e.code === 'Space'){ e.preventDefault(); togglePlay(); }
+    if(e.code === 'Space' || e.key === 'Enter'){ e.preventDefault(); togglePlay(); }
     else if(e.key === 'ArrowRight'){ touch(); next(); }
     else if(e.key === 'ArrowLeft'){ touch(); prev(); }
     else if(/^Digit[1-9]$/.test(e.code)){

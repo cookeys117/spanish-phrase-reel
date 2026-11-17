@@ -1,5 +1,6 @@
 // Tabler icons (MIT licence, tabler.io), inlined so the app works offline.
 const P = {
+"eye": "<path d=\"M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0\" /> <path d=\"M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6\" />",
 "menu-2": "<path d=\"M4 6l16 0\" /> <path d=\"M4 12l16 0\" /> <path d=\"M4 18l16 0\" />",
 "player-track-prev": "<path d=\"M21 5v14l-8 -7z\" /> <path d=\"M10 5v14l-8 -7z\" />",
 "player-play": "<path d=\"M7 4v16l13 -8z\" />",
