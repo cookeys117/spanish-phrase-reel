@@ -14,6 +14,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 
 let A;                    // app api: { lib, byId, getEvents, logEvent, load, save, ladder, openSheet, closeSheet, toast }
 let pool, qs, score, states, q = null, n = 0, open = false, timer = null;
+const qhist = []; let qpos = -1;           // questions seen this session, for ◀ ▶
 const retries = [], recent = [];
 let speechMap = {}, current = null;
 const $ = id => document.getElementById(id);
@@ -75,14 +76,30 @@ function next(){
   }
   n++;
   if(q){
+    qhist.push(q); if(qhist.length > 100) qhist.shift();
+    qpos = qhist.length - 1;
     recent.push(pairKey(q.item.key, q.dir));
     if(q.promptLang === 'es' && qs.autoSpeak) setTimeout(() => speak(q.prompt), 150);
   }
   render();
 }
+const reviewing = () => qpos < qhist.length - 1;
+/** ◀ : look back at earlier questions (already answered — nothing is scored again). */
+function back(){
+  if(qpos <= 0) return;
+  clearTimeout(timer); stopAudio();
+  qpos--; q = qhist[qpos]; render();
+}
+/** ▶ : forward through earlier questions, then on to a new one. */
+function forward(){
+  clearTimeout(timer); stopAudio();
+  if(reviewing()){ qpos++; q = qhist[qpos]; render(); return; }
+  if(q && q.chosen === null) return;           // answer (or "Don't know") the current one first
+  next();
+}
 function answer(i){
   if(!q) return;
-  if(q.chosen !== null) return next();
+  if(q.chosen !== null) return forward();
   q.chosen = i;
   const ok = i === q.answer;
   score.tot++; if(ok) score.ok++; A.save('spr.qscore', score);
@@ -135,10 +152,14 @@ function render(){
       const ex = A.byId[it.examples[0]];
       if(qs.showEx && ex) h += `<div class="qex"><button class="ib" id="qexsay" aria-label="Play example">${ic('volume')}</button><div><div>${esc(ex.es)}</div><div class="muted">${esc(ex.en)}</div></div></div>`;
       if(!qs.autoAdv) h += `<button class="qnext" id="qnext">Next ${ic('arrow-right')}</button>`;
-      else h += `<p class="faint" style="text-align:center;margin-top:10px">Tap anywhere for the next one</p>`;
+      else if(!reviewing()) h += `<p class="faint" style="text-align:center;margin-top:10px">Tap anywhere for the next one</p>`;
     }
   }
   h += `</div>`;
+  const behind = qhist.length - 1 - qpos;
+  h += `<div class="qbar"><button id="qprev" aria-label="Previous question" ${qpos > 0 ? '' : 'disabled'}>${ic('player-track-prev')}</button>
+    <span class="qpos">${behind > 0 ? `Looking back · ${behind} ${behind === 1 ? 'question' : 'questions'} ago` : ''}</span>
+    <button id="qfwd" aria-label="Next question">${ic('player-track-next')}</button></div>`;
   $('quiz').innerHTML = h;
   wire();
 }
@@ -170,16 +191,19 @@ function wire(){
   });
   $('qsay')?.addEventListener('click', e => { e.stopPropagation(); speak(q.prompt, null, true); });
   $('qexsay')?.addEventListener('click', e => { e.stopPropagation(); const ex = q.item.examples[0]; speak('', `audio/${ex}_es.mp3`, true); });
-  $('qnext')?.addEventListener('click', next);
+  $('qnext')?.addEventListener('click', forward);
+  $('qprev').onclick = back; $('qfwd').onclick = forward;
   const body = $('qbody');
-  body.onclick = e => { if(q && q.chosen !== null && !e.target.closest('button')) next(); };
+  body.onclick = e => { if(q && q.chosen !== null && !e.target.closest('button')) forward(); };
 }
 function onKey(e){
   if(!open || e.target.matches('input, textarea, select') || $('sh').classList.contains('open')) return;
   if(e.key === 'Escape') return closeQuiz();
+  if(e.key === 'ArrowLeft') return back();
+  if(e.key === 'ArrowRight') return forward();
   if(/^Digit[1-5]$/.test(e.code)) answer(+e.code.slice(5) - 1);
   else if(e.code === 'Digit0' || (e.code === 'Space' && q && q.chosen === null)){ e.preventDefault(); answer(-1); }
-  else if((e.key === 'Enter' || e.code === 'Space') && q && q.chosen !== null){ e.preventDefault(); next(); }
+  else if((e.key === 'Enter' || e.code === 'Space') && q && q.chosen !== null){ e.preventDefault(); forward(); }
 }
 
 /* ---------- settings ---------- */
