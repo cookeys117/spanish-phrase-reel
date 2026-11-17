@@ -179,3 +179,93 @@ celular#mobile-phone | noun | mobile phone | m | Colombian
 carro#car | noun | car | m | Colombian
 verdad#truth | noun | truth | f
 nombre#name | noun | name | m
+
+# --- batch 2 ---
+administrador#building-manager | noun | building manager | m
+cortina#curtain | noun | curtain | f
+habitación#bedroom | noun | bedroom | f
+música#music | noun | music | f
+arriba#upstairs | adv | upstairs / above
+lavadora#washing-machine | noun | washing machine | f
+balcón#balcony | noun | balcony | m
+planta#plant | noun | plant | f
+arriendo#rent | noun | rent | m | Colombian (elsewhere: alquiler)
+próximo#next | adj | next | oa
+semana#week | noun | week | f
+piso#flooring | noun | floor (surface) | m
+madera#wood | noun | wood | f
+electricista#electrician | noun | electrician | m
+enchufe#socket | noun | socket / plug | m
+polvo#dust | noun | dust | m
+parte#part | noun | part / place | f
+cemento#cement | noun | cement | m
+lunes#monday | noun | Monday | m
+tubo#pipe | noun | pipe | m
+daño#damage | noun | damage | m
+día#day | noun | day | m | masculine despite the -a: el día
+garganta#throat | noun | throat | f
+resultado#result | noun | result | m
+listo#ready | adj | ready | oa | Colombian: ¡listo! = OK / sure
+jueves#thursday | noun | Thursday | m
+medicina#medicine | noun | medicine | f
+después#after | adv | after
+almuerzo#lunch | noun | lunch | m
+abuela#grandmother | noun | grandmother | f
+enfermo#ill | adj | ill / sick | oa
+hay#there-is | expr | there is / there are
+cerca#near | adv | near / nearby
+odontólogo#dentist | noun | dentist | m | Colombian: el odontólogo
+diente#tooth | noun | tooth | m
+incapacidad#sick-note | noun | sick note | f | Colombian: medical leave certificate
+trabajo#work | noun | work / job | m
+plato#dish | noun | dish / plate | m
+frío#cold | adj | cold | oa
+carta#menu | noun | menu | f
+arepa#arepa | noun | arepa (corn cake) | f
+jugo#juice | noun | juice | m | Colombian (Spain: zumo)
+natural#natural | adj | natural / fresh (juice) | cons
+equivocado#wrong | adj | wrong | oa
+algo#something | pron | something
+propina#tip | noun | tip | f
+rápido#quickly | adv | quickly
+kilo#kilo | noun | kilo | m
+papa#potato | noun | potato | f | Colombian: la papa = potato (el Papa = the Pope)
+descuento#discount | noun | discount | m
+efectivo#cash | noun | cash | m
+pantalón#trousers | noun | trousers | m | Colombian: el pantalón (singular)
+fruta#fruit | noun | fruit | f
+plaza#market-square | noun | market (square) | f | Colombian: la plaza (de mercado)
+bolsa#bag | noun | bag | f
+precio#price | noun | price | m
+IVA#VAT | noun | VAT | m
+otro#other | adj | other / another | oa
+notaría#notary-office | noun | notary's office | f | Colombian paperwork happens here
+sistema#system | noun | system | m | masculine despite the -a
+impuesto#tax | noun | tax | m
+abril#april | noun | April | m
+mejor#better | adv | better
+internet#internet | noun | internet | m
+taxi#taxi | noun | taxi | m
+cinco#five | num | five
+minuto#minute | noun | minute | m
+metro#metro | noun | metro | m
+centro#city-centre | noun | city centre | m
+trancón#traffic-jam | noun | traffic jam | m | Colombian
+bus#bus | noun | bus | m
+esquina#corner | noun | corner | f
+aeropuerto#airport | noun | airport | m
+avión#plane | noun | plane | m
+conductor#driver | noun | driver | m
+dirección#address | noun | address | f
+vuelo#flight | noun | flight | m
+bebé#baby | noun | baby | m
+marzo#march | noun | March | m
+joven#young | adj | young | cons | plural adds an accent: jóvenes
+Cartagena#Cartagena | name | Cartagena
+historia#story | noun | story / history | f
+chistoso#funny | adj | funny | oa | Colombian
+cumpleaños#birthday | noun | birthday | m
+película#film | noun | film | f
+después#later | adv | later / afterwards
+calor#heat | noun | heat | m
+frío#cold-weather | noun | cold (weather) | m

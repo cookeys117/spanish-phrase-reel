@@ -4,3 +4,6 @@ ir-a | ir a + infinitive | going to (future)
 me-duele | me duele(n) + body part | my … hurts
 me-gusta | me gusta(n) | I like (literally: it pleases me)
 hace-tiempo | hace + time  /  ¿hace cuánto…? | ago / how long
+hace-clima | hace calor / frío | it's hot / cold (weather)
+me-encanta | me encanta(n) | I love (literally: it delights me)
+por-todas-partes | por todas partes | everywhere

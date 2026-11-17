@@ -1,0 +1,207 @@
+# Batch 2 · adds future (will) and conditional (would) · plus more now / did / used to · new topic: transport
+
+# topic: apartment
+p0106 | The building manager will send the bill tomorrow
+  El administrador:w:administrador#building-manager mandará:v:mandar.fut.usted el recibo:w:recibo#utility-bill mañana:w:mañana#tomorrow
+p0107 | I'd like to change the curtains
+  Me gustaría:v:gustar.cond.usted cambiar:i:cambiar las cortinas:w:cortina#curtain.p +c:me-gusta@0-1
+p0108 | We'll paint the bedroom white
+  Pintaremos:v:pintar.fut.nosotros la habitación:w:habitación#bedroom de blanco:a:blanco#white.m.s
+p0109 | Could you turn the music down, please?
+  ¿Podría:v:poder.cond.usted bajar:i:bajar la música,:w:música#music por_favor?:w:por_favor#please
+p0110 | The neighbours upstairs make a lot of noise
+  Los vecinos:w:vecino#neighbour.p de arriba:w:arriba#upstairs hacen:v:hacer.pres.ellos mucho:a:mucho#much.m.s ruido:w:ruido#noise
+p0111 | The washing machine doesn't work
+  La lavadora:w:lavadora#washing-machine no sirve:v:servir.pres.usted
+p0112 | We used to have a balcony with plants
+  Teníamos:v:tener.impf.nosotros un balcón:w:balcón#balcony con plantas:w:planta#plant.p
+p0113 | I'll leave the key with the doorman
+  Dejaré:v:dejar.fut.yo la llave:w:llave#key con el portero:w:portero#doorman
+p0114 | The apartment gets a lot of light
+  El apartamento:w:apartamento#apartment tiene:v:tener.pres.usted mucha:a:mucho#much.f.s luz:w:luz#electricity
+p0115 | The rent goes up every year
+  El arriendo:w:arriendo#rent sube:v:subir.pres.usted cada:w:cada#each año:w:año#year
+
+# topic: renovations
+p0116 | The builders will finish next week
+  Los maestros:w:maestro#builder.p terminarán:v:terminar.fut.ellos la próxima:a:próximo#next.f.s semana:w:semana#week
+p0117 | I'd prefer a wooden floor
+  Preferiría:v:preferir.cond.yo un piso:w:piso#flooring de madera:w:madera#wood
+p0118 | How long will the work take?
+  ¿Cuánto se demorará:v:demorar.fut.usted la obra?:w:obra#building-work
+p0119 | The electrician changed all the sockets
+  El electricista:w:electricista#electrician cambió:v:cambiar.pret.usted todos:a:todo#all.m.p los enchufes:w:enchufe#socket.p
+p0120 | There was dust everywhere
+  Había:v:haber.impf.usted polvo:w:polvo#dust por todas:a:todo#all.f.p partes:w:parte#part.p +c:por-todas-partes@2-4
+p0121 | We need to buy more cement
+  Necesitamos:v:necesitar.pres.nosotros comprar:i:comprar más cemento:w:cemento#cement
+p0122 | The new door won't arrive until Monday
+  La puerta:w:puerta#door nueva:a:nuevo#new.f.s no llegará:v:llegar.fut.usted hasta el lunes:w:lunes#monday
+p0123 | It would be cheaper to fix it
+  Sería:v:ser.cond.usted más barato:a:barato#cheap.m.s arreglarla:i:arreglar
+p0124 | The architect used to visit the site every Friday
+  El arquitecto:w:arquitecto#architect visitaba:v:visitar.impf.usted la obra:w:obra#building-work todos:a:todo#all.m.p los viernes:w:viernes#friday
+p0125 | They broke a pipe in the kitchen
+  Rompieron:v:romper.pret.ellos un tubo:w:tubo#pipe en la cocina:w:cocina#kitchen
+p0126 | Who's going to pay for the damage?
+  ¿Quién va:v:ir.pres.usted a pagar:i:pagar el daño?:w:daño#damage +c:ir-a@1-2
+
+# topic: health
+p0127 | I'll call the doctor tomorrow
+  Llamaré:v:llamar.fut.yo al médico:w:médico#doctor mañana:w:mañana#tomorrow
+p0128 | You should rest for two days
+  Debería:v:deber.cond.usted descansar:i:descansar dos:w:dos#two días:w:día#day.p
+p0129 | My throat hurts
+  Me duele:v:doler.pres.usted la garganta:w:garganta#throat +c:me-duele@0-1
+p0130 | The results will be ready on Thursday
+  Los resultados:w:resultado#result.p estarán:v:estar.fut.ellos listos:a:listo#ready.m.p el jueves:w:jueves#thursday
+p0131 | I took the medicine after lunch
+  Tomé:v:tomar.pret.yo la medicina:w:medicina#medicine después:w:después#after del almuerzo:w:almuerzo#lunch
+p0132 | My grandmother used to make soup when I was ill
+  Mi abuela:w:abuela#grandmother hacía:v:hacer.impf.usted sopa:w:sopa#soup cuando estaba:v:estar.impf.yo enfermo:a:enfermo#ill.m.s
+p0133 | Is there a chemist near here?
+  ¿Hay:w:hay#there-is una droguería:w:droguería#pharmacy cerca?:w:cerca#near
+p0134 | The dentist cleaned my teeth
+  El odontólogo:w:odontólogo#dentist me limpió:v:limpiar.pret.usted los dientes:w:diente#tooth.p
+p0135 | I'd need a sick note for work
+  Necesitaría:v:necesitar.cond.yo una incapacidad:w:incapacidad#sick-note para el trabajo:w:trabajo#work
+p0136 | We're going to wait for the results
+  Vamos:v:ir.pres.nosotros a esperar:i:esperar los resultados:w:resultado#result.p +c:ir-a@0-1
+
+# topic: restaurants
+p0137 | I'd like a table near the window
+  Me gustaría:v:gustar.cond.usted una mesa:w:mesa#table cerca:w:cerca#near de la ventana:w:ventana#window +c:me-gusta@0-1
+p0138 | What would you recommend?
+  ¿Qué me recomendaría?:v:recomendar.cond.usted
+p0139 | We'll order the dish of the day
+  Pediremos:v:pedir.fut.nosotros el plato:w:plato#dish del día:w:día#day
+p0140 | The soup was cold
+  La sopa:w:sopa#soup estaba:v:estar.impf.usted fría:a:frío#cold.f.s
+p0141 | Could you bring me the menu?
+  ¿Me podría:v:poder.cond.usted traer:i:traer la carta?:w:carta#menu
+p0142 | We used to eat arepas every morning
+  Comíamos:v:comer.impf.nosotros arepas:w:arepa#arepa.p todas:a:todo#all.f.p las mañanas:w:mañana#morning.p
+p0143 | Is the juice fresh (natural)?
+  ¿El jugo:w:jugo#juice es:v:ser.pres.usted natural?:a:natural#natural.m.s
+p0144 | I'm paying for everyone
+  Yo pago:v:pagar.pres.yo por todos:w:todos#everyone
+p0145 | The waiter brought the wrong dish
+  El mesero:w:mesero#waiter trajo:v:traer.pret.usted el plato:w:plato#dish equivocado:a:equivocado#wrong.m.s
+p0146 | Would you like something to drink?
+  ¿Le gustaría:v:gustar.cond.usted algo:w:algo#something de tomar?:i:tomar +c:me-gusta@0-1
+p0147 | The tip isn't included
+  La propina:w:propina#tip no está:v:estar.pres.usted incluida:a:incluido#included.f.s
+p0148 | They served the food really quickly
+  Sirvieron:v:servir.pret.ellos la comida:w:comida#food muy rápido:w:rápido#quickly
+
+# topic: shopping
+p0149 | I'll take two kilos of potatoes
+  Me llevo:v:llevar.pres.yo dos:w:dos#two kilos:w:kilo#kilo.p de papa:w:papa#potato
+p0150 | Would you give me a discount?
+  ¿Me haría:v:hacer.cond.usted un descuento?:w:descuento#discount
+p0151 | The shop will close at eight
+  La tienda:w:tienda#shop cerrará:v:cerrar.fut.usted a las ocho:w:ocho#eight
+p0152 | I paid in cash
+  Pagué:v:pagar.pret.yo en efectivo:w:efectivo#cash
+p0153 | These trousers are very big
+  Este pantalón:w:pantalón#trousers es:v:ser.pres.usted muy grande:a:grande#big.m.s
+p0154 | We used to buy fruit at the market
+  Comprábamos:v:comprar.impf.nosotros la fruta:w:fruta#fruit en la plaza:w:plaza#market-square
+p0155 | Do you have a bag?
+  ¿Tiene:v:tener.pres.usted una bolsa?:w:bolsa#bag
+p0156 | Can I try it on?
+  ¿Me lo puedo:v:poder.pres.yo medir?:i:medir
+p0157 | The price includes VAT
+  El precio:w:precio#price incluye:v:incluir.pres.usted el IVA:w:IVA#VAT
+p0158 | They'll deliver it on Saturday
+  Lo entregarán:v:entregar.fut.ellos el sábado:w:sábado#saturday
+p0159 | I'd buy the blue one
+  Yo compraría:v:comprar.cond.yo el azul:a:azul#blue.m.s
+p0160 | The card didn't go through
+  La tarjeta:w:tarjeta#card no pasó:v:pasar.pret.usted
+
+# topic: banking
+p0161 | I'll send the money tomorrow
+  Mandaré:v:mandar.fut.yo la plata:w:plata#money mañana:w:mañana#tomorrow
+p0162 | Could you lend me some money?
+  ¿Me podría:v:poder.cond.usted prestar:i:prestar plata?:w:plata#money
+p0163 | The bank charged me a fee
+  El banco:w:banco#bank me cobró:v:cobrar.pret.usted una comisión:w:comisión#fee
+p0164 | I used to have an account at another bank
+  Tenía:v:tener.impf.yo una cuenta:w:cuenta#account en otro:a:otro#other.m.s banco:w:banco#bank
+p0165 | I need a new card
+  Necesito:v:necesitar.pres.yo una tarjeta:w:tarjeta#card nueva:a:nuevo#new.f.s
+p0166 | We'll have to go to the notary
+  Tendremos:v:tener.fut.nosotros que ir:i:ir a la notaría:w:notaría#notary-office +c:tener-que@0-1
+p0167 | The system wasn't working
+  El sistema:w:sistema#system no funcionaba:v:funcionar.impf.usted
+p0168 | How much do they charge for the transfer?
+  ¿Cuánto cobran:v:cobrar.pres.ellos por la transferencia?:w:transferencia#transfer
+p0169 | I signed the contract yesterday
+  Firmé:v:firmar.pret.yo el contrato:w:contrato#contract ayer:w:ayer#yesterday
+p0170 | I'll pay the taxes in April
+  Pagaré:v:pagar.fut.yo los impuestos:w:impuesto#tax.p en abril:w:abril#april
+p0171 | It would be better to pay online
+  Sería:v:ser.cond.usted mejor:w:mejor#better pagar:i:pagar por internet:w:internet#internet
+
+# topic: transport
+p0172 | The taxi will arrive in five minutes
+  El taxi:w:taxi#taxi llegará:v:llegar.fut.usted en cinco:w:cinco#five minutos:w:minuto#minute.p
+p0173 | We took the metro to the centre
+  Tomamos:v:tomar.pret.nosotros el metro:w:metro#metro al centro:w:centro#city-centre
+p0174 | Could you drop me here, please?
+  ¿Me podría:v:poder.cond.usted dejar:i:dejar aquí, por_favor?:w:por_favor#please
+p0175 | There was a lot of traffic
+  Había:v:haber.impf.usted mucho:a:mucho#much.m.s trancón:w:trancón#traffic-jam
+p0176 | I'm going to walk to the gym
+  Voy:v:ir.pres.yo a caminar:i:caminar al gimnasio:w:gimnasio#gym +c:ir-a@0-1
+p0177 | The bus used to stop on this corner
+  El bus:w:bus#bus paraba:v:parar.impf.usted en esta esquina:w:esquina#corner
+p0178 | I'll drive to the airport
+  Manejaré:v:manejar.fut.yo hasta el aeropuerto:w:aeropuerto#airport
+p0179 | Where can I park the car?
+  ¿Dónde puedo:v:poder.pres.yo parquear:i:parquear el carro?:w:carro#car
+p0180 | We'd go by plane
+  Iríamos:v:ir.cond.nosotros en avión:w:avión#plane
+p0181 | The driver didn't know the address
+  El conductor:w:conductor#driver no sabía:v:saber.impf.usted la dirección:w:dirección#address
+p0182 | The flight left late
+  El vuelo:w:vuelo#flight salió:v:salir.pret.usted tarde:w:tarde#late
+
+# topic: social
+p0183 | We'll see each other on Friday
+  Nos veremos:v:ver.fut.nosotros el viernes:w:viernes#friday
+p0184 | Would you like to come for dinner?
+  ¿Te gustaría:v:gustar.cond.usted venir:i:venir a comer?:i:comer +c:me-gusta@0-1
+p0185 | My sister is going to have a baby in March
+  Mi hermana:w:hermana#sister tendrá:v:tener.fut.usted un bebé:w:bebé#baby en marzo:w:marzo#march
+p0186 | When I was young I used to dance a lot
+  Cuando era:v:ser.impf.yo joven:a:joven#young.m.s bailaba:v:bailar.impf.yo mucho:w:mucho#a-lot
+p0187 | I'd love to go to Cartagena
+  Me encantaría:v:encantar.cond.usted ir:i:ir a Cartagena:w:Cartagena#Cartagena +c:me-encanta@0-1
+p0188 | They told us a funny story
+  Nos contaron:v:contar.pret.ellos una historia:w:historia#story chistosa:a:chistoso#funny.f.s
+p0189 | What are you going to do tomorrow?
+  ¿Qué vas:v:ir.pres.tu a hacer:i:hacer mañana?:w:mañana#tomorrow +c:ir-a@1-2
+p0190 | I didn't know you lived here
+  No sabía:v:saber.impf.yo que vivías:v:vivir.impf.tu aquí
+p0191 | We'll celebrate my birthday at home
+  Celebraremos:v:celebrar.fut.nosotros mi cumpleaños:w:cumpleaños#birthday en la casa:w:casa#house
+p0192 | It would be great to see you
+  Sería:v:ser.cond.usted chévere:a:chévere#great.m.s verte:i:ver
+p0193 | My friends were waiting for me
+  Mis amigos:w:amigo#friend.p me esperaban:v:esperar.impf.ellos
+p0194 | Did you like the film?
+  ¿Te gustó:v:gustar.pret.usted la película?:w:película#film +c:me-gusta@0-1
+p0195 | We met at a party
+  Nos conocimos:v:conocer.pret.nosotros en una fiesta:w:fiesta#party
+p0196 | I'll tell you later
+  Te cuento:v:contar.pres.yo después:w:después#later
+p0197 | He always used to arrive late
+  Siempre:w:siempre#always llegaba:v:llegar.impf.usted tarde:w:tarde#late
+p0198 | Would you help me with this?
+  ¿Me ayudaría:v:ayudar.cond.usted con esto?
+p0199 | It's very hot today
+  Hace:v:hacer.pres.usted mucho:a:mucho#much.m.s calor:w:calor#heat hoy:w:hoy#today +c:hace-clima@0-2
+p0200 | It was cold last night
+  Hacía:v:hacer.impf.usted frío:w:frío#cold-weather anoche:w:anoche#last-night +c:hace-clima@0-1

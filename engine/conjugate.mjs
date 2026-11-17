@@ -186,6 +186,8 @@ export const VERBS = [
   ['cuidar','to look after'],['lavar','to wash'],['echar','to throw / put'],['romper','to break'],
   ['responder','to reply'],['ocurrir','to happen'],['compartir','to share'],['asistir','to attend'],
   ['enfermar','to make ill (enfermarse = to get ill)'],['cubrir','to cover'],
+  ['descansar','to rest'],['pasar','to pass / go through'],['prestar','to lend'],['parar','to stop'],
+  ['encantar','to delight (me encanta = I love)'],['celebrar','to celebrate'],
 ].map(([inf, en]) => ({ inf, en, cat: 'regular' })).concat([
   // stem-changers
   {inf:'pensar',en:'to think',stemChange:'e-ie'},{inf:'cerrar',en:'to close',stemChange:'e-ie'},
@@ -206,7 +208,7 @@ export const VERBS = [
   {inf:'probar',en:'to try / taste',stemChange:'o-ue'},{inf:'devolver',en:'to give back',stemChange:'o-ue'},
   {inf:'almorzar',en:'to have lunch',stemChange:'o-ue',spelling:'zar'},
   {inf:'pedir',en:'to ask for / order',stemChange:'e-i'},{inf:'servir',en:'to serve / work (be useful)',stemChange:'e-i'},
-  {inf:'repetir',en:'to repeat',stemChange:'e-i'},{inf:'vestir',en:'to dress',stemChange:'e-i'},
+  {inf:'repetir',en:'to repeat',stemChange:'e-i'},{inf:'medir',en:'to measure / try on',stemChange:'e-i'},{inf:'vestir',en:'to dress',stemChange:'e-i'},
   {inf:'seguir',en:'to follow / continue',stemChange:'e-i',spelling:'guir'},
   {inf:'conseguir',en:'to get / manage to',stemChange:'e-i',spelling:'guir'},
   {inf:'empezar',en:'to begin',stemChange:'e-ie',spelling:'zar'},

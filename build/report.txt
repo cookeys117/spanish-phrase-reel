@@ -1,8 +1,8 @@
-Phrases: 105 (105 OK, 0 with errors)
+Phrases: 200 (200 OK, 0 with errors)
 Errors: 0   Warnings: 0
-Verbs used: 67   Words: 164   Constructions: 5
-By tense: {"pres":43,"impf":29,"pret":31}
-By topic: {"apartment":15,"renovations":14,"health":14,"restaurants":15,"shopping":14,"banking":13,"social":20}
-By register: {"usted/3rd":51,"none":50,"tu":4}
+Verbs used: 94   Words: 252   Constructions: 8
+By tense: {"pres":66,"impf":46,"pret":46,"fut":19,"cond":20}
+By topic: {"apartment":25,"renovations":25,"health":24,"restaurants":27,"shopping":26,"banking":24,"social":38,"transport":11}
+By register: {"usted/3rd":101,"none":93,"tu":6}
 
 

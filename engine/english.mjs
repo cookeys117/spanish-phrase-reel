@@ -17,7 +17,8 @@ const E = {
   tardar:['take long','took long'], contestar:['answer'], levantar:['lift'], firmar:['sign'], quejar:['complain'], molestar:['bother'],
   cenar:['have dinner','had dinner'], bailar:['dance'], viajar:['travel','travelled'], cuidar:['look after'], lavar:['wash'],
   echar:['throw','threw'], romper:['break','broke'], responder:['reply'], ocurrir:['happen'], compartir:['share'], asistir:['attend'],
-  enfermar:['get ill','got ill'], cubrir:['cover'],
+  enfermar:['get ill','got ill'], cubrir:['cover'], descansar:['rest'], pasar:['go through','went through'],
+  prestar:['lend','lent'], parar:['stop','stopped'], encantar:['delight'], celebrar:['celebrate'], medir:['try on','tried on'],
   pensar:['think','thought'], cerrar:['close'], entender:['understand','understood'], perder:['lose','lost'], sentar:['seat'],
   despertar:['wake','woke'], recomendar:['recommend'], querer:['want'], sentir:['feel','felt'], preferir:['prefer','preferred'],
   mentir:['lie','lied'], divertir:['have fun','had fun'], sugerir:['suggest'], atender:['serve'], calentar:['heat up'],
@@ -38,7 +39,7 @@ const E = {
 const PAST_OVERRIDE = { conocer: 'met', saber: 'found out' };
 const SUBJECT = { yo: 'I', tu: 'you', usted: 'he/she', nosotros: 'we', ellos: 'they' };
 // Verbs whose forms don't make sense as a person drill (one-person verbs, auxiliaries)
-export const NO_FORM_QUIZ = new Set(['haber', 'gustar', 'doler', 'faltar', 'ocurrir', 'costar', 'funcionar', 'valer']);
+export const NO_FORM_QUIZ = new Set(['haber', 'gustar', 'encantar', 'doler', 'faltar', 'ocurrir', 'costar', 'funcionar', 'valer']);
 
 const third = w => w === 'have' ? 'has' : w === 'do' ? 'does' : w === 'go' ? 'goes' : w === 'can' ? 'can'
   : /(s|sh|ch|x|z)$/.test(w) ? w + 'es' : /[^aeiou]y$/.test(w) ? w.slice(0, -1) + 'ies' : w + 's';
