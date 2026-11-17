@@ -56,13 +56,13 @@ export class Player {
     for(const ph of order){
       if(!alive()) return;
       this.phase = ph; this.onPhase(ph);
-      if(ph === 'first') await this.play(c.first, alive);
+      if(ph === 'first') await this.play(c.first, alive, settings.muted);
       else if(ph === 'gap'){
         await c.second.ready;
-        if(c.chime && settings.chime) chime();
+        if(c.chime && settings.chime && !settings.muted) chime();
         await wait(estimate(c.second) * settings.gapMult * 1000 + settings.thinkTime * 1000);
       }
-      else if(ph === 'second') await this.play(c.second, alive);
+      else if(ph === 'second') await this.play(c.second, alive, settings.muted);
       else if(ph === 'after') await wait(settings.pauseBetween * 1000);
     }
     if(!alive()) return;
@@ -70,9 +70,10 @@ export class Player {
     this.phase = 'done'; this.onPhase('done'); this.onDone();
   }
 
-  play(clip, alive = () => true){
+  play(clip, alive = () => true, silent = false){
     return clip.ready.then(() => new Promise(res => {
       if(!alive()) return res();
+      if(silent) return setTimeout(res, estimate(clip) * 1000);     // muted: keep the timing, no sound
       if(clip.audio){
         this.current = clip.audio;
         clip.audio.currentTime = 0;

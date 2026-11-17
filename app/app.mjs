@@ -11,7 +11,7 @@ const load = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSO
 const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){ toast('Could not save — storage full or blocked'); } };
 
 const DEFAULTS = {
-  order: 'en', hideGap: true, gapMult: 1.0, thinkTime: 1.0, pauseBetween: 1.5, mode: 'auto', chime: true, regColour: true,
+  order: 'en', muted: false, hideGap: true, gapMult: 1.0, thinkTime: 1.0, pauseBetween: 1.5, mode: 'auto', chime: true, regColour: true,
   stillThere: 15, themeShare: 70, newCap: 15,
   weights: { pres: 1, pret: 1, impf: 1, fut: 1, cond: 1, subj: 1 },
   ladder: { firstInterval: 1, factor: 2, maxInterval: 180, redDrop: 2 },
@@ -201,6 +201,10 @@ function renderCard(){
 function renderAll(){
   renderBanner(); renderCard();
   $('mA').classList.toggle('on', settings.mode === 'auto'); $('mM').classList.toggle('on', settings.mode === 'manual');
+  $('mA').innerHTML = (settings.mode === 'auto' ? ic('check') + ' ' : '') + 'Auto';
+  $('mM').innerHTML = (settings.mode === 'manual' ? ic('check') + ' ' : '') + 'Manual';
+  $('mute').innerHTML = ic(settings.muted ? 'volume-off' : 'volume'); $('mute').classList.toggle('muted', settings.muted);
+  $('mute').setAttribute('aria-label', settings.muted ? 'Sound is off' : 'Sound is on');
   $('ord').textContent = settings.order === 'en' ? 'English first' : 'Spanish first';
   $('pp').innerHTML = ic(playing ? 'player-pause' : 'player-play');
   $('status').textContent = manual() ? (stage === 'asking' ? 'Tap to reveal' : 'Tap for next') : (playing ? '' : 'Paused');
@@ -396,6 +400,14 @@ function wireInput(){
   $('ord').onclick = () => { settings.order = settings.order === 'en' ? 'es' : 'en'; save(KEY.settings, settings); goTo(pos); };
   $('ban').onclick = () => { if(!$('ban').classList.contains('review')) openThemeTable(); };
   $('mnu').onclick = openMenu;
+  $('mute').onclick = () => {
+    settings.muted = !settings.muted; save(KEY.settings, settings); renderAll();
+    if(settings.muted && playing){                     // silence whatever is speaking right now
+      if(manual()) player.pause(), (playing = false), renderAll();
+      else { player.pause(); startPlaying(['first', 'gap', 'second'].includes(phase) ? phase : 'first'); }
+    }
+    toast(settings.muted ? 'Sound off · the speaker buttons still play' : 'Sound on');
+  };
   $('ov').onclick = closeSheet;
   $('add').onclick = () => toast('Adding your own phrases comes in Phase 3');
   $('qz').onclick = () => toast('The quiz comes in Phase 2');

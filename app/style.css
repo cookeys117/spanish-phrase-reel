@@ -1,13 +1,13 @@
 :root{
   --bg:#fff; --surface:#f5f4f0; --text:#1f1e1c; --muted:#77756f; --faint:#a6a49d; --line:#e4e2dc; --line2:#cfccc4;
   --en:#e6f1fb; --es:#f6d9e4; --reg:#1d6b0c; --stem:#1f6fd1; --irr:#d42a2a; --hook:#7f77dd;
-  --green-bg:#dcefc6; --green:#3b6d11; --red-bg:#f9d6d6; --red:#a32d2d; --accent:#185fa5;
+  --green-bg:#dcefc6; --green:#3b6d11; --red-bg:#f9d6d6; --red:#a32d2d; --accent:#185fa5; --accent-fill:#185fa5;
   --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root{ --bg:#161616; --surface:#222; --text:#eeece6; --muted:#a3a19a; --faint:#77756f; --line:#2f2e2c; --line2:#45433f;
     --en:#16324f; --es:#4d2234; --reg:#9fd27a; --stem:#85b7eb; --irr:#f58a8a; --hook:#afa9ec;
-    --green-bg:#27500a; --green:#c0dd97; --red-bg:#5c1d1d; --red:#f7c1c1; --accent:#85b7eb; }
+    --green-bg:#27500a; --green:#c0dd97; --red-bg:#5c1d1d; --red:#f7c1c1; --accent:#85b7eb; --accent-fill:#2a6fbd; }
 }
 *{ box-sizing:border-box; }
 html,body{ margin:0; height:100%; background:var(--bg); color:var(--text); font-family:var(--font); -webkit-tap-highlight-color:transparent; }
@@ -18,7 +18,8 @@ button:active{ transform:scale(.98); }
 .top{ padding-top:10px; padding-bottom:6px; }
 .ib{ border:none; padding:6px 8px; font-size:20px; }
 .small{ font-size:13px; padding:5px 10px; }
-.seg{ display:flex; gap:4px; } .seg button{ font-size:13px; padding:5px 10px; } .seg button.on{ background:var(--surface); border-color:var(--line2); font-weight:500; }
+.seg{ display:flex; gap:4px; } .seg button{ font-size:13px; padding:5px 10px; } .seg button.on{ background:var(--accent-fill); border-color:var(--accent-fill); color:#fff; font-weight:500; }
+.tr{ display:flex; align-items:center; gap:2px; } .ib.muted{ color:var(--red); }
 .ban{ display:flex; gap:8px; align-items:center; padding:10px 14px; font-size:14px; border-bottom:0.5px solid var(--line); cursor:pointer; background:var(--surface); }
 .ban.review{ background:transparent; color:var(--faint); cursor:default; }
 .ban b{ font-weight:600; } .ban .ex{ color:var(--muted); } .ban .chev{ margin-left:auto; color:var(--faint); }
