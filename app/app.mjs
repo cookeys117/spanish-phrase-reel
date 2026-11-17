@@ -252,7 +252,8 @@ function openPanel(idx){
     : `<button class="mb red" data-neg="all">${ic('x')}Didn't know it</button>`) + `</div>`;
   for(const k of cons){ const x = lib.constructions[k.item.slice(2)]; h += `<button class="mb red" data-neg="${k.item}">${ic('x')}Didn't know “${esc(x?.es || k.item)}”</button>`; }
   if(c.ratings[idx]) h += `<button class="mb muted" data-clear>${ic('eraser')}Clear rating</button>`;
-  if(t.verb) h += `<div class="sec">${esc(t.verb.inf)} · ${esc(lib.verbs[t.verb.inf]?.en || '')}</div>` + verbTableHTML(t.verb.inf, t.verb.tense, t.verb.p);
+  const CAT = { regular: 'regular verb', 'stem-change': 'stem-changing verb', 'spelling-change': 'spelling-change verb', irregular: 'irregular verb' };
+  if(t.verb) h += `<div class="sec">${esc(t.verb.inf)} · ${esc(lib.verbs[t.verb.inf]?.en || '')} · <b>${CAT[lib.verbs[t.verb.inf]?.cat] || ''}</b></div>` + verbTableHTML(t.verb.inf, t.verb.tense, t.verb.p);
   if(t.adj) h += `<div class="sec">${esc(t.adj.lemma)} · agreement</div>` + adjTableHTML(t.adj);
   const w = lib.words[(t.items.find(i => i.startsWith('w:')) || '').slice(2)];
   if(w?.note) h += `<div class="sec">Note</div><p class="m">${esc(w.note)}</p>`;

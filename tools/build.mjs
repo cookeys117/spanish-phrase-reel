@@ -68,7 +68,9 @@ function analyseToken(tok, ph, i, err){
     if(text[0] !== text[0].toLowerCase()) out.parts[0][0] = out.parts[0][0][0].toUpperCase() + out.parts[0][0].slice(1);
     out.items = [...c.formItems, c.meaningItem];
     out.verb = { inf: tok.v, tense: tok.tense, p: tok.p, kind: c.kind };
-    out.info = `${tok.v} · ${TENSE_LABEL[tok.tense]} · ${PERSON_LABEL[tok.p]} · ${c.kind === 'stem' ? 'stem change ' + getVerb(tok.v).stemChange : c.kind}`;
+    const sc = getVerb(tok.v).stemChange;
+    const formLabel = c.kind === 'regular' ? 'regular form' : c.kind === 'stem' ? `stem change ${sc.replace('-', '→')}` : 'irregular form';
+    out.info = `${tok.v} · ${TENSE_LABEL[tok.tense]} · ${PERSON_LABEL[tok.p]} · ${formLabel}`;
     out.m = getVerb(tok.v).en;
     return out;
   }
