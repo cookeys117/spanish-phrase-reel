@@ -155,7 +155,7 @@ for(const ph of phrases){
 const verbs = {};
 for(const inf of [...usedVerbs].sort()){
   const v = getVerb(inf);
-  verbs[inf] = { en: v.en, cat: v.cat, stemChange: v.stemChange || null, table: table(inf) };
+  verbs[inf] = { en: v.en, cat: v.cat, stemChange: v.stemChange || null, spelling: v.spelling || null, table: table(inf) };
 }
 const library = {
   version: new Date().toISOString(),

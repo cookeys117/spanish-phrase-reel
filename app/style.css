@@ -75,3 +75,4 @@ textarea{ width:100%; min-height:70px; font:inherit; font-size:14px; padding:8px
 .ct tr > :first-child{ position:sticky; left:0; background:var(--bg); z-index:1; }
 .vcat{ font-size:14px; font-style:italic; font-weight:400; }
 .vc-irr{ color:var(--irr); } .vc-reg{ color:var(--reg); } .vc-stem{ color:var(--stem); }
+.chg{ display:inline-block; margin-left:6px; padding:1px 7px; border-radius:10px; font-size:13px; font-weight:500; color:var(--stem); border:1px solid var(--stem); vertical-align:2px; white-space:nowrap; }

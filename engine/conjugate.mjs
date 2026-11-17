@@ -298,6 +298,8 @@ function stemChangeOnlyForm(v, tense, person){
 /** True when this cell comes from a genuinely irregular source (not just a stem or spelling change). */
 function fromIrregularSource(inf, tense, idx){
   if(IRREGULAR_FULL[inf] && tense !== 'subj') return true;
+  // c -> zc (conozco, conozca) is taught as a spelling change, so it's blue, not red
+  if(getVerb(inf).spelling === 'cer-cir-zc' && (tense === 'subj' || (tense === 'pres' && idx === 0))) return false;
   if(tense === 'subj' && (IRREG_SUBJ[inf] || YO_PRES_IRREG[inf])) return true;
   if(tense === 'pres' && idx === 0 && YO_PRES_IRREG[inf]) return true;
   if(tense === 'pret' && IRREG_PRETERITE_STEM[inf]) return true;

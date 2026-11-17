@@ -251,8 +251,13 @@ function openPanel(idx){
   const VCAT = { regular: ['regular', 'vc-reg'], 'stem-change': ['stem-changing', 'vc-stem'], 'spelling-change': ['spelling change', 'vc-stem'], irregular: ['irregular', 'vc-irr'] };
   let h;
   if(t.verb){
-    const [lab, cls] = VCAT[lib.verbs[t.verb.inf]?.cat] || ['', ''];
-    h = `<div class="head"><h3>${esc(t.verb.inf)} <span class="vcat ${cls}">(${lab})</span></h3>${closeBtn}</div><p class="m" style="margin-bottom:10px">${esc(t.m || '')}</p>`;
+    const vb = lib.verbs[t.verb.inf] || {};
+    const [lab, cls] = VCAT[vb.cat] || ['', ''];
+    // the change itself, as small blue tags:  e → ie   z → c
+    const SPELL = { car: 'c → qu', gar: 'g → gu', zar: 'z → c', 'cer-cir-zc': 'c → zc', 'uir-y': 'i → y', 'ger-gir': 'g → j', guir: 'gu → g' };
+    const tags = [vb.stemChange && vb.stemChange.replace('-', ' → '), vb.spelling && SPELL[vb.spelling]].filter(Boolean)
+      .map(x => `<span class="chg">${esc(x)}</span>`).join('');
+    h = `<div class="head"><h3>${esc(t.verb.inf)} <span class="vcat ${cls}">(${lab})</span>${tags}</h3>${closeBtn}</div><p class="m" style="margin-bottom:10px">${esc(t.m || '')}</p>`;
   } else {
     h = `<div class="head"><h3>${esc(word)}</h3>${closeBtn}</div><p class="m">${esc(t.m || '')}</p><p class="info">${esc(t.info || '')}</p>`;
   }
