@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url';
 import { conjugate, classify, segment, table, getVerb, VERB_BY_INF, TENSE_LABEL, PERSON_LABEL } from '../engine/conjugate.mjs';
 import { adjAnalysis, pluralOf, AGREEMENT_PATTERNS } from '../engine/adjectives.mjs';
 import { readWords, readConstructions, readPhrases } from './textformat.mjs';
+import { buildPool, quizSpeech } from '../app/quiz.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const contentDir = join(root, 'content');
@@ -163,6 +164,7 @@ const library = {
             words: Object.keys(words).length, constructions: Object.keys(constructions).length },
   verbs, words, constructions, patterns: AGREEMENT_PATTERNS, phrases: built,
 };
+library.quizSpeech = quizSpeech(buildPool(library));   // Spanish words/forms the quiz speaks (for make_audio.py)
 mkdirSync(join(root, 'build'), { recursive: true });
 writeFileSync(join(root, 'build', 'library.json'), JSON.stringify(library));
 

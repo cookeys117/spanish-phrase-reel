@@ -5,7 +5,7 @@ spaced repetition underneath, plus an endless vocabulary quiz. Standard Colombia
 
 The full design is in the Claude project doc `plan/phrase-reel-decisions.md`.
 
-**Status: Phase 1 (reel prototype).** Open the app at
+**Status: Phase 2 (reel + vocabulary quiz).** Open the app at
 **https://cookeys117.github.io/spanish-phrase-reel/** on the PC or phone. Progress is saved in that
 browser only until sync arrives in Phase 3 (Menu → Export makes a backup file).
 
@@ -19,7 +19,8 @@ browser only until sync arrives in Phase 3 (Menu → Export makes a backup file)
 | `tools/build.mjs` | Validates every phrase and writes `build/library.json`, the file the app reads. |
 | `tools/review.mjs` | Writes `build/review.html`, a colour-coded list of every phrase for checking a batch. |
 | `tools/make_audio.py` | Makes the MP3s with Azure (run on your PC, see below). |
-| `index.html`, `app/` | The app: reel screen (`app.mjs`), scheduling and the ladder (`scheduler.mjs`), audio playback (`player.mjs`). |
+| `index.html`, `app/` | The app: reel screen (`app.mjs`), scheduling and the ladder (`scheduler.mjs`), audio playback (`player.mjs`), the quiz (`quiz.mjs` questions and queue, `quizui.mjs` screen). |
+| `engine/english.mjs` | English renderings of verb forms for the quiz ("tuvimos" = "we had"). |
 | `audio/` | The phrase MP3s and their manifest. |
 | `tests/` | Engine and scheduler tests. |
 
@@ -28,6 +29,7 @@ browser only until sync arrives in Phase 3 (Menu → Export makes a backup file)
 ```
 node tests/engine.test.mjs     # engine tests
 node tests/scheduler.test.mjs  # ladder / phrase-choice tests
+node tests/quiz.test.mjs       # quiz questions and queue (after build)
 node tools/build.mjs           # validate content -> build/library.json + build/report.txt
 node tools/review.mjs          # build/review.html
 ```
@@ -63,4 +65,6 @@ multi-word construction. Vocabulary lives in `content/words.txt`, constructions 
 3. It makes `phrase-audio.zip`. Attach it in the Claude chat and it gets added here.
 
 Spanish alternates Salomé / Gonzalo (es-CO); English alternates Sonia / Ryan (en-GB).
+It also makes one clip per Spanish word / verb form the quiz speaks (`audio/q/`, listed in
+`audio/quiz-manifest.json`); until those exist the quiz uses the device's own Spanish voice.
 Re-running only makes clips that are missing or whose text has changed.

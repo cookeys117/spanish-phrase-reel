@@ -4,6 +4,7 @@ import { Player, chime } from './player.mjs';
 import { segment as conjSegment, conjugate, TENSE_LABEL } from '../engine/conjugate.mjs';
 import { adjForm } from '../engine/adjectives.mjs';
 import { ic } from './icons.mjs';
+import { initQuiz, openQuiz, quizIsOpen } from './quizui.mjs';
 
 /* ---------------- storage ---------------- */
 const KEY = { events: 'spr.events', settings: 'spr.settings', fix: 'spr.fix', dev: 'spr.device', theme: 'spr.theme' };
@@ -42,7 +43,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 const today = () => dayKey();
 const cur = () => history[pos];
 
-function refreshStates(){ states = computeStates(events, byId, settings.ladder); }
+function refreshStates(){ states = computeStates(events.filter(e => e.m !== 'quiz'), byId, settings.ladder); }
 function logEvent(e){ events.push({ t: Date.now(), d: device, m: 'reel', ...e }); save(KEY.events, events); }
 
 /* ---------------- theme of the day ---------------- */
@@ -410,9 +411,9 @@ function wireInput(){
   };
   $('ov').onclick = closeSheet;
   $('add').onclick = () => toast('Adding your own phrases comes in Phase 3');
-  $('qz').onclick = () => toast('The quiz comes in Phase 2');
+  $('qz').onclick = () => { if(playing) pausePlaying(); openQuiz(); };
   document.addEventListener('keydown', e => {
-    if(e.target.matches('input, textarea, select')) return;
+    if(e.target.matches('input, textarea, select') || quizIsOpen()) return;
     if(e.key === 'Escape') return closeSheet();
     if($('sh').classList.contains('open')) return;
     if(!$('start').classList.contains('gone')) return;
@@ -443,6 +444,7 @@ async function init(){
   refreshStates();
   theme = todaysTheme();
   document.querySelectorAll('[data-ic]').forEach(el => el.outerHTML = ic(el.dataset.ic));
+  await initQuiz({ lib, byId, getEvents: () => events, logEvent, load, save, ladder: () => settings.ladder, openSheet, closeSheet, toast });
   wireInput();
   const verbs = [['caminar'], ['comer'], ['vivir']];
   const sample = verbs.map(([v]) => conjugate(v, theme, 'yo')).join(', ');

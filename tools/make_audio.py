@@ -4,7 +4,9 @@ Make the phrase audio with Azure neural text-to-speech (runs on YOUR PC; your ke
 For every phrase in build/library.json that has no audio yet it creates
     audio/<id>_es.mp3   Spanish, alternating es-CO Salomé / Gonzalo phrase by phrase
     audio/<id>_en.mp3   English, alternating en-GB Sonia / Ryan
-updates audio/manifest.json, and finally packs everything into  phrase-audio.zip
+and for every Spanish word / verb form the quiz speaks
+    audio/q/<word>.mp3  (listed in audio/quiz-manifest.json)
+updates the manifests, and finally packs everything into  phrase-audio.zip
 (attach that zip in the Claude chat and it gets added to the app).
 
 Safe to re-run: existing clips are skipped, so an interrupted run just resumes.
@@ -14,8 +16,11 @@ Setup (PowerShell, in the unzipped repository folder):
     $env:AZURE_SPEECH_REGION = "eastus"      # your resource's Location/Region
     python tools\\make_audio.py
 """
+import hashlib
 import json
 import os
+import re
+import unicodedata
 import sys
 import time
 import urllib.error
@@ -27,6 +32,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LIBRARY = os.path.join(ROOT, "build", "library.json")
 AUDIO = os.path.join(ROOT, "audio")
 MANIFEST = os.path.join(AUDIO, "manifest.json")
+QUIZ_MANIFEST = os.path.join(AUDIO, "quiz-manifest.json")
 ZIP_OUT = os.path.join(ROOT, "phrase-audio.zip")
 
 ES_VOICES = ["es-CO-SalomeNeural", "es-CO-GonzaloNeural"]
@@ -76,7 +82,8 @@ def main():
         sys.exit(f"Can't find {LIBRARY}. Run this from the unzipped repository folder.")
 
     with open(LIBRARY, encoding="utf-8") as f:
-        phrases = json.load(f)["phrases"]
+        library = json.load(f)
+    phrases = library["phrases"]
     os.makedirs(AUDIO, exist_ok=True)
     manifest = {}
     if os.path.exists(MANIFEST):
@@ -98,28 +105,54 @@ def main():
                 continue
             jobs.append((p["id"], lang_key, name, text, voice, lang))
 
+    # quiz words: one clip per distinct Spanish word / verb form
+    quiz = {}
+    if os.path.exists(QUIZ_MANIFEST):
+        with open(QUIZ_MANIFEST, encoding="utf-8") as f:
+            quiz = json.load(f)
+    os.makedirs(os.path.join(AUDIO, "q"), exist_ok=True)
+    for i, text in enumerate(library.get("quizSpeech", [])):
+        name = "q/" + slug(text) + ".mp3"
+        if quiz.get(text) == name and os.path.exists(os.path.join(AUDIO, name)):
+            continue
+        jobs.append(("quiz", text, name, text, ES_VOICES[i % 2], "es-CO"))
+
     print(f"{len(phrases)} phrases, {len(jobs)} clips to make "
           f"(about {len(jobs) * SECONDS_BETWEEN_REQUESTS / 60:.0f} min on the free tier).")
     for n, (pid, lang_key, name, text, voice, lang) in enumerate(jobs, 1):
         audio = synthesize(text, voice, lang, key, region)
         with open(os.path.join(AUDIO, name), "wb") as out:
             out.write(audio)
-        manifest[pid][lang_key] = {"file": name, "voice": voice, "text": text}
+        if pid == "quiz":
+            quiz[lang_key] = name
+        else:
+            manifest[pid][lang_key] = {"file": name, "voice": voice, "text": text}
         print(f"  [{n}/{len(jobs)}] {voice.split('-')[2][:-6]:7} {text[:60]}")
         if n % 10 == 0:
-            write_manifest(manifest)
+            write_manifest(manifest, quiz)
         time.sleep(SECONDS_BETWEEN_REQUESTS)
-    write_manifest(manifest)
+    write_manifest(manifest, quiz)
 
     with zipfile.ZipFile(ZIP_OUT, "w", zipfile.ZIP_DEFLATED) as z:
-        for fn in sorted(os.listdir(AUDIO)):
-            z.write(os.path.join(AUDIO, fn), arcname=f"audio/{fn}")
+        for folder, _, files in os.walk(AUDIO):
+            for fn in sorted(files):
+                path = os.path.join(folder, fn)
+                z.write(path, arcname="audio/" + os.path.relpath(path, AUDIO).replace(os.sep, "/"))
     print(f"\nFinished. Attach this file in the Claude chat:\n  {ZIP_OUT}")
 
 
-def write_manifest(manifest):
+def slug(text):
+    """File-safe name: 'el ascensor' -> 'el-ascensor-3f9a1c' (the hash keeps está / esta apart)."""
+    plain = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode().lower()
+    plain = re.sub(r"[^a-z0-9]+", "-", plain).strip("-")[:40]
+    return f"{plain}-{hashlib.md5(text.encode('utf-8')).hexdigest()[:6]}"
+
+
+def write_manifest(manifest, quiz):
     with open(MANIFEST, "w", encoding="utf-8") as f:
         json.dump(manifest, f, ensure_ascii=False, indent=1)
+    with open(QUIZ_MANIFEST, "w", encoding="utf-8") as f:
+        json.dump(quiz, f, ensure_ascii=False, indent=1, sort_keys=True)
 
 
 if __name__ == "__main__":
