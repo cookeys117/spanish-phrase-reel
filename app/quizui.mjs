@@ -26,6 +26,8 @@ export async function initQuiz(api){
   pool = buildPool(A.lib);
   qs = { ...DEFAULTS, ...A.load('spr.quiz', {}) };
   qs.types = { ...DEFAULTS.types, ...(qs.types || {}) };
+  qs.topics = null;                                  // all topics, always (topics stay in the data for grouping)
+  qs.muted = A.startup().muted;
   score = A.load('spr.qscore', { ok: 0, tot: 0 });
   try { speechMap = await (await fetch('audio/quiz-manifest.json', { cache: 'no-cache' })).json(); } catch(e){ speechMap = {}; }
   document.addEventListener('keydown', onKey);
@@ -117,17 +119,14 @@ function answer(i){
 /* ---------- rendering ---------- */
 function chip(on, label, data){ return `<button class="chip ${on ? 'on' : ''}" ${data}>${ic(on ? 'check' : 'plus')} ${esc(label)}</button>`; }
 function render(){
-  const topics = [...new Set(A.lib.phrases.map(p => p.topic))].sort();
   const typesOn = TYPES.filter(([k]) => qs.types[k]).map(([, l]) => l);
-  const summary = `${typesOn.length === TYPES.length ? 'all word types' : typesOn.join(', ') || 'nothing'} · ${DIRS.find(d => d[0] === qs.dir)[1]}`
-    + (qs.topics ? ` · ${qs.topics.length} topic${qs.topics.length > 1 ? 's' : ''}` : '');
+  const summary = `${typesOn.length === TYPES.length ? 'all word types' : typesOn.join(', ') || 'nothing'} · ${DIRS.find(d => d[0] === qs.dir)[1]}`;
   let h = `<div class="qhead"><button class="ib small" id="qback">${ic('arrow-left')} Reel</button><span class="qscore">${score.tot ? `${score.ok} / ${score.tot}` : ''}</span>
     <button class="ib ${qs.muted ? 'muted' : ''}" id="qmute" aria-label="Sound on or off">${ic(qs.muted ? 'volume-off' : 'volume')}</button>
     <button class="ib" id="qmenu" aria-label="Quiz settings">${ic('menu-2')}</button></div>
     <div class="qfilter"><button class="flink" id="qf"><span class="muted">Including:</span> ${esc(summary)} ${ic(qs.open ? 'chevron-up' : 'chevron-down')}</button>`;
   if(qs.open){
     h += `<div class="chips">${TYPES.map(([k, l]) => chip(qs.types[k], l, `data-type="${k}"`)).join('')}</div>`;
-    h += `<div class="chips">${chip(!qs.topics, 'All topics', 'data-topic="*"')}${topics.map(t => chip(qs.topics?.includes(t), t, `data-topic="${t}"`)).join('')}</div>`;
     if(qs.types.form) h += `<div class="chips"><span class="faint">Verb forms:</span> ${TENSES.map(([k, l]) => chip(!qs.tenses || qs.tenses.includes(k), l, `data-tense="${k}"`)).join('')}</div>`;
     h += `<div class="chips">${DIRS.map(([k, l]) => chip(qs.dir === k, l, `data-dir="${k}"`)).join('')}</div>`;
   }
@@ -170,12 +169,6 @@ function wire(){
   $('qf').onclick = () => { qs.open = !qs.open; persist(); render(); };
   const refilter = () => { persist(); retries.length = 0; next(); };
   $('quiz').querySelectorAll('[data-type]').forEach(b => b.onclick = () => { qs.types[b.dataset.type] = !qs.types[b.dataset.type]; refilter(); });
-  $('quiz').querySelectorAll('[data-topic]').forEach(b => b.onclick = () => {
-    const t = b.dataset.topic;
-    if(t === '*') qs.topics = null;
-    else { const cur = qs.topics || []; qs.topics = cur.includes(t) ? cur.filter(x => x !== t) : [...cur, t]; if(!qs.topics.length) qs.topics = null; }
-    refilter();
-  });
   $('quiz').querySelectorAll('[data-tense]').forEach(b => b.onclick = () => {
     const all = TENSES.map(t => t[0]), cur = qs.tenses || all, t = b.dataset.tense;
     qs.tenses = cur.includes(t) ? cur.filter(x => x !== t) : [...cur, t];
@@ -213,6 +206,7 @@ function openSettings(){
   const check = (id, label, val) => `<div class="sr"><span>${label}</span><input type="checkbox" id="${id}" ${val ? 'checked' : ''}></div>`;
   const sec = v => `${(+v).toFixed(1)} s`;
   A.openSheet(`<div class="head"><h3>Quiz settings</h3><button class="ib" data-close aria-label="Close">${ic('x')}</button></div>
+    ${A.startupHTML()}<div class="grp">Quiz</div>
     ${check('q_sound', 'Sound', !qs.muted)}
     ${check('q_speak', 'Speak Spanish automatically', qs.autoSpeak)}
     ${check('q_adv', 'Move on automatically', qs.autoAdv)}
@@ -223,7 +217,7 @@ function openSettings(){
     <button class="mb muted" id="q_reset">${ic('refresh')}Reset the running score (${score.ok} / ${score.tot})</button>
     <p class="faint">The quiz keeps its own ladder, separate from the reel. Each word is tracked both ways (Spanish → English and English → Spanish); English → Spanish joins in “mixed” once you know a word the easy way round.</p>`);
   const bind = (id, fn, fmt) => { const el = $(id); el.oninput = el.onchange = () => { fn(el.type === 'checkbox' ? el.checked : +el.value); if(fmt) $(id + 'o').textContent = fmt(el.value); persist(); }; };
-  bind('q_sound', v => qs.muted = !v); bind('q_speak', v => qs.autoSpeak = v); bind('q_adv', v => qs.autoAdv = v);
+  A.wireStartup(); bind('q_sound', v => qs.muted = !v); bind('q_speak', v => qs.autoSpeak = v); bind('q_adv', v => qs.autoAdv = v);
   bind('q_ok', v => qs.dOk = v, sec); bind('q_bad', v => qs.dBad = v, sec); bind('q_ex', v => qs.showEx = v); bind('q_new', v => qs.newCap = v, v => v);
   $('q_reset').onclick = () => { score = { ok: 0, tot: 0 }; A.save('spr.qscore', score); A.closeSheet(); render(); A.toast('Score reset'); };
   const sh = $('sh'), close = () => render();

@@ -1,5 +1,5 @@
 // Phrase Reel — Phase 1 prototype (reel screen). Progress is kept in this browser only (sync comes in Phase 3).
-import { computeStates, choosePhrase, pickTheme, dayKey, phraseItems, newItemsToday, todaysVerdict } from './scheduler.mjs';
+import { computeStates, choosePhrase, dayKey, phraseItems, newItemsToday, todaysVerdict } from './scheduler.mjs';
 import { Player, chime } from './player.mjs';
 import { segment as conjSegment, conjugate, TENSE_LABEL } from '../engine/conjugate.mjs';
 import { adjForm } from '../engine/adjectives.mjs';
@@ -7,26 +7,29 @@ import { ic } from './icons.mjs';
 import { initQuiz, openQuiz, quizIsOpen } from './quizui.mjs';
 
 /* ---------------- storage ---------------- */
-const KEY = { events: 'spr.events', settings: 'spr.settings', fix: 'spr.fix', dev: 'spr.device', theme: 'spr.theme' };
+const KEY = { events: 'spr.events', settings: 'spr.settings', fix: 'spr.fix', dev: 'spr.device' };
 const load = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e){ return d; } };
 const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){ toast('Could not save — storage full or blocked'); } };
 
 const DEFAULTS = {
   order: 'en', muted: false, hideGap: true, gapMult: 1.0, thinkTime: 1.0, pauseBetween: 1.5, mode: 'auto', chime: true, regColour: true,
-  stillThere: 15, themeShare: 70, newCap: 15,
+  stillThere: 15, newCap: 15,
+  startup: { screen: 'cards', mode: 'manual', muted: false },     // how the app opens (shared with the quiz)
   weights: { pres: 1, pret: 1, impf: 1, fut: 1, cond: 1, subj: 1 },
   ladder: { firstInterval: 1, factor: 2, maxInterval: 180, redDrop: 2 },
 };
 let settings = { ...DEFAULTS, ...load(KEY.settings, {}) };
 settings.weights = { ...DEFAULTS.weights, ...(settings.weights || {}) };
 settings.ladder = { ...DEFAULTS.ladder, ...(settings.ladder || {}) };
+settings.startup = { ...DEFAULTS.startup, ...(settings.startup || {}) };
+settings.mode = settings.startup.mode; settings.muted = settings.startup.muted;
 let events = load(KEY.events, []);
 let fixList = load(KEY.fix, []);
 const device = load(KEY.dev, null) || (() => { const d = 'web-' + Math.random().toString(36).slice(2, 8); save(KEY.dev, d); return d; })();
 
 /* ---------------- state ---------------- */
 const $ = id => document.getElementById(id);
-let lib, byId, states, theme, availableTenses;
+let lib, byId, states, availableTenses, started = false;
 const history = [];               // cards: { phrase, slot, inst, ratings: {tokenIdx: 'g'|'r'} }
 let pos = -1, cardCounter = 0, untouched = 0, playing = false, phase = 'idle', kbd = false;
 let stage = 'asking';             // manual mode: 'asking' (answer hidden) -> 'revealed'
@@ -46,15 +49,6 @@ const cur = () => history[pos];
 function refreshStates(){ states = computeStates(events.filter(e => e.m !== 'quiz'), byId, settings.ladder); }
 function logEvent(e){ events.push({ t: Date.now(), d: device, m: 'reel', ...e }); save(KEY.events, events); }
 
-/* ---------------- theme of the day ---------------- */
-function todaysTheme(){
-  const stored = load(KEY.theme, null);
-  if(stored && stored.day === today() && availableTenses.includes(stored.tense)) return stored.tense;
-  const t = pickTheme(today(), settings.weights, availableTenses);
-  save(KEY.theme, { day: today(), tense: t });
-  return t;
-}
-
 /* ---------------- choosing cards ---------------- */
 const forced = new URLSearchParams(location.search).get('ph');   // ?ph=p0059 opens that phrase first (for testing)
 function newCard(){
@@ -63,7 +57,7 @@ function newCard(){
   const dueRe = requeue.findIndex(r => r.at <= cardCounter);
   const requeueItem = dueRe >= 0 ? requeue.splice(dueRe, 1)[0].item : null;
   const { phrase, slot } = choosePhrase({
-    phrases: lib.phrases, states, today: today(), theme, themeShare: settings.themeShare / 100, recent,
+    phrases: lib.phrases, states, today: today(), theme: null, themeShare: 0, tenseWeights: settings.weights, recent,
     newToday: newItemsToday(states, today()), newCap: settings.newCap, requeueItem,
   });
   cardCounter++;
@@ -100,7 +94,7 @@ function loadCurrent(){
 }
 const manual = () => settings.mode === 'manual';
 function startPlaying(fromPhase){
-  playing = true;
+  playing = true; started = true;
   if(manual()){
     // Manual: play the first language, then wait (answer hidden) for a tap to reveal.
     stage = 'asking'; renderAll();
@@ -164,17 +158,6 @@ function tokenHTML(t, idx, rating){
   const badge = kbd && rateable <= 9 ? `<sup>${rateable}</sup>` : '';
   return `${esc(t.pre || '')}<span class="tk ${rating || ''}" data-i="${idx}">${inner}${badge}</span>${esc(t.post || '')}`;
 }
-function renderBanner(){
-  const c = cur(), b = $('ban');
-  const onTheme = !c || c.phrase.tenses.includes(theme) || !c.phrase.tenses.length;
-  if(c && !onTheme){
-    b.className = 'ban review';
-    b.innerHTML = `${ic('refresh')}<span>Review · not today's theme (${c.phrase.tenses.map(t => TENSE_LABEL[t]).join(', ')})</span>`;
-  } else {
-    b.className = 'ban';
-    b.innerHTML = `${ic('calendar')}<span><b>Today: ${TENSE_LABEL[theme]}</b> <span class="ex">· ${TENSE_EX[theme]}</span></span>${ic('chevron-right','chev')}`;
-  }
-}
 function renderCard(){
   const c = cur(); if(!c) return;
   const p = c.phrase;
@@ -200,7 +183,7 @@ function renderCard(){
   $('hn').innerHTML = notes.join('') || `<span class="faint">${showSecond ? 'No notes on this phrase' : 'Notes appear once the answer shows'}</span>`;
 }
 function renderAll(){
-  renderBanner(); renderCard();
+  renderCard();
   $('mA').classList.toggle('on', settings.mode === 'auto'); $('mM').classList.toggle('on', settings.mode === 'manual');
   $('mA').innerHTML = (settings.mode === 'auto' ? ic('check') + ' ' : '') + 'Auto';
   $('mM').innerHTML = (settings.mode === 'manual' ? ic('check') + ' ' : '') + 'Manual';
@@ -208,7 +191,7 @@ function renderAll(){
   $('mute').setAttribute('aria-label', settings.muted ? 'Sound is off' : 'Sound is on');
   $('ord').textContent = settings.order === 'en' ? 'English first' : 'Spanish first';
   $('pp').innerHTML = ic(playing ? 'player-pause' : 'player-play');
-  $('status').textContent = manual() ? (stage === 'asking' ? 'Tap to reveal' : 'Tap for next') : (playing ? '' : 'Paused');
+  $('status').textContent = manual() ? (stage === 'asking' ? 'Tap to reveal' : 'Tap for next') : (playing ? '' : started ? 'Paused' : 'Tap ▶ to start');
   if(manual()) $('pp').innerHTML = ic(stage === 'asking' ? 'eye' : 'player-track-next');
   const start = Math.max(0, history.length - 10);
   $('dots').innerHTML = history.slice(start).map((c, k) => {
@@ -299,14 +282,6 @@ function openReport(p){
     fixList.push({ t: Date.now(), ph: p.id, es: p.es, en: p.en, note }); save(KEY.fix, fixList); closeSheet(); toast('Added to the fix list');
   };
 }
-function openThemeTable(){
-  const verbs = [['caminar', '-ar'], ['comer', '-er'], ['vivir', '-ir']];
-  let h = `<div class="head"><h3>Today: ${TENSE_FULL[theme]}</h3>${closeBtn}</div><p class="info">Regular endings</p><div class="tbl"><table class="ct"><tr><th></th>${verbs.map(v => `<th>${v[1]} (${v[0]})</th>`).join('')}</tr>`;
-  for(const p of PERSONS){
-    h += `<tr><th>${PERSON_LABEL[p]}</th>` + verbs.map(([inf]) => `<td>${conjSegment(inf, theme, p).map(([s, k]) => k ? `<span class="${k}">${esc(s)}</span>` : esc(s)).join('')}</td>`).join('') + '</tr>';
-  }
-  openSheet(h + '</table></div>');
-}
 
 /* ---------------- menu, settings, fix list ---------------- */
 function openMenu(){
@@ -335,19 +310,18 @@ function openSettings(){
   const sec = s => `${(+s).toFixed(1)} s`, x = v => `×${(+v).toFixed(1)}`, pct = v => `${v}%`, days = v => `${v} d`;
   const L = settings.ladder;
   let h = `<div class="head"><h3>Reel settings</h3>${closeBtn}</div>
+    ${startupHTML()}
     <div class="grp">Playback</div>
     ${sel('s_order', 'Which language first', settings.order, [['en', 'English first'], ['es', 'Spanish first']])}
     ${check('s_hide', 'Hide the answer during the gap', settings.hideGap)}
     ${range('s_gap', 'Gap length (× answer length)', settings.gapMult, 0.5, 2.5, 0.1, x)}
     ${range('s_think', 'Extra thinking time', settings.thinkTime, 0, 4, 0.5, sec)}
     ${range('s_pause', 'Pause between cards', settings.pauseBetween, 0.5, 5, 0.5, sec)}
-    ${sel('s_mode', 'Start in', settings.mode, [['auto', 'Auto'], ['manual', 'Manual']])}
     ${check('s_chime', 'Chime for irregular verbs not yet learned', settings.chime)}
-    ${check('s_reg', 'Colour regular endings blue', settings.regColour)}
+    ${check('s_reg', 'Colour regular endings green', settings.regColour)}
     ${range('s_still', '“Still there?” after this many untouched cards (0 = off)', settings.stillThere, 0, 50, 5)}
-    <div class="grp">Today's theme · how often each tense is picked</div>
+    <div class="grp">How often each tense comes up (0 = never)</div>
     ${['pres', 'pret', 'impf', 'fut', 'cond', 'subj'].map(t => range('w_' + t, TENSE_FULL[t] + (availableTenses.includes(t) ? '' : ' <span class="faint">(no phrases yet)</span>'), settings.weights[t], 0, 3, 0.5)).join('')}
-    ${range('s_share', 'Theme vs review', settings.themeShare, 50, 100, 5, pct)}
     ${range('s_new', 'New items per day (at most)', settings.newCap, 0, 50, 1)}
     <div class="grp">Advanced · the ladder</div>
     ${range('l_first', 'First interval', L.firstInterval, 1, 3, 1, days)}
@@ -361,11 +335,26 @@ function openSettings(){
   bind('s_order', v => { settings.order = v; loadCurrent(); });
   bind('s_hide', v => settings.hideGap = v);
   bind('s_gap', v => settings.gapMult = v, x); bind('s_think', v => settings.thinkTime = v, sec); bind('s_pause', v => settings.pauseBetween = v, sec);
-  bind('s_mode', v => { settings.mode = v; goTo(pos, false); }); bind('s_chime', v => settings.chime = v); bind('s_reg', v => settings.regColour = v);
+  wireStartup(); bind('s_chime', v => settings.chime = v); bind('s_reg', v => settings.regColour = v);
   bind('s_still', v => settings.stillThere = v, v => v);
   for(const t of ['pres', 'pret', 'impf', 'fut', 'cond', 'subj']) bind('w_' + t, v => settings.weights[t] = v, v => v);
-  bind('s_share', v => settings.themeShare = v, pct); bind('s_new', v => settings.newCap = v, v => v);
+  bind('s_new', v => settings.newCap = v, v => v);
   bind('l_first', v => L.firstInterval = v, days); bind('l_factor', v => L.factor = v, x); bind('l_max', v => L.maxInterval = v, days); bind('l_drop', v => L.redDrop = v, v => v);
+}
+
+/* ---------------- start-up settings (shared by both settings pages) ---------------- */
+function startupHTML(){
+  const S = settings.startup, opt = (v, cur, l) => `<option value="${v}" ${v === cur ? 'selected' : ''}>${l}</option>`;
+  return `<div class="grp">When the app opens</div>
+    <div class="sr"><span>Open with</span><select id="st_screen">${opt('cards', S.screen, 'Phrase cards')}${opt('quiz', S.screen, 'Quiz')}</select></div>
+    <div class="sr"><span>Cards start in</span><select id="st_mode">${opt('manual', S.mode, 'Manual')}${opt('auto', S.mode, 'Auto')}</select></div>
+    <div class="sr"><span>Sound</span><select id="st_sound">${opt('on', S.muted ? 'off' : 'on', 'On')}${opt('off', S.muted ? 'off' : 'on', 'Off (muted)')}</select></div>`;
+}
+export function wireStartup(){
+  const set = (k, v) => { settings.startup[k] = v; save(KEY.settings, settings); };
+  $('st_screen').onchange = e => set('screen', e.target.value);
+  $('st_mode').onchange = e => set('mode', e.target.value);
+  $('st_sound').onchange = e => set('muted', e.target.value === 'off');
 }
 
 /* ---------------- toast ---------------- */
@@ -399,7 +388,6 @@ function wireInput(){
   $('mA').onclick = () => { if(manual()){ settings.mode = 'auto'; save(KEY.settings, settings); goTo(pos); } };
   $('mM').onclick = () => { if(!manual()){ settings.mode = 'manual'; save(KEY.settings, settings); goTo(pos); } };
   $('ord').onclick = () => { settings.order = settings.order === 'en' ? 'es' : 'en'; save(KEY.settings, settings); goTo(pos); };
-  $('ban').onclick = () => { if(!$('ban').classList.contains('review')) openThemeTable(); };
   $('mnu').onclick = openMenu;
   $('mute').onclick = () => {
     settings.muted = !settings.muted; save(KEY.settings, settings); renderAll();
@@ -413,10 +401,10 @@ function wireInput(){
   $('add').onclick = () => toast('Adding your own phrases comes in Phase 3');
   $('qz').onclick = () => { if(playing) pausePlaying(); openQuiz(); };
   document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && $('sh').classList.contains('open')) return closeSheet();
     if(e.target.matches('input, textarea, select') || quizIsOpen()) return;
     if(e.key === 'Escape') return closeSheet();
     if($('sh').classList.contains('open')) return;
-    if(!$('start').classList.contains('gone')) return;
     const rateable = cur()?.phrase.tokens.map((t, i) => t.items ? i : -1).filter(i => i >= 0) || [];
     if(e.code === 'Space' || e.key === 'Enter'){ e.preventDefault(); togglePlay(); }
     else if(e.key === 'ArrowRight'){ touch(); next(); }
@@ -435,28 +423,21 @@ async function init(){
   try {
     lib = await (await fetch('build/library.json', { cache: 'no-cache' })).json();
   } catch(e){
-    $('start').innerHTML = `<div class="startbox"><h2>Couldn't load the phrases</h2><p class="muted">Check your connection and reload.</p></div>`; return;
+    $('card').innerHTML = `<p class="muted" style="padding:20px">Couldn't load the phrases. Check your connection and reload.</p>`; return;
   }
   byId = Object.fromEntries(lib.phrases.map(p => [p.id, p]));
   const counts = {};
   for(const p of lib.phrases) for(const t of p.tenses) counts[t] = (counts[t] || 0) + 1;
   availableTenses = Object.keys(counts).filter(t => counts[t] >= 5);
   refreshStates();
-  theme = todaysTheme();
   document.querySelectorAll('[data-ic]').forEach(el => el.outerHTML = ic(el.dataset.ic));
-  await initQuiz({ lib, byId, getEvents: () => events, logEvent, load, save, ladder: () => settings.ladder, openSheet, closeSheet, toast });
+  await initQuiz({ lib, byId, getEvents: () => events, logEvent, load, save, ladder: () => settings.ladder, openSheet, closeSheet, toast,
+    startup: () => settings.startup, setStartup: (k, v) => { settings.startup[k] = v; save(KEY.settings, settings); }, startupHTML, wireStartup });
   wireInput();
-  const verbs = [['caminar'], ['comer'], ['vivir']];
-  const sample = verbs.map(([v]) => conjugate(v, theme, 'yo')).join(', ');
-  $('start').innerHTML = `<div class="startbox"><p class="muted" style="margin:0 0 6px">Today's theme</p><h2>${TENSE_FULL[theme]}</h2>
-    <p class="muted">${sample}…</p>
-    <p class="faint" style="margin-top:16px">${lib.counts.ok} phrases · tap a word when you knew it, hold it for more.</p>
-    <button class="go" id="go">${ic('player-play')} Start</button></div>`;
-  $('go').onclick = () => {
-    $('start').classList.add('gone');
-    chime(0.0001);                         // unlock audio on iOS/Android with the user's tap
-    if(settings.mode === 'manual'){ history.push(newCard()); pos = 0; loadCurrent(); renderAll(); startPlaying(); }
-    else next();
-  };
+  // open straight onto the first card (no start screen)
+  history.push(newCard()); pos = 0; loadCurrent(); renderAll();
+  document.addEventListener('pointerdown', () => chime(0.0001), { once: true });   // unlock audio on the first tap
+  if(manual()) startPlaying();                 // speaks the first language if the browser allows; tap reveals the answer
+  if(settings.startup.screen === 'quiz') openQuiz();
 }
 init();

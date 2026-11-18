@@ -126,8 +126,15 @@ export function choosePhrase(ctx){
   for(const p of usable){
     const onTheme = p.tenses.includes(theme);
     let score = rnd() * 1.5;
-    if(slot === 'theme') score += onTheme ? 6 : -6;
-    else score += onTheme ? -2 : 1;
+    if(theme){
+      if(slot === 'theme') score += onTheme ? 6 : -6;
+      else score += onTheme ? -2 : 1;
+    }
+    if(ctx.tenseWeights && p.tenses.length){          // tense sliders: 0 = never, 1 = normal, 3 = lots
+      const w = Math.max(...p.tenses.map(t => ctx.tenseWeights[t] ?? 1));
+      if(w <= 0) continue;
+      score += (w - 1) * 2.5;
+    }
     let fresh = 0;
     for(const i of phraseItems(p)){
       const s = states.get(i);
