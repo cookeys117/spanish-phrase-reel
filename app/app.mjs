@@ -4,7 +4,8 @@ import { Player, chime } from './player.mjs';
 import { segment as conjSegment, conjugate, TENSE_LABEL } from '../engine/conjugate.mjs';
 import { adjForm } from '../engine/adjectives.mjs';
 import { ic } from './icons.mjs';
-import { initQuiz, openQuiz, quizIsOpen } from './quizui.mjs';
+import { initQuiz, openQuiz, quizIsOpen, refreshQuizVoices } from './quizui.mjs';
+import { startVoiceWatch } from './voices.mjs';
 
 /* ---------------- storage ---------------- */
 const KEY = { events: 'spr.events', settings: 'spr.settings', fix: 'spr.fix', dev: 'spr.device' };
@@ -436,6 +437,7 @@ async function init(){
   await initQuiz({ lib, byId, getEvents: () => events, logEvent, load, save, ladder: () => settings.ladder, openSheet, closeSheet, toast,
     startup: () => settings.startup, setStartup: (k, v) => { settings.startup[k] = v; save(KEY.settings, settings); }, startupHTML, wireStartup });
   wireInput();
+  startVoiceWatch(lib, refreshQuizVoices);         // small pink strip while new voices are being made
   // open straight onto the first card (no start screen)
   history.push(newCard()); pos = 0; loadCurrent(); renderAll();
   document.addEventListener('pointerdown', () => chime(0.0001), { once: true });   // unlock audio on the first tap

@@ -41,10 +41,15 @@ jobs:
       - name: Make missing clips
         if: steps.keys.outputs.ok == 'true'
         env:
+          COMMIT_EVERY: '50'                      # publish every 50 clips so the app can show progress
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
           AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
           MAKE_ZIP: '0'
-        run: python -u tools/make_audio.py   # -u = show each line as it happens
+        run: |
+          git config user.name "audio-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python -u tools/make_audio.py   # -u = show each line as it happens
 
       - name: Commit the new clips
         if: steps.keys.outputs.ok == 'true'

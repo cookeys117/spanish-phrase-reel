@@ -23,6 +23,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 import unicodedata
 import sys
 import time
@@ -133,6 +134,8 @@ def main():
         print(f"  [{n}/{len(jobs)}] {voice.split('-')[2][:-6]:7} {text[:60]}")
         if n % 10 == 0:
             write_manifest(manifest, quiz)
+        if COMMIT_EVERY and n % COMMIT_EVERY == 0 and n < len(jobs):
+            publish(f"Add audio clips {n}/{len(jobs)} (automatic)")
         time.sleep(SECONDS_BETWEEN_REQUESTS)
     write_manifest(manifest, quiz)
 
@@ -145,6 +148,29 @@ def main():
                 path = os.path.join(folder, fn)
                 z.write(path, arcname="audio/" + os.path.relpath(path, AUDIO).replace(os.sep, "/"))
     print(f"\nFinished. Attach this file in the Claude chat:\n  {ZIP_OUT}")
+
+
+# On GitHub: publish the clips in chunks as they're made, so the app can show progress
+COMMIT_EVERY = int(os.environ.get("COMMIT_EVERY", "0"))
+
+
+def publish(message):
+    """Commit and push what's been made so far, then ask GitHub Pages to refresh the site."""
+    run = lambda *a: subprocess.run(a, cwd=ROOT, check=False)
+    run("git", "add", "audio")
+    if subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=ROOT).returncode == 0:
+        return
+    run("git", "commit", "-q", "-m", message)
+    run("git", "pull", "-q", "--rebase", "origin", "main")
+    run("git", "push", "-q", "origin", "HEAD:main")
+    token, repo = os.environ.get("GITHUB_TOKEN"), os.environ.get("GITHUB_REPOSITORY")
+    if token and repo:
+        try:
+            req = urllib.request.Request(f"https://api.github.com/repos/{repo}/pages/builds", method="POST",
+                                         headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"})
+            urllib.request.urlopen(req, timeout=30).read()
+        except Exception as e:                      # the site still updates on its own; this just speeds it up
+            print(f"    (couldn't ask Pages to refresh: {e})")
 
 
 def slug(text):

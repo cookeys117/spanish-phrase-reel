@@ -22,6 +22,10 @@ let speechMap = {}, current = null;
 const $ = id => document.getElementById(id);
 
 export const quizIsOpen = () => open;
+/** New clips have arrived: pick up the latest list of quiz word clips. */
+export async function refreshQuizVoices(){
+  try { speechMap = await (await fetch('audio/quiz-manifest.json', { cache: 'no-cache' })).json(); } catch(e){}
+}
 
 export async function initQuiz(api){
   A = api;
