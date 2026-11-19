@@ -9,6 +9,8 @@ const DEFAULTS = {
   types: { noun: true, verb: true, form: true, adj: true, adv: true, con: true, other: true },
   topics: null, tenses: null, dir: 'mix', open: false,
   muted: false, autoSpeak: true, autoAdv: true, dOk: 1.2, dBad: 2.6, showEx: true, newCap: 20,
+  // the quiz's own ladder — gentler than the reel's, because picking from options is easier than recalling
+  ladder: { firstInterval: 1, factor: 1.3, maxInterval: 30, redDrop: 2 },
 };
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
@@ -26,6 +28,7 @@ export async function initQuiz(api){
   pool = buildPool(A.lib);
   qs = { ...DEFAULTS, ...A.load('spr.quiz', {}) };
   qs.types = { ...DEFAULTS.types, ...(qs.types || {}) };
+  qs.ladder = { ...DEFAULTS.ladder, ...(qs.ladder || {}) };
   qs.topics = null;                                  // all topics, always (topics stay in the data for grouping)
   qs.muted = A.startup().muted;
   score = A.load('spr.qscore', { ok: 0, tot: 0 });
@@ -64,7 +67,7 @@ function quizEvents(){ return A.getEvents().filter(e => e.m === 'quiz'); }
 function next(){
   clearTimeout(timer);
   const fp = filtered();
-  states = computeStates(quizEvents(), {}, A.ladder());
+  states = computeStates(quizEvents(), {}, qs.ladder);
   const today = dayKey();
   let newToday = 0; for(const s of states.values()) if(s.firstSeen === today) newToday++;
   q = null;
@@ -214,11 +217,25 @@ function openSettings(){
     ${range('q_bad', 'Pause after a wrong answer', qs.dBad, 1, 8, 0.1, sec)}
     ${check('q_ex', 'Show an example phrase', qs.showEx)}
     ${range('q_new', 'New words per day (at most)', qs.newCap, 0, 60, 5, v => v)}
+    <div class="grp">Quiz ladder (separate from the reel)</div>
+    <p class="faint" style="margin:4px 0 0">How far apart a word comes back after each right answer (one step per day at most). Gaps now: <span id="q_gaps"></span></p>
+    ${range('ql_first', 'First interval', qs.ladder.firstInterval, 1, 3, 1, v => `${v} d`)}
+    ${range('ql_factor', 'Growth per right answer', qs.ladder.factor, 1.1, 2.5, 0.1, v => `×${(+v).toFixed(1)}`)}
+    ${range('ql_max', 'Longest interval', qs.ladder.maxInterval, 7, 180, 1, v => `${v} d`)}
+    ${range('ql_drop', 'Steps dropped on a miss', qs.ladder.redDrop, 1, 5, 1, v => v)}
     <button class="mb muted" id="q_reset">${ic('refresh')}Reset the running score (${score.ok} / ${score.tot})</button>
     <p class="faint">The quiz keeps its own ladder, separate from the reel. Each word is tracked both ways (Spanish → English and English → Spanish); English → Spanish joins in “mixed” once you know a word the easy way round.</p>`);
   const bind = (id, fn, fmt) => { const el = $(id); el.oninput = el.onchange = () => { fn(el.type === 'checkbox' ? el.checked : +el.value); if(fmt) $(id + 'o').textContent = fmt(el.value); persist(); }; };
   A.wireStartup(); bind('q_sound', v => qs.muted = !v); bind('q_speak', v => qs.autoSpeak = v); bind('q_adv', v => qs.autoAdv = v);
   bind('q_ok', v => qs.dOk = v, sec); bind('q_bad', v => qs.dBad = v, sec); bind('q_ex', v => qs.showEx = v); bind('q_new', v => qs.newCap = v, v => v);
+  const gaps = () => { const L = qs.ladder, out = []; let prev = 0;
+    for(let r = 1; r <= 40 && out.length < 14; r++){ const d = Math.max(1, Math.round(Math.min(L.maxInterval, L.firstInterval * Math.pow(L.factor, r - 1)))); out.push(d); if(d >= L.maxInterval) break; }
+    $('q_gaps').textContent = out.join(', ') + ' days'; };
+  gaps();
+  bind('ql_first', v => { qs.ladder.firstInterval = v; gaps(); }, v => `${v} d`);
+  bind('ql_factor', v => { qs.ladder.factor = v; gaps(); }, v => `×${(+v).toFixed(1)}`);
+  bind('ql_max', v => { qs.ladder.maxInterval = v; gaps(); }, v => `${v} d`);
+  bind('ql_drop', v => qs.ladder.redDrop = v, v => v);
   $('q_reset').onclick = () => { score = { ok: 0, tot: 0 }; A.save('spr.qscore', score); A.closeSheet(); render(); A.toast('Score reset'); };
   const sh = $('sh'), close = () => render();
   sh.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', close));
