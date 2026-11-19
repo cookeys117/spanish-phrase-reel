@@ -1258,5 +1258,1145 @@
    "voice": "en-GB-SoniaNeural",
    "text": "I always forget his name"
   }
+ },
+ "p0106": {
+  "es": {
+   "file": "p0106_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "El administrador mandará el recibo mañana"
+  },
+  "en": {
+   "file": "p0106_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The building manager will send the bill tomorrow"
+  }
+ },
+ "p0107": {
+  "es": {
+   "file": "p0107_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Me gustaría cambiar las cortinas"
+  },
+  "en": {
+   "file": "p0107_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'd like to change the curtains"
+  }
+ },
+ "p0108": {
+  "es": {
+   "file": "p0108_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Pintaremos la habitación de blanco"
+  },
+  "en": {
+   "file": "p0108_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "We'll paint the bedroom white"
+  }
+ },
+ "p0109": {
+  "es": {
+   "file": "p0109_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "¿Podría bajar la música, por favor?"
+  },
+  "en": {
+   "file": "p0109_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "Could you turn the music down, please?"
+  }
+ },
+ "p0110": {
+  "es": {
+   "file": "p0110_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Los vecinos de arriba hacen mucho ruido"
+  },
+  "en": {
+   "file": "p0110_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The neighbours upstairs make a lot of noise"
+  }
+ },
+ "p0111": {
+  "es": {
+   "file": "p0111_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "La lavadora no sirve"
+  },
+  "en": {
+   "file": "p0111_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The washing machine doesn't work"
+  }
+ },
+ "p0112": {
+  "es": {
+   "file": "p0112_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Teníamos un balcón con plantas"
+  },
+  "en": {
+   "file": "p0112_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "We used to have a balcony with plants"
+  }
+ },
+ "p0113": {
+  "es": {
+   "file": "p0113_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Dejaré la llave con el portero"
+  },
+  "en": {
+   "file": "p0113_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'll leave the key with the doorman"
+  }
+ },
+ "p0114": {
+  "es": {
+   "file": "p0114_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "El apartamento tiene mucha luz"
+  },
+  "en": {
+   "file": "p0114_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The apartment gets a lot of light"
+  }
+ },
+ "p0115": {
+  "es": {
+   "file": "p0115_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "El arriendo sube cada año"
+  },
+  "en": {
+   "file": "p0115_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The rent goes up every year"
+  }
+ },
+ "p0116": {
+  "es": {
+   "file": "p0116_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Los maestros terminarán la próxima semana"
+  },
+  "en": {
+   "file": "p0116_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The builders will finish next week"
+  }
+ },
+ "p0117": {
+  "es": {
+   "file": "p0117_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Preferiría un piso de madera"
+  },
+  "en": {
+   "file": "p0117_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'd prefer a wooden floor"
+  }
+ },
+ "p0118": {
+  "es": {
+   "file": "p0118_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Cuánto se demorará la obra?"
+  },
+  "en": {
+   "file": "p0118_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "How long will the work take?"
+  }
+ },
+ "p0119": {
+  "es": {
+   "file": "p0119_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "El electricista cambió todos los enchufes"
+  },
+  "en": {
+   "file": "p0119_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The electrician changed all the sockets"
+  }
+ },
+ "p0120": {
+  "es": {
+   "file": "p0120_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Había polvo por todas partes"
+  },
+  "en": {
+   "file": "p0120_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "There was dust everywhere"
+  }
+ },
+ "p0121": {
+  "es": {
+   "file": "p0121_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Necesitamos comprar más cemento"
+  },
+  "en": {
+   "file": "p0121_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We need to buy more cement"
+  }
+ },
+ "p0122": {
+  "es": {
+   "file": "p0122_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "La puerta nueva no llegará hasta el lunes"
+  },
+  "en": {
+   "file": "p0122_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The new door won't arrive until Monday"
+  }
+ },
+ "p0123": {
+  "es": {
+   "file": "p0123_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Sería más barato arreglarla"
+  },
+  "en": {
+   "file": "p0123_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "It would be cheaper to fix it"
+  }
+ },
+ "p0124": {
+  "es": {
+   "file": "p0124_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "El arquitecto visitaba la obra todos los viernes"
+  },
+  "en": {
+   "file": "p0124_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The architect used to visit the site every Friday"
+  }
+ },
+ "p0125": {
+  "es": {
+   "file": "p0125_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Rompieron un tubo en la cocina"
+  },
+  "en": {
+   "file": "p0125_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "They broke a pipe in the kitchen"
+  }
+ },
+ "p0126": {
+  "es": {
+   "file": "p0126_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Quién va a pagar el daño?"
+  },
+  "en": {
+   "file": "p0126_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Who's going to pay for the damage?"
+  }
+ },
+ "p0127": {
+  "es": {
+   "file": "p0127_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Llamaré al médico mañana"
+  },
+  "en": {
+   "file": "p0127_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'll call the doctor tomorrow"
+  }
+ },
+ "p0128": {
+  "es": {
+   "file": "p0128_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Debería descansar dos días"
+  },
+  "en": {
+   "file": "p0128_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "You should rest for two days"
+  }
+ },
+ "p0129": {
+  "es": {
+   "file": "p0129_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Me duele la garganta"
+  },
+  "en": {
+   "file": "p0129_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "My throat hurts"
+  }
+ },
+ "p0130": {
+  "es": {
+   "file": "p0130_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Los resultados estarán listos el jueves"
+  },
+  "en": {
+   "file": "p0130_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The results will be ready on Thursday"
+  }
+ },
+ "p0131": {
+  "es": {
+   "file": "p0131_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Tomé la medicina después del almuerzo"
+  },
+  "en": {
+   "file": "p0131_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I took the medicine after lunch"
+  }
+ },
+ "p0132": {
+  "es": {
+   "file": "p0132_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Mi abuela hacía sopa cuando estaba enfermo"
+  },
+  "en": {
+   "file": "p0132_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "My grandmother used to make soup when I was ill"
+  }
+ },
+ "p0133": {
+  "es": {
+   "file": "p0133_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "¿Hay una droguería cerca?"
+  },
+  "en": {
+   "file": "p0133_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "Is there a chemist near here?"
+  }
+ },
+ "p0134": {
+  "es": {
+   "file": "p0134_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "El odontólogo me limpió los dientes"
+  },
+  "en": {
+   "file": "p0134_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The dentist cleaned my teeth"
+  }
+ },
+ "p0135": {
+  "es": {
+   "file": "p0135_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Necesitaría una incapacidad para el trabajo"
+  },
+  "en": {
+   "file": "p0135_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'd need a sick note for work"
+  }
+ },
+ "p0136": {
+  "es": {
+   "file": "p0136_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Vamos a esperar los resultados"
+  },
+  "en": {
+   "file": "p0136_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "We're going to wait for the results"
+  }
+ },
+ "p0137": {
+  "es": {
+   "file": "p0137_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Me gustaría una mesa cerca de la ventana"
+  },
+  "en": {
+   "file": "p0137_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'd like a table near the window"
+  }
+ },
+ "p0138": {
+  "es": {
+   "file": "p0138_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Qué me recomendaría?"
+  },
+  "en": {
+   "file": "p0138_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "What would you recommend?"
+  }
+ },
+ "p0139": {
+  "es": {
+   "file": "p0139_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Pediremos el plato del día"
+  },
+  "en": {
+   "file": "p0139_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We'll order the dish of the day"
+  }
+ },
+ "p0140": {
+  "es": {
+   "file": "p0140_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "La sopa estaba fría"
+  },
+  "en": {
+   "file": "p0140_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The soup was cold"
+  }
+ },
+ "p0141": {
+  "es": {
+   "file": "p0141_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "¿Me podría traer la carta?"
+  },
+  "en": {
+   "file": "p0141_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "Could you bring me the menu?"
+  }
+ },
+ "p0142": {
+  "es": {
+   "file": "p0142_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Comíamos arepas todas las mañanas"
+  },
+  "en": {
+   "file": "p0142_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "We used to eat arepas every morning"
+  }
+ },
+ "p0143": {
+  "es": {
+   "file": "p0143_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "¿El jugo es natural?"
+  },
+  "en": {
+   "file": "p0143_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "Is the juice fresh (natural)?"
+  }
+ },
+ "p0144": {
+  "es": {
+   "file": "p0144_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Yo pago por todos"
+  },
+  "en": {
+   "file": "p0144_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I'm paying for everyone"
+  }
+ },
+ "p0145": {
+  "es": {
+   "file": "p0145_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "El mesero trajo el plato equivocado"
+  },
+  "en": {
+   "file": "p0145_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The waiter brought the wrong dish"
+  }
+ },
+ "p0146": {
+  "es": {
+   "file": "p0146_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Le gustaría algo de tomar?"
+  },
+  "en": {
+   "file": "p0146_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Would you like something to drink?"
+  }
+ },
+ "p0147": {
+  "es": {
+   "file": "p0147_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "La propina no está incluida"
+  },
+  "en": {
+   "file": "p0147_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The tip isn't included"
+  }
+ },
+ "p0148": {
+  "es": {
+   "file": "p0148_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Sirvieron la comida muy rápido"
+  },
+  "en": {
+   "file": "p0148_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "They served the food really quickly"
+  }
+ },
+ "p0149": {
+  "es": {
+   "file": "p0149_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Me llevo dos kilos de papa"
+  },
+  "en": {
+   "file": "p0149_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'll take two kilos of potatoes"
+  }
+ },
+ "p0150": {
+  "es": {
+   "file": "p0150_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Me haría un descuento?"
+  },
+  "en": {
+   "file": "p0150_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Would you give me a discount?"
+  }
+ },
+ "p0151": {
+  "es": {
+   "file": "p0151_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "La tienda cerrará a las ocho"
+  },
+  "en": {
+   "file": "p0151_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The shop will close at eight"
+  }
+ },
+ "p0152": {
+  "es": {
+   "file": "p0152_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Pagué en efectivo"
+  },
+  "en": {
+   "file": "p0152_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I paid in cash"
+  }
+ },
+ "p0153": {
+  "es": {
+   "file": "p0153_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Este pantalón es muy grande"
+  },
+  "en": {
+   "file": "p0153_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "These trousers are very big"
+  }
+ },
+ "p0154": {
+  "es": {
+   "file": "p0154_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Comprábamos la fruta en la plaza"
+  },
+  "en": {
+   "file": "p0154_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "We used to buy fruit at the market"
+  }
+ },
+ "p0155": {
+  "es": {
+   "file": "p0155_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "¿Tiene una bolsa?"
+  },
+  "en": {
+   "file": "p0155_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "Do you have a bag?"
+  }
+ },
+ "p0156": {
+  "es": {
+   "file": "p0156_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Me lo puedo medir?"
+  },
+  "en": {
+   "file": "p0156_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Can I try it on?"
+  }
+ },
+ "p0157": {
+  "es": {
+   "file": "p0157_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "El precio incluye el IVA"
+  },
+  "en": {
+   "file": "p0157_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The price includes VAT"
+  }
+ },
+ "p0158": {
+  "es": {
+   "file": "p0158_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Lo entregarán el sábado"
+  },
+  "en": {
+   "file": "p0158_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "They'll deliver it on Saturday"
+  }
+ },
+ "p0159": {
+  "es": {
+   "file": "p0159_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Yo compraría el azul"
+  },
+  "en": {
+   "file": "p0159_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'd buy the blue one"
+  }
+ },
+ "p0160": {
+  "es": {
+   "file": "p0160_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "La tarjeta no pasó"
+  },
+  "en": {
+   "file": "p0160_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The card didn't go through"
+  }
+ },
+ "p0161": {
+  "es": {
+   "file": "p0161_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Mandaré la plata mañana"
+  },
+  "en": {
+   "file": "p0161_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'll send the money tomorrow"
+  }
+ },
+ "p0162": {
+  "es": {
+   "file": "p0162_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Me podría prestar plata?"
+  },
+  "en": {
+   "file": "p0162_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Could you lend me some money?"
+  }
+ },
+ "p0163": {
+  "es": {
+   "file": "p0163_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "El banco me cobró una comisión"
+  },
+  "en": {
+   "file": "p0163_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The bank charged me a fee"
+  }
+ },
+ "p0164": {
+  "es": {
+   "file": "p0164_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Tenía una cuenta en otro banco"
+  },
+  "en": {
+   "file": "p0164_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I used to have an account at another bank"
+  }
+ },
+ "p0165": {
+  "es": {
+   "file": "p0165_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Necesito una tarjeta nueva"
+  },
+  "en": {
+   "file": "p0165_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I need a new card"
+  }
+ },
+ "p0166": {
+  "es": {
+   "file": "p0166_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Tendremos que ir a la notaría"
+  },
+  "en": {
+   "file": "p0166_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "We'll have to go to the notary"
+  }
+ },
+ "p0167": {
+  "es": {
+   "file": "p0167_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "El sistema no funcionaba"
+  },
+  "en": {
+   "file": "p0167_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The system wasn't working"
+  }
+ },
+ "p0168": {
+  "es": {
+   "file": "p0168_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Cuánto cobran por la transferencia?"
+  },
+  "en": {
+   "file": "p0168_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "How much do they charge for the transfer?"
+  }
+ },
+ "p0169": {
+  "es": {
+   "file": "p0169_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Firmé el contrato ayer"
+  },
+  "en": {
+   "file": "p0169_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I signed the contract yesterday"
+  }
+ },
+ "p0170": {
+  "es": {
+   "file": "p0170_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Pagaré los impuestos en abril"
+  },
+  "en": {
+   "file": "p0170_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I'll pay the taxes in April"
+  }
+ },
+ "p0171": {
+  "es": {
+   "file": "p0171_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Sería mejor pagar por internet"
+  },
+  "en": {
+   "file": "p0171_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "It would be better to pay online"
+  }
+ },
+ "p0172": {
+  "es": {
+   "file": "p0172_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "El taxi llegará en cinco minutos"
+  },
+  "en": {
+   "file": "p0172_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The taxi will arrive in five minutes"
+  }
+ },
+ "p0173": {
+  "es": {
+   "file": "p0173_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Tomamos el metro al centro"
+  },
+  "en": {
+   "file": "p0173_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We took the metro to the centre"
+  }
+ },
+ "p0174": {
+  "es": {
+   "file": "p0174_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Me podría dejar aquí, por favor?"
+  },
+  "en": {
+   "file": "p0174_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Could you drop me here, please?"
+  }
+ },
+ "p0175": {
+  "es": {
+   "file": "p0175_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Había mucho trancón"
+  },
+  "en": {
+   "file": "p0175_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "There was a lot of traffic"
+  }
+ },
+ "p0176": {
+  "es": {
+   "file": "p0176_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Voy a caminar al gimnasio"
+  },
+  "en": {
+   "file": "p0176_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I'm going to walk to the gym"
+  }
+ },
+ "p0177": {
+  "es": {
+   "file": "p0177_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "El bus paraba en esta esquina"
+  },
+  "en": {
+   "file": "p0177_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The bus used to stop on this corner"
+  }
+ },
+ "p0178": {
+  "es": {
+   "file": "p0178_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Manejaré hasta el aeropuerto"
+  },
+  "en": {
+   "file": "p0178_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I'll drive to the airport"
+  }
+ },
+ "p0179": {
+  "es": {
+   "file": "p0179_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "¿Dónde puedo parquear el carro?"
+  },
+  "en": {
+   "file": "p0179_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "Where can I park the car?"
+  }
+ },
+ "p0180": {
+  "es": {
+   "file": "p0180_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Iríamos en avión"
+  },
+  "en": {
+   "file": "p0180_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "We'd go by plane"
+  }
+ },
+ "p0181": {
+  "es": {
+   "file": "p0181_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "El conductor no sabía la dirección"
+  },
+  "en": {
+   "file": "p0181_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The driver didn't know the address"
+  }
+ },
+ "p0182": {
+  "es": {
+   "file": "p0182_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "El vuelo salió tarde"
+  },
+  "en": {
+   "file": "p0182_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The flight left late"
+  }
+ },
+ "p0183": {
+  "es": {
+   "file": "p0183_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Nos veremos el viernes"
+  },
+  "en": {
+   "file": "p0183_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We'll see each other on Friday"
+  }
+ },
+ "p0184": {
+  "es": {
+   "file": "p0184_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Te gustaría venir a comer?"
+  },
+  "en": {
+   "file": "p0184_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Would you like to come for dinner?"
+  }
+ },
+ "p0185": {
+  "es": {
+   "file": "p0185_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Mi hermana tendrá un bebé en marzo"
+  },
+  "en": {
+   "file": "p0185_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "My sister is going to have a baby in March"
+  }
+ },
+ "p0186": {
+  "es": {
+   "file": "p0186_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Cuando era joven bailaba mucho"
+  },
+  "en": {
+   "file": "p0186_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "When I was young I used to dance a lot"
+  }
+ },
+ "p0187": {
+  "es": {
+   "file": "p0187_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Me encantaría ir a Cartagena"
+  },
+  "en": {
+   "file": "p0187_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'd love to go to Cartagena"
+  }
+ },
+ "p0188": {
+  "es": {
+   "file": "p0188_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Nos contaron una historia chistosa"
+  },
+  "en": {
+   "file": "p0188_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "They told us a funny story"
+  }
+ },
+ "p0189": {
+  "es": {
+   "file": "p0189_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "¿Qué vas a hacer mañana?"
+  },
+  "en": {
+   "file": "p0189_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "What are you going to do tomorrow?"
+  }
+ },
+ "p0190": {
+  "es": {
+   "file": "p0190_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "No sabía que vivías aquí"
+  },
+  "en": {
+   "file": "p0190_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I didn't know you lived here"
+  }
+ },
+ "p0191": {
+  "es": {
+   "file": "p0191_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Celebraremos mi cumpleaños en la casa"
+  },
+  "en": {
+   "file": "p0191_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We'll celebrate my birthday at home"
+  }
+ },
+ "p0192": {
+  "es": {
+   "file": "p0192_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Sería chévere verte"
+  },
+  "en": {
+   "file": "p0192_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "It would be great to see you"
+  }
+ },
+ "p0193": {
+  "es": {
+   "file": "p0193_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Mis amigos me esperaban"
+  },
+  "en": {
+   "file": "p0193_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "My friends were waiting for me"
+  }
+ },
+ "p0194": {
+  "es": {
+   "file": "p0194_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Te gustó la película?"
+  },
+  "en": {
+   "file": "p0194_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Did you like the film?"
+  }
+ },
+ "p0195": {
+  "es": {
+   "file": "p0195_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Nos conocimos en una fiesta"
+  },
+  "en": {
+   "file": "p0195_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We met at a party"
+  }
+ },
+ "p0196": {
+  "es": {
+   "file": "p0196_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Te cuento después"
+  },
+  "en": {
+   "file": "p0196_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I'll tell you later"
+  }
+ },
+ "p0197": {
+  "es": {
+   "file": "p0197_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Siempre llegaba tarde"
+  },
+  "en": {
+   "file": "p0197_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "He always used to arrive late"
+  }
+ },
+ "p0198": {
+  "es": {
+   "file": "p0198_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Me ayudaría con esto?"
+  },
+  "en": {
+   "file": "p0198_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Would you help me with this?"
+  }
+ },
+ "p0199": {
+  "es": {
+   "file": "p0199_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Hace mucho calor hoy"
+  },
+  "en": {
+   "file": "p0199_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "It's very hot today"
+  }
+ },
+ "p0200": {
+  "es": {
+   "file": "p0200_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Hacía frío anoche"
+  },
+  "en": {
+   "file": "p0200_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "It was cold last night"
+  }
  }
 }
