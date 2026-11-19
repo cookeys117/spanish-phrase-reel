@@ -14,7 +14,7 @@ const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } cat
 const DEFAULTS = {
   order: 'en', muted: false, hideGap: true, gapMult: 1.0, thinkTime: 1.0, pauseBetween: 1.5, mode: 'auto', chime: true, regColour: true,
   stillThere: 15, newCap: 15,
-  startup: { screen: 'cards', mode: 'manual', muted: false },     // how the app opens (shared with the quiz)
+  startup: { screen: 'cards', mode: 'manual', quizMode: 'auto', muted: false },     // how the app opens (shared with the quiz)
   weights: { pres: 1, pret: 1, impf: 1, fut: 1, cond: 1, subj: 1 },
   ladder: { firstInterval: 1, factor: 2, maxInterval: 180, redDrop: 2 },
 };
@@ -348,12 +348,14 @@ function startupHTML(){
   return `<div class="grp">When the app opens</div>
     <div class="sr"><span>Open with</span><select id="st_screen">${opt('cards', S.screen, 'Phrase cards')}${opt('quiz', S.screen, 'Quiz')}</select></div>
     <div class="sr"><span>Cards start in</span><select id="st_mode">${opt('manual', S.mode, 'Manual')}${opt('auto', S.mode, 'Auto')}</select></div>
+    <div class="sr"><span>Quiz starts in</span><select id="st_qmode">${opt('auto', S.quizMode, 'Auto (moves on after right answers)')}${opt('manual', S.quizMode, 'Manual')}</select></div>
     <div class="sr"><span>Sound</span><select id="st_sound">${opt('on', S.muted ? 'off' : 'on', 'On')}${opt('off', S.muted ? 'off' : 'on', 'Off (muted)')}</select></div>`;
 }
 export function wireStartup(){
   const set = (k, v) => { settings.startup[k] = v; save(KEY.settings, settings); };
   $('st_screen').onchange = e => set('screen', e.target.value);
   $('st_mode').onchange = e => set('mode', e.target.value);
+  $('st_qmode').onchange = e => set('quizMode', e.target.value);
   $('st_sound').onchange = e => set('muted', e.target.value === 'off');
 }
 

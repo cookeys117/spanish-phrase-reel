@@ -1,0 +1,62 @@
+# Makes any missing audio clips with Azure text-to-speech and adds them to the app.
+# Runs automatically when phrases change, or by hand from the Actions tab ("Run workflow").
+# Needs two repository secrets: AZURE_SPEECH_KEY and AZURE_SPEECH_REGION.
+name: Make audio
+
+on:
+  push:
+    branches: [main]
+    paths: ['build/library.json']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: make-audio
+  cancel-in-progress: false
+
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the Azure secrets are set
+        id: keys
+        env:
+          KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+        run: |
+          if [ -z "$KEY" ]; then
+            echo "AZURE_SPEECH_KEY secret not set - skipping."; echo "ok=false" >> "$GITHUB_OUTPUT"
+          else echo "ok=true" >> "$GITHUB_OUTPUT"; fi
+
+      - uses: actions/setup-python@v5
+        if: steps.keys.outputs.ok == 'true'
+        with:
+          python-version: '3.12'
+
+      - name: Make missing clips
+        if: steps.keys.outputs.ok == 'true'
+        env:
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
+          MAKE_ZIP: '0'
+        run: python tools/make_audio.py
+
+      - name: Commit the new clips
+        if: steps.keys.outputs.ok == 'true'
+        run: |
+          git config user.name "audio-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio
+          if git diff --cached --quiet; then echo "No new clips."; exit 0; fi
+          git commit -m "Add audio clips (automatic)"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          # make sure the website picks the new files up
+          curl -s -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pages/builds" || true

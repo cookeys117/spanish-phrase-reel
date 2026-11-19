@@ -8,7 +8,7 @@ const DIRS = [['mix', 'Mixed'], ['es', 'ES → EN'], ['en', 'EN → ES']];
 const DEFAULTS = {
   types: { noun: true, verb: true, form: true, adj: true, adv: true, con: true, other: true },
   topics: null, tenses: null, dir: 'mix', open: false,
-  muted: false, autoSpeak: true, autoAdv: true, dOk: 1.2, dBad: 2.6, showEx: true, newCap: 20,
+  muted: false, autoSpeak: true, mode: 'auto', dOk: 1.2, readEx: 'wrong', showEx: true, newCap: 20,
   // the quiz's own ladder — gentler than the reel's, because picking from options is easier than recalling
   ladder: { firstInterval: 1, factor: 1.3, maxInterval: 30, redDrop: 2 },
 };
@@ -31,6 +31,7 @@ export async function initQuiz(api){
   qs.ladder = { ...DEFAULTS.ladder, ...(qs.ladder || {}) };
   qs.topics = null;                                  // all topics, always (topics stay in the data for grouping)
   qs.muted = A.startup().muted;
+  qs.mode = A.startup().quizMode || 'auto';
   score = A.load('spr.qscore', { ok: 0, tot: 0 });
   try { speechMap = await (await fetch('audio/quiz-manifest.json', { cache: 'no-cache' })).json(); } catch(e){ speechMap = {}; }
   document.addEventListener('keydown', onKey);
@@ -45,21 +46,33 @@ function closeQuiz(){ open = false; clearTimeout(timer); stopAudio(); $('quiz').
 
 /* ---------- sound ---------- */
 function stopAudio(){ if(current){ current.pause(); current = null; } try { speechSynthesis.cancel(); } catch(e){} }
+/** Speak Spanish: the Azure clip if there is one, otherwise the device's voice. Resolves when finished. */
 function speak(text, src, force = false){
-  if(qs.muted && !force) return;
+  if(qs.muted && !force) return Promise.resolve();
   stopAudio();
   const file = src || (speechMap[text] && 'audio/' + speechMap[text]);
-  if(file){ current = new Audio(file); current.play().catch(() => tts(text)); return; }
-  tts(text);
+  return new Promise(res => {
+    const safety = setTimeout(res, 12000);
+    const done = () => { clearTimeout(safety); res(); };
+    if(file){
+      const a = current = new Audio(file);
+      a.addEventListener('ended', done, { once: true });
+      a.play().catch(() => tts(text, done));
+    } else tts(text, done);
+  });
 }
-function tts(text){
+function tts(text, done = () => {}){
   try {
+    if(!text) return done();
     const u = new SpeechSynthesisUtterance(text); u.lang = 'es-CO'; u.rate = 0.95;
     const v = speechSynthesis.getVoices().find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
     if(v) u.voice = v;
+    u.onend = done; u.onerror = done;
     speechSynthesis.cancel(); speechSynthesis.speak(u);
-  } catch(e){}
+  } catch(e){ done(); }
 }
+const exPhrase = () => A.byId[q.item.examples[0]];
+const speakExample = (force = false) => { const ex = exPhrase(); return ex ? speak(ex.es, `audio/${ex.id}_es.mp3`, force) : Promise.resolve(); };
 
 /* ---------- questions ---------- */
 function filtered(){ return filterPool(pool, qs); }
@@ -110,13 +123,16 @@ function answer(i){
   score.tot++; if(ok) score.ok++; A.save('spr.qscore', score);
   A.logEvent({ m: 'quiz', i: pairKey(q.item.key, q.dir), r: ok ? 'g' : 'r', q: q.kind });
   if(!ok && q.kind !== 'again') retries.push({ key: q.item.key, dir: q.dir, at: n + 4 });
-  if(qs.autoSpeak){
-    const ex = q.item.examples[0];
-    if(q.optionLang === 'es') speak(q.options[q.answer]);
-    else if(qs.showEx && ex) speak('', `audio/${ex}_es.mp3`);
-  }
   render();
-  if(qs.autoAdv) timer = setTimeout(next, (ok ? qs.dOk : qs.dBad) * 1000);
+  // sound: the right Spanish word (when the answers were Spanish), then the example phrase if wanted
+  const asked = q;
+  const readEx = qs.showEx && (qs.readEx === 'always' || (qs.readEx === 'wrong' && !ok));
+  (async () => {
+    if(qs.autoSpeak && q.optionLang === 'es') await speak(q.options[q.answer]);
+    if(readEx && q === asked) await speakExample();
+    // Auto: a right answer moves on (after the audio + a short pause); a wrong one waits for you
+    if(ok && qs.mode === 'auto' && q === asked && !reviewing()) timer = setTimeout(next, qs.dOk * 1000);
+  })();
 }
 
 /* ---------- rendering ---------- */
@@ -124,7 +140,8 @@ function chip(on, label, data){ return `<button class="chip ${on ? 'on' : ''}" $
 function render(){
   const typesOn = TYPES.filter(([k]) => qs.types[k]).map(([, l]) => l);
   const summary = `${typesOn.length === TYPES.length ? 'all word types' : typesOn.join(', ') || 'nothing'} · ${DIRS.find(d => d[0] === qs.dir)[1]}`;
-  let h = `<div class="qhead"><button class="ib small" id="qback">${ic('arrow-left')} Reel</button><span class="qscore">${score.tot ? `${score.ok} / ${score.tot}` : ''}</span>
+  const segBtn = (m, l) => `<button data-qmode="${m}" class="${qs.mode === m ? 'on' : ''}">${qs.mode === m ? ic('check') + ' ' : ''}${l}</button>`;
+  let h = `<div class="qhead"><button class="ib small" id="qback">${ic('arrow-left')} Reel</button><div class="seg">${segBtn('auto', 'Auto')}${segBtn('manual', 'Manual')}</div><span class="qscore">${score.tot ? `${score.ok} / ${score.tot}` : ''}</span>
     <button class="ib ${qs.muted ? 'muted' : ''}" id="qmute" aria-label="Sound on or off">${ic(qs.muted ? 'volume-off' : 'volume')}</button>
     <button class="ib" id="qmenu" aria-label="Quiz settings">${ic('menu-2')}</button></div>
     <div class="qfilter"><button class="flink" id="qf"><span class="muted">Including:</span> ${esc(summary)} ${ic(qs.open ? 'chevron-up' : 'chevron-down')}</button>`;
@@ -150,11 +167,13 @@ function render(){
       return `<button class="opt ${q.optionLang} ${cls}" data-opt="${i}"><span class="okey">${i + 1}</span><span class="otext">${esc(o)}</span>${say}</button>`;
     }).join('');
     h += `<button class="opt dk ${answered && q.chosen === -1 ? 'chosen' : ''}" data-opt="-1"><span class="okey">0</span>Don't know</button>`;
+    const ex = A.byId[it.examples[0]];
+    if(qs.showEx && ex) h += answered
+      ? `<div class="qex"><button class="ib" id="qexsay" aria-label="Play example">${ic('volume')}</button><div><div>${esc(ex.es)}</div><div class="muted">${esc(ex.en)}</div></div></div>`
+      : `<div class="qex hold"><div class="muted">Example phrase shows after you answer</div></div>`;
     if(answered){
-      const ex = A.byId[it.examples[0]];
-      if(qs.showEx && ex) h += `<div class="qex"><button class="ib" id="qexsay" aria-label="Play example">${ic('volume')}</button><div><div>${esc(ex.es)}</div><div class="muted">${esc(ex.en)}</div></div></div>`;
-      if(!qs.autoAdv) h += `<button class="qnext" id="qnext">Next ${ic('arrow-right')}</button>`;
-      else if(!reviewing()) h += `<p class="faint" style="text-align:center;margin-top:10px">Tap anywhere for the next one</p>`;
+      const waits = qs.mode === 'manual' || q.chosen !== q.answer || reviewing();
+      if(waits) h += `<button class="qnext" id="qnext">Next ${ic('arrow-right')}</button>`;
     }
   }
   h += `</div>`;
@@ -167,6 +186,12 @@ function render(){
 }
 function wire(){
   $('qback').onclick = closeQuiz;
+  $('quiz').querySelectorAll('[data-qmode]').forEach(b => b.onclick = () => {
+    qs.mode = b.dataset.qmode; persist();
+    clearTimeout(timer);
+    if(qs.mode === 'auto' && q && q.chosen === q.answer && !reviewing()) timer = setTimeout(next, qs.dOk * 1000);
+    render();
+  });
   $('qmute').onclick = () => { qs.muted = !qs.muted; persist(); if(qs.muted) stopAudio(); render(); };
   $('qmenu').onclick = openSettings;
   $('qf').onclick = () => { qs.open = !qs.open; persist(); render(); };
@@ -186,7 +211,7 @@ function wire(){
     answer(+b.dataset.opt);
   });
   $('qsay')?.addEventListener('click', e => { e.stopPropagation(); speak(q.prompt, null, true); });
-  $('qexsay')?.addEventListener('click', e => { e.stopPropagation(); const ex = q.item.examples[0]; speak('', `audio/${ex}_es.mp3`, true); });
+  $('qexsay')?.addEventListener('click', e => { e.stopPropagation(); speakExample(true); });
   $('qnext')?.addEventListener('click', forward);
   $('qprev').onclick = back; $('qfwd').onclick = forward;
   const body = $('qbody');
@@ -212,9 +237,8 @@ function openSettings(){
     ${A.startupHTML()}<div class="grp">Quiz</div>
     ${check('q_sound', 'Sound', !qs.muted)}
     ${check('q_speak', 'Speak Spanish automatically', qs.autoSpeak)}
-    ${check('q_adv', 'Move on automatically', qs.autoAdv)}
-    ${range('q_ok', 'Pause after a right answer', qs.dOk, 0.5, 4, 0.1, sec)}
-    ${range('q_bad', 'Pause after a wrong answer', qs.dBad, 1, 8, 0.1, sec)}
+    <div class="sr"><span>Read the example phrase aloud</span><select id="q_readex">${[['wrong', 'Only when I get it wrong'], ['always', 'Always'], ['off', 'Off (just show it)']].map(([v, l]) => `<option value="${v}" ${qs.readEx === v ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
+    ${range('q_ok', 'Auto: pause before moving on after a right answer', qs.dOk, 0.3, 4, 0.1, sec)}
     ${check('q_ex', 'Show an example phrase', qs.showEx)}
     ${range('q_new', 'New words per day (at most)', qs.newCap, 0, 60, 5, v => v)}
     <div class="grp">Quiz ladder (separate from the reel)</div>
@@ -226,8 +250,9 @@ function openSettings(){
     <button class="mb muted" id="q_reset">${ic('refresh')}Reset the running score (${score.ok} / ${score.tot})</button>
     <p class="faint">The quiz keeps its own ladder, separate from the reel. Each word is tracked both ways (Spanish → English and English → Spanish); English → Spanish joins in “mixed” once you know a word the easy way round.</p>`);
   const bind = (id, fn, fmt) => { const el = $(id); el.oninput = el.onchange = () => { fn(el.type === 'checkbox' ? el.checked : +el.value); if(fmt) $(id + 'o').textContent = fmt(el.value); persist(); }; };
-  A.wireStartup(); bind('q_sound', v => qs.muted = !v); bind('q_speak', v => qs.autoSpeak = v); bind('q_adv', v => qs.autoAdv = v);
-  bind('q_ok', v => qs.dOk = v, sec); bind('q_bad', v => qs.dBad = v, sec); bind('q_ex', v => qs.showEx = v); bind('q_new', v => qs.newCap = v, v => v);
+  A.wireStartup(); bind('q_sound', v => qs.muted = !v); bind('q_speak', v => qs.autoSpeak = v);
+  $('q_readex').onchange = e => { qs.readEx = e.target.value; persist(); };
+  bind('q_ok', v => qs.dOk = v, sec); bind('q_ex', v => qs.showEx = v); bind('q_new', v => qs.newCap = v, v => v);
   const gaps = () => { const L = qs.ladder, out = []; let prev = 0;
     for(let r = 1; r <= 40 && out.length < 14; r++){ const d = Math.max(1, Math.round(Math.min(L.maxInterval, L.firstInterval * Math.pow(L.factor, r - 1)))); out.push(d); if(d >= L.maxInterval) break; }
     $('q_gaps').textContent = out.join(', ') + ' days'; };

@@ -11,7 +11,10 @@ updates the manifests, and finally packs everything into  phrase-audio.zip
 
 Safe to re-run: existing clips are skipped, so an interrupted run just resumes.
 
-Setup (PowerShell, in the unzipped repository folder):
+Normally this runs by itself on GitHub (.github/workflows/audio.yml) whenever new phrases are
+pushed, using the repository secrets AZURE_SPEECH_KEY and AZURE_SPEECH_REGION.
+
+To run it by hand instead (PowerShell, in the unzipped repository folder):
     $env:AZURE_SPEECH_KEY = "<your Key 1>"
     $env:AZURE_SPEECH_REGION = "eastus"      # your resource's Location/Region
     python tools\\make_audio.py
@@ -133,6 +136,9 @@ def main():
         time.sleep(SECONDS_BETWEEN_REQUESTS)
     write_manifest(manifest, quiz)
 
+    if os.environ.get("MAKE_ZIP", "1") == "0":         # GitHub job: the clips are committed directly
+        print("Finished.")
+        return
     with zipfile.ZipFile(ZIP_OUT, "w", zipfile.ZIP_DEFLATED) as z:
         for folder, _, files in os.walk(AUDIO):
             for fn in sorted(files):
