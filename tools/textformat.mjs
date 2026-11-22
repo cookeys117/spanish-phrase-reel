@@ -69,8 +69,9 @@ export function readPhrases(dir){
       if(tm){ topic = tm[1]; continue; }
       if(l.startsWith('#')) continue;
       if(/^p\d+\s*\|/.test(l.trim())){
-        const [id, en] = l.split('|').map(s => s.trim());
+        const [id, en, ...opts] = l.split('|').map(s => s.trim());
         pending = { id, topic, en, file: f };
+        for(const o of opts){ const [k, v] = o.split('='); if(k === 'addr') pending.addr = v; }   // e.g.  | addr=tu
         continue;
       }
       if(!pending) throw new Error(`${f}: token line without a phrase header: ${l}`);

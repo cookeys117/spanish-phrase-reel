@@ -148,7 +148,15 @@ for(const ph of phrases){
   const status = errs.length ? 'error' : (ph.status || 'unreviewed');
   if(errs.length){ errorCount += errs.length; report.push(`ERROR ${ph.id}  ${ph.es}\n  - ${errs.join('\n  - ')}`); }
   if(warns.length){ warnCount += warns.length; report.push(`warn  ${ph.id}  ${ph.es}\n  - ${warns.join('\n  - ')}`); }
-  built.push({ id: ph.id, topic: ph.topic, en: ph.en, es: ph.es, tenses, register, status,
+  // Who "you" is in the Spanish (shown as a small tag on the English box): tú / usted / ustedes.
+  let addr = ph.addr || null;
+  if(!addr && /\byou(r|rs|rself)?\b/i.test(ph.en)){
+    if(persons.includes('tu') || /(^|[^a-záéíóúñ])(te|tu|tus|ti|contigo)([^a-záéíóúñ]|$)/i.test(ph.es)) addr = 'tu';
+    else if(persons.includes('usted') || /(^|[^a-záéíóúñ])(su|sus|usted|le)([^a-záéíóúñ]|$)/i.test(ph.es)) addr = 'usted';
+    else warn('English says "you" but no tú / usted found: add | addr=… to the phrase line');
+  }
+  if(addr && !['tu', 'usted', 'ustedes'].includes(addr)) err(`addr must be tu, usted or ustedes`);
+  built.push({ id: ph.id, topic: ph.topic, en: ph.en, es: ph.es, tenses, register, status, ...(addr ? { addr } : {}),
                source: ph.source || 'generated', tokens: toks, constructions: cons });
 }
 

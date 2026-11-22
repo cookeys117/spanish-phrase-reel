@@ -13,7 +13,7 @@ p0063 | I bought vegetables at the market
   Compré:v:comprar.pret.yo verduras:w:verdura#vegetable.p en el mercado:w:mercado#market
 p0064 | They didn't have my size
   No tenían:v:tener.impf.ellos mi talla:w:talla#size
-p0065 | Do you deliver?
+p0065 | Do you deliver? | addr=ustedes
   ¿Ustedes hacen:v:hacer.pres.ellos domicilios?:w:domicilio#home-delivery.p
 p0066 | The supermarket opens at seven
   El supermercado:w:supermercado#supermarket abre:v:abrir.pres.usted a las siete:w:siete#seven

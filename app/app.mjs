@@ -167,7 +167,8 @@ function renderCard(){
   const speaking = lang => playing && ((phase === 'first' && firstLang === lang) || (phase === 'second' && firstLang !== lang));
   const box = lang => {
     const isFirst = lang === firstLang, show = isFirst || showSecond;
-    const body = lang === 'en' ? esc(p.en) : p.tokens.map((t, i) => tokenHTML(t, i, c.ratings[i])).join(' ');
+    const ADDR = { tu: 'tú', usted: 'usted', ustedes: 'ustedes' };
+    const body = lang === 'en' ? esc(p.en) + (p.addr ? ` <span class="addr" title="who 'you' is in the Spanish">${ADDR[p.addr]}</span>` : '') : p.tokens.map((t, i) => tokenHTML(t, i, c.ratings[i])).join(' ');
     return `<div class="bx ${lang}"><div class="lb"><span>${lang === 'en' ? 'English' : 'Español'}</span>
       <button class="spk ${speaking(lang) ? 'on' : ''}" data-say="${isFirst ? 'first' : 'second'}" aria-label="Play again">${ic('volume')}</button></div>
       <p>${show ? body : '<span class="hidden-txt">…</span>'}</p></div>`;

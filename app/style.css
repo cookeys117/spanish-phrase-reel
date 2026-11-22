@@ -108,3 +108,7 @@ textarea{ width:100%; min-height:70px; font:inherit; font-size:14px; padding:8px
 .qhead .seg button{ font-size:12px; padding:4px 8px; }
 .vbanner{ display:none; background:var(--es); color:var(--text); font-size:12px; text-align:center; padding:3px 8px; position:relative; z-index:7; }
 .vbanner.show{ display:block; } #app.hasvb .quiz{ top:22px; }
+
+/* who "you" is in the Spanish: small grey tag after the English sentence */
+.bx .addr{ display:inline-block; vertical-align:middle; font-size:.55em; font-style:italic; color:#4b5563;
+  border:1px solid #9aa1ab; border-radius:999px; padding:0 .55em; margin-left:.25em; line-height:1.6; white-space:nowrap; }

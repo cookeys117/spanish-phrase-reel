@@ -187,7 +187,7 @@ p0190 | I didn't know you lived here
   No sabía:v:saber.impf.yo que vivías:v:vivir.impf.tu aquí
 p0191 | We'll celebrate my birthday at home
   Celebraremos:v:celebrar.fut.nosotros mi cumpleaños:w:cumpleaños#birthday en la casa:w:casa#house
-p0192 | It would be great to see you
+p0192 | It would be great to see you | addr=tu
   Sería:v:ser.cond.usted chévere:a:chévere#great.m.s verte:i:ver
 p0193 | My friends were waiting for me
   Mis amigos:w:amigo#friend.p me esperaban:v:esperar.impf.ellos
