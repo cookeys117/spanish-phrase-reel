@@ -2398,5 +2398,380 @@
    "voice": "en-GB-RyanNeural",
    "text": "It was cold last night"
   }
- }
+ },
+ "p0201": {
+  "es": {
+   "file": "p0201_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Tengo una reunión a las nueve"
+  },
+  "en": {
+   "file": "p0201_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I have a meeting at nine"
+  }
+ },
+ "p0202": {
+  "es": {
+   "file": "p0202_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Mi jefe quiere que mande el informe hoy"
+  },
+  "en": {
+   "file": "p0202_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "My boss wants me to send the report today"
+  }
+ },
+ "p0203": {
+  "es": {
+   "file": "p0203_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Trabajé desde casa toda la semana"
+  },
+  "en": {
+   "file": "p0203_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I worked from home all week"
+  }
+ },
+ "p0204": {
+  "es": {
+   "file": "p0204_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "La conexión es muy lenta"
+  },
+  "en": {
+   "file": "p0204_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The internet connection is very slow"
+  }
+ },
+ "p0205": {
+  "es": {
+   "file": "p0205_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Te llamaré después de la reunión"
+  },
+  "en": {
+   "file": "p0205_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'll call you after the meeting"
+  }
+ },
+ "p0206": {
+  "es": {
+   "file": "p0206_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Me podría mandar el documento por correo?"
+  },
+  "en": {
+   "file": "p0206_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Could you send me the document by email?"
+  }
+ },
+ "p0207": {
+  "es": {
+   "file": "p0207_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Es importante que terminemos esto hoy"
+  },
+  "en": {
+   "file": "p0207_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "It's important that we finish this today"
+  }
+ },
+ "p0208": {
+  "es": {
+   "file": "p0208_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Trabajaba en un banco en Londres"
+  },
+  "en": {
+   "file": "p0208_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I used to work in a bank in London"
+  }
+ },
+ "p0209": {
+  "es": {
+   "file": "p0209_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Tendremos que cambiar la fecha"
+  },
+  "en": {
+   "file": "p0209_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We'll have to change the date"
+  }
+ },
+ "p0210": {
+  "es": {
+   "file": "p0210_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Mi compañero está de vacaciones hasta el viernes"
+  },
+  "en": {
+   "file": "p0210_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "My colleague is on holiday until Friday"
+  }
+ },
+ "p0211": {
+  "es": {
+   "file": "p0211_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Necesito que firme aquí"
+  },
+  "en": {
+   "file": "p0211_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I need you to sign here"
+  }
+ },
+ "p0212": {
+  "es": {
+   "file": "p0212_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "No alcancé a contestar los correos"
+  },
+  "en": {
+   "file": "p0212_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I didn't have time to answer the emails"
+  }
+ },
+ "p0213": {
+  "es": {
+   "file": "p0213_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "La impresora se dañó otra vez"
+  },
+  "en": {
+   "file": "p0213_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The printer broke down again"
+  }
+ },
+ "p0214": {
+  "es": {
+   "file": "p0214_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Viajaremos a Cartagena en diciembre"
+  },
+  "en": {
+   "file": "p0214_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "We'll travel to Cartagena in December"
+  }
+ },
+ "p0215": {
+  "es": {
+   "file": "p0215_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Me gustaría una habitación con vista al mar"
+  },
+  "en": {
+   "file": "p0215_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'd like a room with a sea view"
+  }
+ },
+ "p0216": {
+  "es": {
+   "file": "p0216_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿A qué hora sale el vuelo?"
+  },
+  "en": {
+   "file": "p0216_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "What time does the flight leave?"
+  }
+ },
+ "p0217": {
+  "es": {
+   "file": "p0217_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "El hotel quedaba al lado de la playa"
+  },
+  "en": {
+   "file": "p0217_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The hotel was right next to the beach"
+  }
+ },
+ "p0218": {
+  "es": {
+   "file": "p0218_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Espero que tengas un buen viaje"
+  },
+  "en": {
+   "file": "p0218_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I hope you have a good trip"
+  }
+ },
+ "p0219": {
+  "es": {
+   "file": "p0219_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Perdimos la maleta en el aeropuerto"
+  },
+  "en": {
+   "file": "p0219_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We lost the suitcase at the airport"
+  }
+ },
+ "p0220": {
+  "es": {
+   "file": "p0220_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Necesito visa para ir a Inglaterra?"
+  },
+  "en": {
+   "file": "p0220_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Do I need a visa to go to England?"
+  }
+ },
+ "p0221": {
+  "es": {
+   "file": "p0221_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Cuando lleguemos, te llamaremos"
+  },
+  "en": {
+   "file": "p0221_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "When we arrive, we'll call you"
+  }
+ },
+ "p0222": {
+  "es": {
+   "file": "p0222_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Mis papás nos llevaban a la playa cada año"
+  },
+  "en": {
+   "file": "p0222_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "My parents used to take us to the beach every year"
+  }
+ },
+ "p0223": {
+  "es": {
+   "file": "p0223_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Debemos reservar el hotel antes de que suban los precios"
+  },
+  "en": {
+   "file": "p0223_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We should book the hotel before prices go up"
+  }
+ },
+ "p0224": {
+  "es": {
+   "file": "p0224_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Sería mejor ir en bus"
+  },
+  "en": {
+   "file": "p0224_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "It would be better to go by bus"
+  }
+ },
+ "p0225": {
+  "es": {
+   "file": "p0225_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "La playa estaba llena de gente"
+  },
+  "en": {
+   "file": "p0225_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The beach was full of people"
+  }
+ },
+ "p0226": {},
+ "p0227": {},
+ "p0228": {},
+ "p0229": {},
+ "p0230": {},
+ "p0231": {},
+ "p0232": {},
+ "p0233": {},
+ "p0234": {},
+ "p0235": {},
+ "p0236": {},
+ "p0237": {},
+ "p0238": {},
+ "p0239": {},
+ "p0240": {},
+ "p0241": {},
+ "p0242": {},
+ "p0243": {},
+ "p0244": {},
+ "p0245": {},
+ "p0246": {},
+ "p0247": {},
+ "p0248": {},
+ "p0249": {},
+ "p0250": {},
+ "p0251": {},
+ "p0252": {},
+ "p0253": {},
+ "p0254": {},
+ "p0255": {},
+ "p0256": {},
+ "p0257": {},
+ "p0258": {},
+ "p0259": {},
+ "p0260": {},
+ "p0261": {},
+ "p0262": {},
+ "p0263": {},
+ "p0264": {},
+ "p0265": {},
+ "p0266": {},
+ "p0267": {},
+ "p0268": {},
+ "p0269": {},
+ "p0270": {},
+ "p0271": {},
+ "p0272": {},
+ "p0273": {},
+ "p0274": {},
+ "p0275": {},
+ "p0276": {},
+ "p0277": {},
+ "p0278": {},
+ "p0279": {},
+ "p0280": {},
+ "p0281": {},
+ "p0282": {},
+ "p0283": {},
+ "p0284": {},
+ "p0285": {},
+ "p0286": {},
+ "p0287": {},
+ "p0288": {},
+ "p0289": {},
+ "p0290": {},
+ "p0291": {},
+ "p0292": {},
+ "p0293": {},
+ "p0294": {},
+ "p0295": {},
+ "p0296": {},
+ "p0297": {},
+ "p0298": {},
+ "p0299": {},
+ "p0300": {}
 }
