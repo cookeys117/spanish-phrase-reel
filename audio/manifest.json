@@ -2999,31 +2999,306 @@
    "text": "I doubt he'll arrive on time"
   }
  },
- "p0251": {},
- "p0252": {},
- "p0253": {},
- "p0254": {},
- "p0255": {},
- "p0256": {},
- "p0257": {},
- "p0258": {},
- "p0259": {},
- "p0260": {},
- "p0261": {},
- "p0262": {},
- "p0263": {},
- "p0264": {},
- "p0265": {},
- "p0266": {},
- "p0267": {},
- "p0268": {},
- "p0269": {},
- "p0270": {},
- "p0271": {},
- "p0272": {},
- "p0273": {},
- "p0274": {},
- "p0275": {},
+ "p0251": {
+  "es": {
+   "file": "p0251_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Ojalá nos veamos pronto"
+  },
+  "en": {
+   "file": "p0251_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "Hopefully we'll see each other soon"
+  }
+ },
+ "p0252": {
+  "es": {
+   "file": "p0252_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Me acompañas al médico?"
+  },
+  "en": {
+   "file": "p0252_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Will you come with me to the doctor?"
+  }
+ },
+ "p0253": {
+  "es": {
+   "file": "p0253_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Yo llevo el vino"
+  },
+  "en": {
+   "file": "p0253_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'll bring the wine"
+  }
+ },
+ "p0254": {
+  "es": {
+   "file": "p0254_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "El médico quiere que descanse tres días"
+  },
+  "en": {
+   "file": "p0254_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The doctor wants me to rest for three days"
+  }
+ },
+ "p0255": {
+  "es": {
+   "file": "p0255_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Tengo tos hace una semana"
+  },
+  "en": {
+   "file": "p0255_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I've had a cough for a week"
+  }
+ },
+ "p0256": {
+  "es": {
+   "file": "p0256_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Debería tomar más agua"
+  },
+  "en": {
+   "file": "p0256_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "You should drink more water"
+  }
+ },
+ "p0257": {
+  "es": {
+   "file": "p0257_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "No pude dormir anoche por el ruido"
+  },
+  "en": {
+   "file": "p0257_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I couldn't sleep last night because of the noise"
+  }
+ },
+ "p0258": {
+  "es": {
+   "file": "p0258_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Es importante que tome la medicina con comida"
+  },
+  "en": {
+   "file": "p0258_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "It's important that you take the medicine with food"
+  }
+ },
+ "p0259": {
+  "es": {
+   "file": "p0259_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Pediré una cita para la próxima semana"
+  },
+  "en": {
+   "file": "p0259_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'll make an appointment for next week"
+  }
+ },
+ "p0260": {
+  "es": {
+   "file": "p0260_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Me dolía la rodilla cuando caminaba"
+  },
+  "en": {
+   "file": "p0260_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "My knee used to hurt when I walked"
+  }
+ },
+ "p0261": {
+  "es": {
+   "file": "p0261_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "¡Que te mejores!"
+  },
+  "en": {
+   "file": "p0261_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "Get well soon!"
+  }
+ },
+ "p0262": {
+  "es": {
+   "file": "p0262_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Queremos una mesa para cuatro, por favor"
+  },
+  "en": {
+   "file": "p0262_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "We'd like a table for four, please"
+  }
+ },
+ "p0263": {
+  "es": {
+   "file": "p0263_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Me gustaría el pescado con ensalada"
+  },
+  "en": {
+   "file": "p0263_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'd like the fish with salad"
+  }
+ },
+ "p0264": {
+  "es": {
+   "file": "p0264_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "El mesero nos trajo la cuenta equivocada"
+  },
+  "en": {
+   "file": "p0264_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The waiter brought us the wrong bill"
+  }
+ },
+ "p0265": {
+  "es": {
+   "file": "p0265_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Prefiero que no le pongan ajo"
+  },
+  "en": {
+   "file": "p0265_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'd rather they didn't put garlic in it"
+  }
+ },
+ "p0266": {
+  "es": {
+   "file": "p0266_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Volveremos otro día"
+  },
+  "en": {
+   "file": "p0266_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "We'll come back another day"
+  }
+ },
+ "p0267": {
+  "es": {
+   "file": "p0267_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "La sopa estaba muy salada"
+  },
+  "en": {
+   "file": "p0267_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The soup was very salty"
+  }
+ },
+ "p0268": {
+  "es": {
+   "file": "p0268_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Nos podemos sentar afuera?"
+  },
+  "en": {
+   "file": "p0268_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Can we sit outside?"
+  }
+ },
+ "p0269": {
+  "es": {
+   "file": "p0269_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Comimos muy bien en ese restaurante"
+  },
+  "en": {
+   "file": "p0269_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We ate very well at that restaurant"
+  }
+ },
+ "p0270": {
+  "es": {
+   "file": "p0270_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Tiene esta camisa en una talla más grande?"
+  },
+  "en": {
+   "file": "p0270_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Do you have this shirt in a bigger size?"
+  }
+ },
+ "p0271": {
+  "es": {
+   "file": "p0271_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Pagaré con tarjeta"
+  },
+  "en": {
+   "file": "p0271_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'll pay by card"
+  }
+ },
+ "p0272": {
+  "es": {
+   "file": "p0272_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Busco un regalo para mi esposo"
+  },
+  "en": {
+   "file": "p0272_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I'm looking for a present for my husband"
+  }
+ },
+ "p0273": {
+  "es": {
+   "file": "p0273_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Lo compraría, pero es muy caro"
+  },
+  "en": {
+   "file": "p0273_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'd buy it, but it's very expensive"
+  }
+ },
+ "p0274": {
+  "es": {
+   "file": "p0274_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "La tienda cierra a las ocho"
+  },
+  "en": {
+   "file": "p0274_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The shop closes at eight"
+  }
+ },
+ "p0275": {
+  "es": {
+   "file": "p0275_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "¿Lo puedo devolver si no me queda?"
+  },
+  "en": {
+   "file": "p0275_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "Can I return it if it doesn't fit?"
+  }
+ },
  "p0276": {},
  "p0277": {},
  "p0278": {},
