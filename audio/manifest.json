@@ -2699,31 +2699,306 @@
    "text": "The beach was full of people"
   }
  },
- "p0226": {},
- "p0227": {},
- "p0228": {},
- "p0229": {},
- "p0230": {},
- "p0231": {},
- "p0232": {},
- "p0233": {},
- "p0234": {},
- "p0235": {},
- "p0236": {},
- "p0237": {},
- "p0238": {},
- "p0239": {},
- "p0240": {},
- "p0241": {},
- "p0242": {},
- "p0243": {},
- "p0244": {},
- "p0245": {},
- "p0246": {},
- "p0247": {},
- "p0248": {},
- "p0249": {},
- "p0250": {},
+ "p0226": {
+  "es": {
+   "file": "p0226_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Ojalá no llueva mañana"
+  },
+  "en": {
+   "file": "p0226_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I hope it doesn't rain tomorrow"
+  }
+ },
+ "p0227": {
+  "es": {
+   "file": "p0227_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Llovió toda la tarde"
+  },
+  "en": {
+   "file": "p0227_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "It rained all afternoon"
+  }
+ },
+ "p0228": {
+  "es": {
+   "file": "p0228_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Hace mucho calor en Cartagena"
+  },
+  "en": {
+   "file": "p0228_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "It's very hot in Cartagena"
+  }
+ },
+ "p0229": {
+  "es": {
+   "file": "p0229_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Voy a llevar un paraguas por si llueve"
+  },
+  "en": {
+   "file": "p0229_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'm going to take an umbrella in case it rains"
+  }
+ },
+ "p0230": {
+  "es": {
+   "file": "p0230_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Antes hacía más frío en Bogotá"
+  },
+  "en": {
+   "file": "p0230_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "It used to be colder in Bogotá"
+  }
+ },
+ "p0231": {
+  "es": {
+   "file": "p0231_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Dicen que lloverá toda la semana"
+  },
+  "en": {
+   "file": "p0231_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "They say it will rain all week"
+  }
+ },
+ "p0232": {
+  "es": {
+   "file": "p0232_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Mi hermana nos visitará en marzo"
+  },
+  "en": {
+   "file": "p0232_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "My sister will visit us in March"
+  }
+ },
+ "p0233": {
+  "es": {
+   "file": "p0233_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Mi mamá quiere que vayamos para Navidad"
+  },
+  "en": {
+   "file": "p0233_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "My mum wants us to go for Christmas"
+  }
+ },
+ "p0234": {
+  "es": {
+   "file": "p0234_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Mi esposo también aprende español"
+  },
+  "en": {
+   "file": "p0234_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "My husband is also learning Spanish"
+  }
+ },
+ "p0235": {
+  "es": {
+   "file": "p0235_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Cuando era niño vivía en el campo"
+  },
+  "en": {
+   "file": "p0235_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "When I was a child I lived in the countryside"
+  }
+ },
+ "p0236": {
+  "es": {
+   "file": "p0236_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Mi abuela cocinaba todos los domingos"
+  },
+  "en": {
+   "file": "p0236_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "My grandmother used to cook every Sunday"
+  }
+ },
+ "p0237": {
+  "es": {
+   "file": "p0237_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Me encantaría conocer a tu familia"
+  },
+  "en": {
+   "file": "p0237_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'd love to meet your family"
+  }
+ },
+ "p0238": {
+  "es": {
+   "file": "p0238_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Mi hermano se casa en junio"
+  },
+  "en": {
+   "file": "p0238_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "My brother is getting married in June"
+  }
+ },
+ "p0239": {
+  "es": {
+   "file": "p0239_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Espero que tu papá se mejore pronto"
+  },
+  "en": {
+   "file": "p0239_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I hope your dad gets better soon"
+  }
+ },
+ "p0240": {
+  "es": {
+   "file": "p0240_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Los niños jugaban en el parque"
+  },
+  "en": {
+   "file": "p0240_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The children were playing in the park"
+  }
+ },
+ "p0241": {
+  "es": {
+   "file": "p0241_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Mi sobrina cumple diez años mañana"
+  },
+  "en": {
+   "file": "p0241_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "My niece turns ten tomorrow"
+  }
+ },
+ "p0242": {
+  "es": {
+   "file": "p0242_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Quieres venir a la fiesta el sábado?"
+  },
+  "en": {
+   "file": "p0242_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Do you want to come to the party on Saturday?"
+  }
+ },
+ "p0243": {
+  "es": {
+   "file": "p0243_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Quiero que conozcas a mis amigos"
+  },
+  "en": {
+   "file": "p0243_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I want you to meet my friends"
+  }
+ },
+ "p0244": {
+  "es": {
+   "file": "p0244_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Me avisas cuando llegues?"
+  },
+  "en": {
+   "file": "p0244_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Will you let me know when you arrive?"
+  }
+ },
+ "p0245": {
+  "es": {
+   "file": "p0245_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Anoche nos divertimos mucho"
+  },
+  "en": {
+   "file": "p0245_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We had a lot of fun last night"
+  }
+ },
+ "p0246": {
+  "es": {
+   "file": "p0246_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Iría, pero tengo que trabajar"
+  },
+  "en": {
+   "file": "p0246_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I'd go, but I have to work"
+  }
+ },
+ "p0247": {
+  "es": {
+   "file": "p0247_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Es mejor que vengas temprano"
+  },
+  "en": {
+   "file": "p0247_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "It's better if you come early"
+  }
+ },
+ "p0248": {
+  "es": {
+   "file": "p0248_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Viste el partido ayer?"
+  },
+  "en": {
+   "file": "p0248_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Did you see the match yesterday?"
+  }
+ },
+ "p0249": {
+  "es": {
+   "file": "p0249_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Íbamos a bailar todos los viernes"
+  },
+  "en": {
+   "file": "p0249_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We used to go dancing every Friday"
+  }
+ },
+ "p0250": {
+  "es": {
+   "file": "p0250_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Dudo que llegue a tiempo"
+  },
+  "en": {
+   "file": "p0250_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I doubt he'll arrive on time"
+  }
+ },
  "p0251": {},
  "p0252": {},
  "p0253": {},
