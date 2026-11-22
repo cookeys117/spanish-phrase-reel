@@ -269,7 +269,12 @@ function openPanel(idx){
   sh.querySelector('[data-clear]')?.addEventListener('click', () => { rate(idx, null); closeSheet(); });
   sh.querySelector('[data-report]').onclick = () => openReport(c.phrase);
   const vt = $('vt'); const th = vt?.querySelector(`th[data-t="${t.verb?.tense}"]`);
-  if(vt && th) vt.scrollLeft = Math.max(0, th.offsetLeft - vt.querySelector('th').offsetWidth - 4);
+  if(vt && th){
+    // Centre the card's tense column in the visible part of the table (right of the sticky person column),
+    // so the neighbouring tenses show either side; the browser clamps at the ends.
+    const first = vt.querySelector('th').offsetWidth, visible = vt.clientWidth - first;
+    vt.scrollLeft = Math.max(0, th.offsetLeft - first - (visible - th.offsetWidth) / 2);
+  }
 }
 function openReport(p){
   openSheet(`<div class="head"><h3>Report a problem</h3>${closeBtn}</div><p class="info">${esc(p.es)}<br>${esc(p.en)}</p>
