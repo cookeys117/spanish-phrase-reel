@@ -3299,29 +3299,304 @@
    "text": "Can I return it if it doesn't fit?"
   }
  },
- "p0276": {},
- "p0277": {},
- "p0278": {},
- "p0279": {},
- "p0280": {},
- "p0281": {},
- "p0282": {},
- "p0283": {},
- "p0284": {},
- "p0285": {},
- "p0286": {},
- "p0287": {},
- "p0288": {},
- "p0289": {},
- "p0290": {},
- "p0291": {},
- "p0292": {},
- "p0293": {},
- "p0294": {},
- "p0295": {},
- "p0296": {},
- "p0297": {},
- "p0298": {},
- "p0299": {},
- "p0300": {}
+ "p0276": {
+  "es": {
+   "file": "p0276_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Me dieron un descuento del diez por ciento"
+  },
+  "en": {
+   "file": "p0276_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "They gave me a ten per cent discount"
+  }
+ },
+ "p0277": {
+  "es": {
+   "file": "p0277_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Necesito que lo traigan al apartamento"
+  },
+  "en": {
+   "file": "p0277_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I need them to bring it to the apartment"
+  }
+ },
+ "p0278": {
+  "es": {
+   "file": "p0278_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Quiero abrir una cuenta de ahorros"
+  },
+  "en": {
+   "file": "p0278_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I want to open a savings account"
+  }
+ },
+ "p0279": {
+  "es": {
+   "file": "p0279_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "El banco me mandará una tarjeta nueva"
+  },
+  "en": {
+   "file": "p0279_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The bank will send me a new card"
+  }
+ },
+ "p0280": {
+  "es": {
+   "file": "p0280_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Me cobraron dos veces"
+  },
+  "en": {
+   "file": "p0280_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "They charged me twice"
+  }
+ },
+ "p0281": {
+  "es": {
+   "file": "p0281_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Es necesario que traiga su pasaporte"
+  },
+  "en": {
+   "file": "p0281_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "You need to bring your passport"
+  }
+ },
+ "p0282": {
+  "es": {
+   "file": "p0282_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "El cajero no me devolvió la tarjeta"
+  },
+  "en": {
+   "file": "p0282_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The cash machine didn't give me my card back"
+  }
+ },
+ "p0283": {
+  "es": {
+   "file": "p0283_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Me gustaría mandar plata a Inglaterra"
+  },
+  "en": {
+   "file": "p0283_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'd like to send money to England"
+  }
+ },
+ "p0284": {
+  "es": {
+   "file": "p0284_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Cuándo llegará el bus?"
+  },
+  "en": {
+   "file": "p0284_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "When will the bus come?"
+  }
+ },
+ "p0285": {
+  "es": {
+   "file": "p0285_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "¿Podría parar en la próxima esquina?"
+  },
+  "en": {
+   "file": "p0285_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "Could you stop at the next corner?"
+  }
+ },
+ "p0286": {
+  "es": {
+   "file": "p0286_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Había mucho trancón en la autopista"
+  },
+  "en": {
+   "file": "p0286_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "There was a lot of traffic on the motorway"
+  }
+ },
+ "p0287": {
+  "es": {
+   "file": "p0287_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Te llamo un taxi para que llegues rápido"
+  },
+  "en": {
+   "file": "p0287_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I'll call you a taxi so you get there quickly"
+  }
+ },
+ "p0288": {
+  "es": {
+   "file": "p0288_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "El bus iba lleno, así que caminé"
+  },
+  "en": {
+   "file": "p0288_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The bus was full, so I walked"
+  }
+ },
+ "p0289": {
+  "es": {
+   "file": "p0289_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "¿Cuánto cuesta un taxi al aeropuerto?"
+  },
+  "en": {
+   "file": "p0289_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "How much is a taxi to the airport?"
+  }
+ },
+ "p0290": {
+  "es": {
+   "file": "p0290_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Preferiría ir en metro"
+  },
+  "en": {
+   "file": "p0290_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I'd rather go by metro"
+  }
+ },
+ "p0291": {
+  "es": {
+   "file": "p0291_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Quiero que arreglen el ascensor esta semana"
+  },
+  "en": {
+   "file": "p0291_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "I want them to fix the lift this week"
+  }
+ },
+ "p0292": {
+  "es": {
+   "file": "p0292_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Siempre apago las luces cuando salgo"
+  },
+  "en": {
+   "file": "p0292_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I always turn off the lights when I go out"
+  }
+ },
+ "p0293": {
+  "es": {
+   "file": "p0293_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "El portero recogerá el paquete"
+  },
+  "en": {
+   "file": "p0293_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "The doorman will pick up the parcel"
+  }
+ },
+ "p0294": {
+  "es": {
+   "file": "p0294_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Espero que vuelva el agua pronto"
+  },
+  "en": {
+   "file": "p0294_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "I hope the water comes back soon"
+  }
+ },
+ "p0295": {
+  "es": {
+   "file": "p0295_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Tendremos que hablar con el administrador"
+  },
+  "en": {
+   "file": "p0295_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We'll have to talk to the building manager"
+  }
+ },
+ "p0296": {
+  "es": {
+   "file": "p0296_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "¿Puedes prender el aire?"
+  },
+  "en": {
+   "file": "p0296_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "Can you turn on the air conditioning?"
+  }
+ },
+ "p0297": {
+  "es": {
+   "file": "p0297_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Necesitamos que venga el plomero mañana"
+  },
+  "en": {
+   "file": "p0297_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "We need the plumber to come tomorrow"
+  }
+ },
+ "p0298": {
+  "es": {
+   "file": "p0298_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "La obra costará más de lo que pensábamos"
+  },
+  "en": {
+   "file": "p0298_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "The work will cost more than we thought"
+  }
+ },
+ "p0299": {
+  "es": {
+   "file": "p0299_es.mp3",
+   "voice": "es-CO-SalomeNeural",
+   "text": "Es mejor que pinten antes de instalar el piso"
+  },
+  "en": {
+   "file": "p0299_en.mp3",
+   "voice": "en-GB-SoniaNeural",
+   "text": "It's better if they paint before laying the floor"
+  }
+ },
+ "p0300": {
+  "es": {
+   "file": "p0300_es.mp3",
+   "voice": "es-CO-GonzaloNeural",
+   "text": "Rompieron una baldosa cuando movieron la nevera"
+  },
+  "en": {
+   "file": "p0300_en.mp3",
+   "voice": "en-GB-RyanNeural",
+   "text": "They broke a tile when they moved the fridge"
+  }
+ }
 }
