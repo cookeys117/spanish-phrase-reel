@@ -1,5 +1,5 @@
 // Phrase Reel — Phase 1 prototype (reel screen). Progress is kept in this browser only (sync comes in Phase 3).
-import { computeStates, choosePhrase, dayKey, phraseItems, newItemsToday, todaysVerdict } from './scheduler.mjs';
+import { computeStates, choosePhrase, dayKey, phraseItems, newItemsToday } from './scheduler.mjs';
 import { Player, chime } from './player.mjs';
 import { segment as conjSegment, conjugate, TENSE_LABEL } from '../engine/conjugate.mjs';
 import { adjForm } from '../engine/adjectives.mjs';
@@ -62,9 +62,8 @@ function newCard(){
     newToday: newItemsToday(states, today()), newCap: settings.newCap, requeueItem,
   });
   cardCounter++;
-  const ratings = {};
-  phrase.tokens.forEach((t, i) => { if(t.items){ const v = todaysVerdict(events, t.items[0]); if(v) ratings[i] = v; } });
-  return { phrase, slot, inst: `${device}-${Date.now()}`, ratings };
+  // Each card starts plain: it only ever shows what was rated on this card (ratings elsewhere today don't show).
+  return { phrase, slot, inst: `${device}-${Date.now()}`, ratings: {} };
 }
 
 function goTo(newPos, autoplay = true){

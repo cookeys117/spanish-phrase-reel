@@ -52,5 +52,14 @@ eq(['a','c'].includes(choosePhrase(base).phrase.id), true, 'theme slot picks a p
 eq(choosePhrase({ ...base, recent: ['a'] }).phrase.id, 'c', 'recent phrase avoided');
 eq(choosePhrase({ ...base, requeueItem: 'w:9' }).phrase.id, 'd', 'requeue brings the red item back');
 
+// Undo on one card doesn't wipe the same item's green from another card that day
+{
+  const e = (r, c, h) => ({ ...ev('2026-11-01', r, 'vp:er|pret|yo', h), c });
+  eq(computeStates([e('g', 'A', 9), e('g', 'B', 10), e('x', 'B', 11)], {}).get('vp:er|pret|yo').rung, 1, 'green from card A survives undo on card B');
+  eq(computeStates([e('g', 'A', 9), e('x', 'A', 11)], {}).get('vp:er|pret|yo').rung, 0, 'undo on the same card clears it');
+  eq(computeStates([e('r', 'A', 9), e('g', 'B', 10)], {}).get('vp:er|pret|yo').rung, 0, 'red on one card still stands over green on another');
+}
+
 console.log(fail ? `${fail} failures` : 'All scheduler tests passed');
 process.exit(fail ? 1 : 0);
+

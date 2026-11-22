@@ -57,15 +57,24 @@ export function computeStates(events, phrasesById, ladder = DEFAULT_LADDER){
       continue;
     }
     if(!e.i) continue;
+    // Per item and day, keep each card's verdict separately, so undoing a tap on one card
+    // ('x' with that card's id) never wipes a rating made on another card the same day.
     if(!verdicts.has(e.i)) verdicts.set(e.i, new Map());
-    const m = verdicts.get(e.i), cur = m.get(day);
-    if(e.r === 'r') m.set(day, 'r');
-    else if(e.r === 'g'){ if(cur !== 'r') m.set(day, 'g'); }
-    else if(e.r === 'x') m.delete(day);
+    const days = verdicts.get(e.i);
+    if(!days.has(day)) days.set(day, new Map());
+    const cards = days.get(day), card = e.c || '';
+    if(e.r === 'x'){ if(e.c) cards.delete(card); else cards.clear(); }
+    else if(e.r === 'r') cards.set(card, 'r');
+    else if(e.r === 'g'){ if(cards.get(card) !== 'r') cards.set(card, 'g'); }
     if(!firstSeen.has(e.i)) firstSeen.set(e.i, day);
   }
   const states = new Map();
-  for(const [item, m] of verdicts){
+  for(const [item, days] of verdicts){
+    const m = new Map();               // day -> 'g' | 'r' (red on any card stands over green)
+    for(const [day, cards] of days){
+      const vs = [...cards.values()];
+      if(vs.includes('r')) m.set(day, 'r'); else if(vs.includes('g')) m.set(day, 'g');
+    }
     let rung = 0, due = null, rated = false;
     for(const day of [...m.keys()].sort()){
       const v = m.get(day);
@@ -84,12 +93,16 @@ export function computeStates(events, phrasesById, ladder = DEFAULT_LADDER){
 
 /** Today's verdict for an item (for showing red/green on a card again). */
 export function todaysVerdict(events, item, today = dayKey()){
-  let v = null;
+  const cards = new Map();
   for(const e of events){
     if(e.i !== item || dayKey(e.t) !== today) continue;
-    if(e.r === 'r') v = 'r'; else if(e.r === 'g' && v !== 'r') v = 'g'; else if(e.r === 'x') v = null;
+    const card = e.c || '';
+    if(e.r === 'x'){ if(e.c) cards.delete(card); else cards.clear(); }
+    else if(e.r === 'r') cards.set(card, 'r');
+    else if(e.r === 'g' && cards.get(card) !== 'r') cards.set(card, 'g');
   }
-  return v;
+  const vs = [...cards.values()];
+  return vs.includes('r') ? 'r' : vs.includes('g') ? 'g' : null;
 }
 
 /** Theme of the day: weighted random from the tense sliders, stable for the whole day. */
