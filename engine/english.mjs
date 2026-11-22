@@ -34,12 +34,16 @@ const E = {
   salir:['go out','went out'], valer:['be worth'], venir:['come','came'], hacer:['do','did'], decir:['say','said'],
   traer:['bring','brought'], ser:['be'], estar:['be'], ir:['go','went'], dar:['give','gave'], ver:['see','saw'],
   saber:['know','knew'], andar:['walk around','walked around'],
+  dudar:['doubt'], mejorar:['improve'], avisar:['let (someone) know','let (someone) know'], acompañar:['go with','went with'],
+  llenar:['fill in','filled in'], casar:['get married','got married'], regresar:['come back','came back'],
+  cumplir:['turn (an age)','turned (an age)'], prender:['turn on','turned on'], llover:['rain'], mover:['move'],
+  apagar:['turn off','turned off'], alcanzar:['reach'], recoger:['pick up','picked up'],
 };
 // conocer / saber change meaning in the past ("conocí" = I met, "supe" = I found out)
 const PAST_OVERRIDE = { conocer: 'met', saber: 'found out' };
 const SUBJECT = { yo: 'I', tu: 'you', usted: 'he/she', nosotros: 'we', ellos: 'they' };
 // Verbs whose forms don't make sense as a person drill (one-person verbs, auxiliaries)
-export const NO_FORM_QUIZ = new Set(['haber', 'gustar', 'encantar', 'doler', 'faltar', 'ocurrir', 'costar', 'funcionar', 'valer']);
+export const NO_FORM_QUIZ = new Set(['haber', 'gustar', 'encantar', 'doler', 'faltar', 'ocurrir', 'costar', 'funcionar', 'valer', 'llover']);
 
 const third = w => w === 'have' ? 'has' : w === 'do' ? 'does' : w === 'go' ? 'goes' : w === 'can' ? 'can'
   : /(s|sh|ch|x|z)$/.test(w) ? w + 'es' : /[^aeiou]y$/.test(w) ? w.slice(0, -1) + 'ies' : w + 's';

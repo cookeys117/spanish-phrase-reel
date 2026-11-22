@@ -9,7 +9,7 @@ export const TYPES = [
 ];
 const POS_TYPE = { noun: 'noun', adj: 'adj', adv: 'adv', expr: 'other', num: 'other', det: 'other', conj: 'other', pron: 'other' };
 const EL_FEMININE = new Set(['agua', 'hambre']);            // feminine, but "el agua", "el hambre"
-const PLURAL_ONLY = new Set(['urgencias']);
+const PLURAL_ONLY = new Set(['urgencias', 'vacaciones']);
 const FORM_TENSES = ['pres', 'pret', 'impf', 'fut', 'cond'];
 const PERSONS = ['yo', 'tu', 'usted', 'nosotros', 'ellos'];
 

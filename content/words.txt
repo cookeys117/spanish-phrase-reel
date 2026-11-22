@@ -159,7 +159,7 @@ temprano#early | adv | early
 
 # --- social ---
 fin_de_semana#weekend | noun | weekend | m
-viernes#friday | noun | Friday | m
+viernes#friday | noun | Friday | m | plural=viernes
 hermano#brother | noun | brother | m
 chévere#great | adj | great / cool | e | Colombian
 qué_pena#sorry | expr | sorry / how embarrassing | | Colombian
@@ -269,3 +269,61 @@ película#film | noun | film | f
 después#later | adv | later / afterwards
 calor#heat | noun | heat | m
 frío#cold-weather | noun | cold (weather) | m
+
+# --- batch 3 ---
+reunión#meeting | noun | meeting | f
+jefe#boss | noun | boss | m
+informe#report | noun | report | m
+conexión#connection | noun | connection | f
+lento#slow | adj | slow | oa
+correo#email | noun | email / post | m
+importante#important | adj | important | e
+Londres#London | name | London
+fecha#date | noun | date | f
+compañero#colleague | noun | colleague / classmate | m
+vacaciones#holiday | noun | holiday / vacation | f | always plural: las vacaciones
+impresora#printer | noun | printer | f
+diciembre#december | noun | December | m
+habitación#room | noun | room (hotel) | f
+vista#view | noun | view | f
+mar#sea | noun | sea | m
+hotel#hotel | noun | hotel | m
+lado#side | noun | side | m | al lado de = next to
+playa#beach | noun | beach | f
+bueno#good | adj | good | oa
+viaje#trip | noun | trip / journey | m
+maleta#suitcase | noun | suitcase | f
+Inglaterra#England | name | England
+papá#dad | noun | dad | m | mis papás = my parents
+antes#before | adv | before / previously
+gente#people | noun | people | f | singular in Spanish: la gente es…
+ojalá#hopefully | expr | hopefully / I hope | | always followed by the subjunctive
+tarde#afternoon | noun | afternoon | f
+paraguas#umbrella | noun | umbrella | m | plural=paraguas
+mamá#mum | noun | mum | f
+Navidad#Christmas | noun | Christmas | f
+esposo#husband | noun | husband | m
+español#Spanish | noun | Spanish (language) | m
+campo#countryside | noun | countryside | m
+junio#june | noun | June | m
+pronto#soon | adv | soon
+parque#park | noun | park | m
+sobrina#niece | noun | niece | f
+diez#ten | num | ten
+vino#wine | noun | wine | m
+partido#match | noun | match / game | m
+tos#cough | noun | cough | f
+rodilla#knee | noun | knee | f
+ensalada#salad | noun | salad | f
+salado#salty | adj | salty | oa
+afuera#outside | adv | outside
+bien#well | adv | well
+por_ciento#percent | expr | per cent
+ahorro#savings | noun | saving | m | cuenta de ahorros = savings account
+vez#time | noun | time (occasion) | f | dos veces = twice
+necesario#necessary | adj | necessary | oa
+autopista#motorway | noun | motorway | f
+así_que#so | conj | so (as a result)
+nevera#fridge | noun | fridge | f
+aire#air-conditioning | noun | air conditioning | m | short for aire acondicionado
+familia#family | noun | family | f

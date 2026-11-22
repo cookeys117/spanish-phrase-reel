@@ -150,7 +150,7 @@ function conjugateIdx(verb, tense, personIdx){
       s = toBackVowelSafe(s, verb.spelling);
       return s + table.subj[personIdx];
     }
-    return root + table.subj[personIdx];
+    return toBackVowelSafe(root, verb.spelling) + table.subj[personIdx];   // escoger → escoja, dirigir → dirija
   }
   throw new Error(`Unknown tense ${tense}`);
 }
@@ -188,6 +188,9 @@ export const VERBS = [
   ['enfermar','to make ill (enfermarse = to get ill)'],['cubrir','to cover'],
   ['descansar','to rest'],['pasar','to pass / go through'],['prestar','to lend'],['parar','to stop'],
   ['encantar','to delight (me encanta = I love)'],['celebrar','to celebrate'],
+  ['dudar','to doubt'],['mejorar','to improve (mejorarse = to get better)'],['avisar','to let (someone) know'],
+  ['acompañar','to go with / keep company'],['llenar','to fill / fill in'],['casar','to marry (casarse = to get married)'],
+  ['regresar','to come back'],['cumplir','to fulfil / turn (an age)'],['prender','to turn on (Colombian)'],
 ].map(([inf, en]) => ({ inf, en, cat: 'regular' })).concat([
   // stem-changers
   {inf:'pensar',en:'to think',stemChange:'e-ie'},{inf:'cerrar',en:'to close',stemChange:'e-ie'},
@@ -207,6 +210,7 @@ export const VERBS = [
   {inf:'doler',en:'to hurt',stemChange:'o-ue'},{inf:'acostar',en:'to put to bed / lie down',stemChange:'o-ue'},
   {inf:'probar',en:'to try / taste',stemChange:'o-ue'},{inf:'devolver',en:'to give back',stemChange:'o-ue'},
   {inf:'almorzar',en:'to have lunch',stemChange:'o-ue',spelling:'zar'},
+  {inf:'llover',en:'to rain',stemChange:'o-ue'},{inf:'mover',en:'to move',stemChange:'o-ue'},
   {inf:'pedir',en:'to ask for / order',stemChange:'e-i'},{inf:'servir',en:'to serve / work (be useful)',stemChange:'e-i'},
   {inf:'repetir',en:'to repeat',stemChange:'e-i'},{inf:'medir',en:'to measure / try on',stemChange:'e-i'},{inf:'vestir',en:'to dress',stemChange:'e-i'},
   {inf:'seguir',en:'to follow / continue',stemChange:'e-i',spelling:'guir'},
@@ -223,6 +227,8 @@ export const VERBS = [
   {inf:'explicar',en:'to explain',spelling:'car'},{inf:'marcar',en:'to dial / mark',spelling:'car'},
   {inf:'pagar',en:'to pay',spelling:'gar'},{inf:'llegar',en:'to arrive',spelling:'gar'},
   {inf:'entregar',en:'to deliver / hand in',spelling:'gar'},
+  {inf:'apagar',en:'to turn off',spelling:'gar'},{inf:'alcanzar',en:'to reach / have time to',spelling:'zar'},
+  {inf:'recoger',en:'to pick up / collect',spelling:'ger-gir'},
   {inf:'conocer',en:'to know (people / places)',spelling:'cer-cir-zc'},
   {inf:'conducir',en:'to drive',spelling:'cer-cir-zc',irregPret:'conduj'},
   {inf:'producir',en:'to produce',spelling:'cer-cir-zc',irregPret:'produj'},
