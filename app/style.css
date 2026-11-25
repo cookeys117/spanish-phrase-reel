@@ -1,11 +1,11 @@
 :root{
-  --bg:#fff; --surface:#f5f4f0; --text:#1f1e1c; --muted:#77756f; --faint:#a6a49d; --line:#e4e2dc; --line2:#cfccc4;
+  --bg:#fff; --surface:#f5f4f0; --text:#1f1e1c; --muted:#77756f; --faint:#a6a49d; --line:#e4e2dc; --line2:#cfccc4; --uline:#8e8a81;
   --en:#e6f1fb; --es:#f6d9e4; --reg:#1d6b0c; --stem:#1f6fd1; --irr:#d42a2a; --hook:#7f77dd;
   --green-bg:#dcefc6; --green:#3b6d11; --red-bg:#f9d6d6; --red:#a32d2d; --accent:#185fa5; --accent-fill:#185fa5;
   --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 @media (prefers-color-scheme: dark){
-  :root{ --bg:#161616; --surface:#222; --text:#eeece6; --muted:#a3a19a; --faint:#77756f; --line:#2f2e2c; --line2:#45433f;
+  :root{ --bg:#161616; --surface:#222; --text:#eeece6; --muted:#a3a19a; --faint:#77756f; --line:#2f2e2c; --line2:#45433f; --uline:#7d7a73;
     --en:#16324f; --es:#4d2234; --reg:#9fd27a; --stem:#85b7eb; --irr:#f58a8a; --hook:#afa9ec;
     --green-bg:#27500a; --green:#c0dd97; --red-bg:#5c1d1d; --red:#f7c1c1; --accent:#85b7eb; --accent-fill:#2a6fbd; }
 }
@@ -35,7 +35,7 @@ button:active{ transform:scale(.98); }
 .spk{ border:none; padding:2px 4px; font-size:16px; color:var(--muted); }
 .spk.on{ color:var(--text); }
 .hidden-txt{ color:var(--faint); }
-.tk{ border-radius:6px; padding:0 2px; cursor:pointer; border-bottom:1.5px dotted var(--line2); -webkit-touch-callout:none; position:relative; }
+.tk{ border-radius:6px; padding:0 2px; cursor:pointer; border-bottom:2.5px dotted var(--uline); -webkit-touch-callout:none; position:relative; }
 .tk.g{ background:var(--green-bg); } .tk.r{ background:var(--red-bg); } .tk.hk{ border-bottom:2px solid var(--hook); }
 .tk sup{ font-size:10px; color:var(--faint); margin-left:1px; }
 .reg{ color:var(--reg); } .stem{ color:var(--stem); } .irr{ color:var(--irr); }
@@ -112,3 +112,10 @@ textarea{ width:100%; min-height:70px; font:inherit; font-size:14px; padding:8px
 /* who "you" is in the Spanish: small grey tag after the English sentence */
 .bx .addr{ display:inline-block; vertical-align:middle; font-size:.55em; font-style:italic; color:#4b5563;
   border:1px solid #9aa1ab; border-radius:999px; padding:0 .55em; margin-left:.25em; line-height:1.6; white-space:nowrap; }
+
+/* "Knew it all" button under the card */
+.allrow{ display:flex; justify-content:flex-end; margin:6px 14px 0; min-height:0; }
+.allbtn{ display:inline-flex; align-items:center; gap:6px; font-size:14px; padding:6px 12px; border-radius:18px;
+  color:var(--green); border:1px solid var(--green); background:var(--green-bg); }
+.allbtn[hidden]{ display:none; }
+.allbtn sup{ font-size:10px; color:var(--faint); }

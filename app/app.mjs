@@ -144,6 +144,18 @@ function rate(idx, verdict, which){
   if(verdict) c.ratings[idx] = verdict; else delete c.ratings[idx];
   refreshStates(); renderAll();
 }
+// "Knew it all": every rateable word on this card not already marked red goes green, then on to the next card.
+function knewAll(){
+  const c = cur(); if(!c) return;
+  touch();
+  c.phrase.tokens.forEach((t, idx) => {
+    if(!t.items || c.ratings[idx] === 'r') return;
+    for(const i of [...t.items, ...constructionItemsFor(c, idx)]) logEvent({ ph: c.phrase.id, c: c.inst, i, r: 'g' });
+    c.ratings[idx] = 'g';
+  });
+  refreshStates(); renderAll();
+  setTimeout(next, 250);           // brief flash of green so you see it land
+}
 function tapToken(idx){
   const c = cur();
   rate(idx, c.ratings[idx] === 'g' ? null : 'g');
@@ -181,6 +193,8 @@ function renderCard(){
     for(const k of p.constructions || []){ const x = lib.constructions[k.item.slice(2)]; if(x) notes.push(`<div><b>${esc(x.es)}</b> = ${esc(x.en)}</div>`); }
     for(const t of p.tokens){ const w = t.items && lib.words[t.items.find(i => i.startsWith('w:'))?.slice(2)]; if(w?.note) notes.push(`<div><b>${esc(t.t.replace(/[¿?¡!,.]/g, ''))}</b>: ${esc(w.note)}</div>`); }
   }
+  $('all').hidden = !showSecond || !p.tokens.some(t => t.items);
+  $('all').innerHTML = ic('check') + ' Knew it all' + (kbd ? ' <sup>G</sup>' : '');
   $('hn').innerHTML = notes.join('') || `<span class="faint">${showSecond ? 'No notes on this phrase' : 'Notes appear once the answer shows'}</span>`;
 }
 function renderAll(){
@@ -407,6 +421,7 @@ function wireInput(){
   };
   $('ov').onclick = closeSheet;
   $('add').onclick = () => toast('Adding your own phrases comes in Phase 3');
+  $('all').onclick = knewAll;
   $('qz').onclick = () => { if(playing) pausePlaying(); openQuiz(); };
   document.addEventListener('keydown', e => {
     if(e.key === 'Escape' && $('sh').classList.contains('open')) return closeSheet();
@@ -417,6 +432,7 @@ function wireInput(){
     if(e.code === 'Space' || e.key === 'Enter'){ e.preventDefault(); togglePlay(); }
     else if(e.key === 'ArrowRight'){ touch(); next(); }
     else if(e.key === 'ArrowLeft'){ touch(); prev(); }
+    else if((e.key === 'g' || e.key === 'G') && !$('all').hidden){ if(!kbd){ kbd = true; } knewAll(); }
     else if(/^Digit[1-9]$/.test(e.code)){
       const i = rateable[+e.code.slice(5) - 1];
       if(!kbd){ kbd = true; renderCard(); }
