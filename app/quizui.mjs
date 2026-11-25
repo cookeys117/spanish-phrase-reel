@@ -19,6 +19,8 @@ let pool, qs, score, states, q = null, n = 0, open = false, timer = null;
 const qhist = []; let qpos = -1;           // questions seen this session, for ◀ ▶
 const retries = [], recent = [];
 let speechMap = {}, current = null;
+// "Practise my misses": a separate, unscored round through today's missed words (nothing is logged).
+let prac = null;           // { queue: [{key, dir}], total, done: Set, again: Set, saved: {q, qhist, qpos} }
 const $ = id => document.getElementById(id);
 
 export const quizIsOpen = () => open;
@@ -81,15 +83,75 @@ const speakExample = (force = false) => { const ex = exPhrase(); return ex ? spe
 /* ---------- questions ---------- */
 /** The score shown is today's only: it starts again from 0 at midnight. */
 // Today's score is counted from today's recorded quiz answers (after a manual reset, if any).
-function rollScore(){
+function todaysAnswers(){
   const d = dayKey(), from = A.load('spr.qreset', 0);
-  const ev = quizEvents().filter(e => dayKey(e.t) === d && e.t > from && (e.r === 'g' || e.r === 'r'));
+  return quizEvents().filter(e => dayKey(e.t) === d && e.t > from && (e.r === 'g' || e.r === 'r'));
+}
+function rollScore(){
+  const ev = todaysAnswers();
   score = { ok: ev.filter(e => e.r === 'g').length, tot: ev.length };
 }
+/** Today's words: each word + direction asked today, with misses / rights, most missed first. */
+function todaysWords(){
+  const byKey = new Map(pool.map(it => [it.key, it])), m = new Map();
+  for(const e of todaysAnswers()){
+    const [key, dir] = e.i.split('>'); const it = byKey.get(key); if(!it) continue;
+    const w = m.get(e.i) || { it, dir, miss: 0, ok: 0, last: 0, lastMiss: 0 };
+    if(e.r === 'r'){ w.miss++; w.lastMiss = e.t; } else w.ok++;
+    w.last = e.t; m.set(e.i, w);
+  }
+  const all = [...m.values()];
+  const missed = all.filter(w => w.miss).sort((a, b) => b.miss - a.miss || b.lastMiss - a.lastMiss);
+  const right = all.filter(w => !w.miss).sort((a, b) => b.last - a.last);
+  return { missed, right };
+}
+const qa = w => w.dir === 'es' ? [w.it.es, w.it.en] : [w.it.en, w.it.es];
+function openToday(){
+  const { missed, right } = todaysWords();
+  const row = w => { const [qq, aa] = qa(w); return `<div class="trow"><button class="ib tsay" data-tsay="${esc(w.it.es)}" aria-label="Play">${ic('volume')}</button><div class="tq">${esc(qq)}</div><div class="ta">${esc(aa)}</div></div>`; };
+  A.openSheet(`<div class="head"><h3>Today's words</h3><button class="ib" data-close aria-label="Close">${ic('x')}</button></div>
+    <p class="info">${score.tot} answer${score.tot === 1 ? '' : 's'} · ${score.ok} right · ${missed.length} word${missed.length === 1 ? '' : 's'} missed at least once</p>
+    ${missed.length ? `<button class="pbtn" id="t_prac">${ic('player-play')} Practise my misses (${missed.length})</button>
+      <div class="grp">Missed today · most missed first</div>${missed.map(row).join('')}` : `<p class="muted">Nothing missed today.</p>`}
+    ${right.length ? `<button class="fold" id="t_fold">${ic('chevron-down')} Right every time (${right.length})</button><div id="t_right" hidden>${right.map(row).join('')}</div>` : ''}`);
+  const sh = $('sh');
+  sh.querySelectorAll('[data-tsay]').forEach(b => b.onclick = () => speak(b.dataset.tsay, null, true));
+  $('t_fold')?.addEventListener('click', () => { const r = $('t_right'); r.hidden = !r.hidden; $('t_fold').innerHTML = `${ic(r.hidden ? 'chevron-down' : 'chevron-up')} Right every time (${right.length})`; });
+  $('t_prac')?.addEventListener('click', () => { A.closeSheet(); startPractice(missed); });
+}
+function startPractice(missed){
+  clearTimeout(timer); stopAudio();
+  const queue0 = missed.map(w => ({ key: w.it.key, dir: w.dir }));
+  prac = { queue0, queue: queue0.map(k => ({ ...k })), total: missed.length, done: new Set(), again: new Set(),
+           saved: { q, qhist: qhist.splice(0), qpos } };
+  qpos = -1; q = null; next();
+}
+function exitPractice(){
+  if(!prac) return;
+  clearTimeout(timer); stopAudio();
+  const sv = prac.saved; prac = null;
+  qhist.splice(0, qhist.length, ...sv.qhist); qpos = sv.qpos; q = sv.q;
+  if(!q) next(); else render();
+}
+function againPractice(){ const keys = [...prac.queue0]; prac.queue = keys.map(k => ({ ...k })); prac.done = new Set(); prac.again = new Set(); qhist.length = 0; qpos = -1; next(); }
 function filtered(){ return filterPool(pool, qs); }
 function quizEvents(){ return A.getEvents().filter(e => e.m === 'quiz'); }
 function next(){
   clearTimeout(timer);
+  if(prac){                                         // practice round: today's misses, nothing scored
+    q = null;
+    while(!q && prac.queue.length){
+      const k = prac.queue.shift(), it = pool.find(p => p.key === k.key);
+      const made = it && makeQuestion(it, k.dir, pool);
+      if(made) q = { ...made, item: it, dir: k.dir, kind: 'practice', chosen: null };
+      else prac.done.add(k.key + '>' + k.dir);
+    }
+    if(q){
+      qhist.push(q); qpos = qhist.length - 1;
+      if(q.promptLang === 'es' && qs.autoSpeak){ const pr = q.prompt; setTimeout(() => speak(pr), 150); }
+    }
+    render(); return;
+  }
   const fp = filtered();
   states = computeStates(quizEvents(), {}, qs.ladder);
   const today = dayKey();
@@ -109,7 +171,7 @@ function next(){
     qhist.push(q); if(qhist.length > 100) qhist.shift();
     qpos = qhist.length - 1;
     recent.push(pairKey(q.item.key, q.dir));
-    if(q.promptLang === 'es' && qs.autoSpeak) setTimeout(() => speak(q.prompt), 150);
+    if(q.promptLang === 'es' && qs.autoSpeak){ const pr = q.prompt; setTimeout(() => speak(pr), 150); }
   }
   render();
 }
@@ -132,9 +194,14 @@ function answer(i){
   if(q.chosen !== null) return forward();
   q.chosen = i;
   const ok = i === q.answer;
-  A.logEvent({ m: 'quiz', i: pairKey(q.item.key, q.dir), r: ok ? 'g' : 'r', q: q.kind });
-  rollScore();
-  if(!ok && q.kind !== 'again') retries.push({ key: q.item.key, dir: q.dir, at: n + 4 });
+  if(prac){                                          // practice: no event, no score; a miss goes to the back of the round
+    const pk = pairKey(q.item.key, q.dir);
+    if(ok) prac.done.add(pk); else { prac.again.add(pk); prac.queue.push({ key: q.item.key, dir: q.dir }); }
+  } else {
+    A.logEvent({ m: 'quiz', i: pairKey(q.item.key, q.dir), r: ok ? 'g' : 'r', q: q.kind });
+    rollScore();
+    if(!ok && q.kind !== 'again') retries.push({ key: q.item.key, dir: q.dir, at: n + 4 });
+  }
   render();
   // sound: the right Spanish word (when the answers were Spanish), then the example phrase if wanted
   const asked = q;
@@ -153,7 +220,7 @@ function render(){
   const typesOn = TYPES.filter(([k]) => qs.types[k]).map(([, l]) => l);
   const summary = `${typesOn.length === TYPES.length ? 'all word types' : typesOn.join(', ') || 'nothing'} · ${DIRS.find(d => d[0] === qs.dir)[1]}`;
   const segBtn = (m, l) => `<button data-qmode="${m}" class="${qs.mode === m ? 'on' : ''}">${qs.mode === m ? ic('check') + ' ' : ''}${l}</button>`;
-  let h = `<div class="qhead"><button class="ib small" id="qback">${ic('arrow-left')} Reel</button><div class="seg">${segBtn('auto', 'Auto')}${segBtn('manual', 'Manual')}</div><span class="qscore" title="Today's score">${(rollScore(), score.tot) ? `Today ${score.ok} / ${score.tot}` : ''}</span>
+  let h = `<div class="qhead"><button class="ib small" id="qback">${ic('arrow-left')} Reel</button><div class="seg">${segBtn('auto', 'Auto')}${segBtn('manual', 'Manual')}</div><span class="qscore">${(rollScore(), score.tot) ? `<button id="qtoday" title="Today's words">Today ${score.ok} / ${score.tot}</button>` : ''}</span>
     <button class="ib ${qs.muted ? 'muted' : ''}" id="qmute" aria-label="Sound on or off">${ic(qs.muted ? 'volume-off' : 'volume')}</button>
     <button class="ib" id="qmenu" aria-label="Quiz settings">${ic('menu-2')}</button></div>
     <div class="qfilter"><button class="flink" id="qf"><span class="muted">Including:</span> ${esc(summary)} ${ic(qs.open ? 'chevron-up' : 'chevron-down')}</button>`;
@@ -162,13 +229,24 @@ function render(){
     if(qs.types.form) h += `<div class="chips"><span class="faint">Verb forms:</span> ${TENSES.map(([k, l]) => chip(!qs.tenses || qs.tenses.includes(k), l, `data-tense="${k}"`)).join('')}</div>`;
     h += `<div class="chips">${DIRS.map(([k, l]) => chip(qs.dir === k, l, `data-dir="${k}"`)).join('')}</div>`;
   }
-  h += `</div><div class="qbody" id="qbody">`;
+  h += `</div>`;
+  if(prac){
+    const finished = !q && !prac.queue.length;
+    h += `<div class="pband"><span>${ic('player-play')} Practising today's misses · <b>${finished ? 'done' : `${prac.done.size} of ${prac.total} done`}</b>${finished ? '' : ' · not scored'}</span><button class="pexit" id="pexit">${ic('x')} Exit</button></div>`;
+  }
+  h += `<div class="qbody" id="qbody">`;
   const fp = filtered();
-  if(!Object.values(qs.types).some(Boolean)) h += `<p class="qwarn">Pick at least one word type.</p>`;
+  if(prac && !q){
+    const firstTime = prac.total - prac.again.size;
+    h += `<div class="pdone"><div class="pbig">${ic('check')}</div><h3>All ${prac.total} practised</h3>
+      <p class="muted">${firstTime} right first time${prac.again.size ? ` · ${prac.again.size} needed another go` : ''}<br>Nothing here changed your scores or schedule.</p>
+      <button class="qnext" id="pagain">${ic('refresh')} Go round again</button><button class="opt pback" id="pback">Back to the normal quiz</button></div>`;
+  }
+  else if(!Object.values(qs.types).some(Boolean)) h += `<p class="qwarn">Pick at least one word type.</p>`;
   else if(!q) h += `<p class="qwarn">Too few words match this selection (${fp.length}). Add another word type or topic.</p>`;
   else {
     const it = q.item, answered = q.chosen !== null;
-    const tag = q.kind === 'again' ? 'Again · practice only' : q.kind === 'new' ? 'New' : '';
+    const tag = q.kind === 'practice' ? 'Practice' : q.kind === 'again' ? 'Again · practice only' : q.kind === 'new' ? 'New' : '';
     h += `<div class="qtag">${tag}</div>`;
     h += `<div class="qprompt ${q.promptLang}"><span>${esc(q.prompt)}</span>${q.promptLang === 'es' ? `<button class="ib" id="qsay" aria-label="Play">${ic('volume')}</button>` : ''}</div>`;
     if(it.type === 'form' && q.promptLang === 'en') h += `<p class="qctx">${esc(it.inf)} · ${esc(A.lib.verbs[it.inf]?.en || '')}</p>`;
@@ -198,6 +276,10 @@ function render(){
 }
 function wire(){
   $('qback').onclick = closeQuiz;
+  $('qtoday')?.addEventListener('click', openToday);
+  $('pexit')?.addEventListener('click', exitPractice);
+  $('pback')?.addEventListener('click', exitPractice);
+  $('pagain')?.addEventListener('click', againPractice);
   $('quiz').querySelectorAll('[data-qmode]').forEach(b => b.onclick = () => {
     qs.mode = b.dataset.qmode; persist();
     clearTimeout(timer);
@@ -231,7 +313,7 @@ function wire(){
 }
 function onKey(e){
   if(!open || e.target.matches('input, textarea, select') || $('sh').classList.contains('open')) return;
-  if(e.key === 'Escape') return closeQuiz();
+  if(e.key === 'Escape') return prac ? exitPractice() : closeQuiz();
   if(e.key === 'ArrowLeft') return back();
   if(e.key === 'ArrowRight') return forward();
   if(/^Digit[1-5]$/.test(e.code)) answer(+e.code.slice(5) - 1);
