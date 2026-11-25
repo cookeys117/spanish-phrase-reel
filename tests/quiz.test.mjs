@@ -34,7 +34,14 @@ const today = dayKey();
 const base = { pool: fp, states: new Map(), dir: 'mix', today, n: 1, retries: [], recent: [], newToday: 0, newCap: 20, random: () => 0.3 };
 const first = nextQuestion(base);
 ok(first.kind === 'new' && first.dir === 'es', 'first question is a new word, Spanish -> English');
-ok(nextQuestion({ ...base, newToday: 20 }).kind === 'practice', 'cap reached -> practice');
+ok(nextQuestion({ ...base, newToday: 20, random: () => 0.9 }).kind === 'practice', 'cap reached -> some review mixed in');
+ok(nextQuestion({ ...base, newToday: 20, random: () => 0.3 }).kind === 'new', 'cap reached -> new words still keep coming');
+{ // extra practice skips words already answered today, preferring earlier days' words
+  const st = new Map(fp.slice(0, 4).map(it => [pairKey(it.key, 'es'), { rung: 1, due: '2999-01-01', rated: true, firstSeen: today }]));
+  const done = new Set(fp.slice(0, 3).map(it => pairKey(it.key, 'es')));
+  const few = { ...base, pool: fp.slice(0, 4), states: st, newToday: 99, doneToday: done, random: () => 0.9 };
+  for(let k = 0; k < 20; k++) ok(nextQuestion({ ...few, random: () => k / 20 }).item.key === fp[3].key, 'not-yet-asked-today word is picked');
+}
 const retries = [{ key: fp[3].key, dir: 'es', at: 1 }];
 ok(nextQuestion({ ...base, retries }).item.key === fp[3].key, 'retry comes back when due');
 

@@ -36,7 +36,7 @@ export async function initQuiz(api){
   qs.topics = null;                                  // all topics, always (topics stay in the data for grouping)
   qs.muted = A.startup().muted;
   qs.mode = A.startup().quizMode || 'auto';
-  score = A.load('spr.qscore', { ok: 0, tot: 0 });
+  rollScore();
   try { speechMap = await (await fetch('audio/quiz-manifest.json', { cache: 'no-cache' })).json(); } catch(e){ speechMap = {}; }
   document.addEventListener('keydown', onKey);
 }
@@ -79,6 +79,13 @@ const exPhrase = () => A.byId[q.item.examples[0]];
 const speakExample = (force = false) => { const ex = exPhrase(); return ex ? speak(ex.es, `audio/${ex.id}_es.mp3`, force) : Promise.resolve(); };
 
 /* ---------- questions ---------- */
+/** The score shown is today's only: it starts again from 0 at midnight. */
+// Today's score is counted from today's recorded quiz answers (after a manual reset, if any).
+function rollScore(){
+  const d = dayKey(), from = A.load('spr.qreset', 0);
+  const ev = quizEvents().filter(e => dayKey(e.t) === d && e.t > from && (e.r === 'g' || e.r === 'r'));
+  score = { ok: ev.filter(e => e.r === 'g').length, tot: ev.length };
+}
 function filtered(){ return filterPool(pool, qs); }
 function quizEvents(){ return A.getEvents().filter(e => e.m === 'quiz'); }
 function next(){
@@ -87,10 +94,11 @@ function next(){
   states = computeStates(quizEvents(), {}, qs.ladder);
   const today = dayKey();
   let newToday = 0; for(const s of states.values()) if(s.firstSeen === today) newToday++;
+  const doneToday = new Set(quizEvents().filter(e => dayKey(e.t) === today).map(e => e.i));
   q = null;
   if(fp.length >= 1){
     for(let tries = 0; tries < 8 && !q; tries++){
-      const pick = nextQuestion({ pool: fp, states, dir: qs.dir, today, n, retries, recent, newToday, newCap: qs.newCap });
+      const pick = nextQuestion({ pool: fp, states, dir: qs.dir, today, n, retries, recent, newToday, newCap: qs.newCap, doneToday });
       if(!pick?.item) break;
       const made = makeQuestion(pick.item, pick.dir, pool);
       if(made) q = { ...made, item: pick.item, dir: pick.dir, kind: pick.kind, chosen: null };
@@ -124,8 +132,8 @@ function answer(i){
   if(q.chosen !== null) return forward();
   q.chosen = i;
   const ok = i === q.answer;
-  score.tot++; if(ok) score.ok++; A.save('spr.qscore', score);
   A.logEvent({ m: 'quiz', i: pairKey(q.item.key, q.dir), r: ok ? 'g' : 'r', q: q.kind });
+  rollScore();
   if(!ok && q.kind !== 'again') retries.push({ key: q.item.key, dir: q.dir, at: n + 4 });
   render();
   // sound: the right Spanish word (when the answers were Spanish), then the example phrase if wanted
@@ -145,7 +153,7 @@ function render(){
   const typesOn = TYPES.filter(([k]) => qs.types[k]).map(([, l]) => l);
   const summary = `${typesOn.length === TYPES.length ? 'all word types' : typesOn.join(', ') || 'nothing'} · ${DIRS.find(d => d[0] === qs.dir)[1]}`;
   const segBtn = (m, l) => `<button data-qmode="${m}" class="${qs.mode === m ? 'on' : ''}">${qs.mode === m ? ic('check') + ' ' : ''}${l}</button>`;
-  let h = `<div class="qhead"><button class="ib small" id="qback">${ic('arrow-left')} Reel</button><div class="seg">${segBtn('auto', 'Auto')}${segBtn('manual', 'Manual')}</div><span class="qscore">${score.tot ? `${score.ok} / ${score.tot}` : ''}</span>
+  let h = `<div class="qhead"><button class="ib small" id="qback">${ic('arrow-left')} Reel</button><div class="seg">${segBtn('auto', 'Auto')}${segBtn('manual', 'Manual')}</div><span class="qscore" title="Today's score">${(rollScore(), score.tot) ? `Today ${score.ok} / ${score.tot}` : ''}</span>
     <button class="ib ${qs.muted ? 'muted' : ''}" id="qmute" aria-label="Sound on or off">${ic(qs.muted ? 'volume-off' : 'volume')}</button>
     <button class="ib" id="qmenu" aria-label="Quiz settings">${ic('menu-2')}</button></div>
     <div class="qfilter"><button class="flink" id="qf"><span class="muted">Including:</span> ${esc(summary)} ${ic(qs.open ? 'chevron-up' : 'chevron-down')}</button>`;
@@ -244,14 +252,14 @@ function openSettings(){
     <div class="sr"><span>Read the example phrase aloud</span><select id="q_readex">${[['wrong', 'Only when I get it wrong'], ['always', 'Always'], ['off', 'Off (just show it)']].map(([v, l]) => `<option value="${v}" ${qs.readEx === v ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
     ${range('q_ok', 'Auto: pause before moving on after a right answer', qs.dOk, 0.3, 4, 0.1, sec)}
     ${check('q_ex', 'Show an example phrase', qs.showEx)}
-    ${range('q_new', 'New words per day (at most)', qs.newCap, 0, 60, 5, v => v)}
+    ${range('q_new', 'New words per day before review mixes in', qs.newCap, 0, 60, 5, v => v)}
     <div class="grp">Quiz ladder (separate from the reel)</div>
     <p class="faint" style="margin:4px 0 0">How far apart a word comes back after each right answer (one step per day at most). Gaps now: <span id="q_gaps"></span></p>
     ${range('ql_first', 'First interval', qs.ladder.firstInterval, 1, 3, 1, v => `${v} d`)}
     ${range('ql_factor', 'Growth per right answer', qs.ladder.factor, 1.1, 2.5, 0.1, v => `×${(+v).toFixed(1)}`)}
     ${range('ql_max', 'Longest interval', qs.ladder.maxInterval, 7, 180, 1, v => `${v} d`)}
     ${range('ql_drop', 'Steps dropped on a miss', qs.ladder.redDrop, 1, 5, 1, v => v)}
-    <button class="mb muted" id="q_reset">${ic('refresh')}Reset the running score (${score.ok} / ${score.tot})</button>
+    <button class="mb muted" id="q_reset">${ic('refresh')}Reset today's score (${score.ok} / ${score.tot})</button>
     <p class="faint">The quiz keeps its own ladder, separate from the reel. Each word is tracked both ways (Spanish → English and English → Spanish); English → Spanish joins in “mixed” once you know a word the easy way round.</p>`);
   const bind = (id, fn, fmt) => { const el = $(id); el.oninput = el.onchange = () => { fn(el.type === 'checkbox' ? el.checked : +el.value); if(fmt) $(id + 'o').textContent = fmt(el.value); persist(); }; };
   A.wireStartup(); bind('q_sound', v => qs.muted = !v); bind('q_speak', v => qs.autoSpeak = v);
@@ -265,7 +273,7 @@ function openSettings(){
   bind('ql_factor', v => { qs.ladder.factor = v; gaps(); }, v => `×${(+v).toFixed(1)}`);
   bind('ql_max', v => { qs.ladder.maxInterval = v; gaps(); }, v => `${v} d`);
   bind('ql_drop', v => qs.ladder.redDrop = v, v => v);
-  $('q_reset').onclick = () => { score = { ok: 0, tot: 0 }; A.save('spr.qscore', score); A.closeSheet(); render(); A.toast('Score reset'); };
+  $('q_reset').onclick = () => { A.save('spr.qreset', Date.now()); rollScore(); A.closeSheet(); render(); A.toast('Score reset'); };
   const sh = $('sh'), close = () => render();
   sh.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', close));
   $('ov').addEventListener('click', close, { once: true });

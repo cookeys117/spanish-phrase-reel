@@ -113,8 +113,10 @@ export function filterPool(pool, f){
  *        retries: [{key, dir, at}], recent: [pairKeys], newToday, newCap, random }
  */
 export const pairKey = (key, dir) => `${key}>${dir}`;
+const NEW_SHARE_AFTER_CAP = 0.65;
 export function nextQuestion(ctx){
   const { pool, states, dir, today, n, retries, recent, newToday, newCap } = ctx;
+  const doneToday = ctx.doneToday || new Set();      // pair keys already answered today
   const rnd = ctx.random || Math.random;
   const ri = retries.findIndex(r => r.at <= n && pool.some(p => p.key === r.key));
   if(ri >= 0){ const r = retries.splice(ri, 1)[0]; return { item: pool.find(p => p.key === r.key), dir: r.dir, kind: 'again' }; }
@@ -138,11 +140,14 @@ export function nextQuestion(ctx){
     const p = pick(due.slice(0, 5));
     return { item: p.it, dir: p.d, kind: 'due' };
   }
+  // New words: always up to the daily cap; after that they keep coming, mixed with some review (about 2 in 3 new).
   const unseen = from.filter(p => !p.s);
-  if(unseen.length && newToday < newCap){ const p = pick(unseen); return { item: p.it, dir: p.d, kind: 'new' }; }
-  // extra practice: lower rungs come up more often; never moves anything up early (scheduler rule)
+  if(unseen.length && (newToday < newCap || rnd() < NEW_SHARE_AFTER_CAP)){ const p = pick(unseen); return { item: p.it, dir: p.d, kind: 'new' }; }
+  // Extra practice (nothing moves up early — one promotion per day): prefer words from earlier days that
+  // weren't asked today; words already answered today only come back via the retry after a miss.
   const seen = from.filter(p => p.s);
-  const pool2 = seen.length ? seen : from;
+  const notToday = seen.filter(p => !doneToday.has(pairKey(p.it.key, p.d)));
+  const pool2 = notToday.length ? notToday : seen.length ? seen : from;
   const weighted = pool2.flatMap(p => Array(Math.max(1, 5 - (p.s?.rung ?? 0))).fill(p));
   const p = pick(weighted);
   return { item: p.it, dir: p.d, kind: 'practice' };
