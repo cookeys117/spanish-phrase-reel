@@ -1,4 +1,4 @@
-// Phrase Reel — Phase 1 prototype (reel screen). Progress is kept in this browser only (sync comes in Phase 3).
+// Phrase Reel — reel screen. Progress is kept in this browser and synced to Supabase when signed in (app/sync.mjs).
 import { computeStates, choosePhrase, dayKey, phraseItems, newItemsToday } from './scheduler.mjs';
 import { Player, chime } from './player.mjs';
 import { segment as conjSegment, conjugate, TENSE_LABEL } from '../engine/conjugate.mjs';
@@ -6,11 +6,16 @@ import { adjForm } from '../engine/adjectives.mjs';
 import { ic } from './icons.mjs';
 import { initQuiz, openQuiz, quizIsOpen, refreshQuizVoices } from './quizui.mjs';
 import { startVoiceWatch } from './voices.mjs';
+import { createSync } from './sync.mjs';
 
 /* ---------------- storage ---------------- */
 const KEY = { events: 'spr.events', settings: 'spr.settings', fix: 'spr.fix', dev: 'spr.device' };
 const load = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e){ return d; } };
-const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){ toast('Could not save — storage full or blocked'); } };
+const save = (k, v) => {
+  try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){ toast('Could not save — storage full or blocked'); }
+  if((k === 'spr.settings' || k === 'spr.quiz') && sync) sync.settingsChanged();        // settings travel to your other devices
+};
+let sync = null;
 
 const DEFAULTS = {
   order: 'en', muted: false, hideGap: true, gapMult: 1.0, thinkTime: 1.0, pauseBetween: 1.5, mode: 'auto', chime: true, regColour: true,
@@ -25,6 +30,14 @@ settings.ladder = { ...DEFAULTS.ladder, ...(settings.ladder || {}) };
 settings.startup = { ...DEFAULTS.startup, ...(settings.startup || {}) };
 settings.mode = settings.startup.mode; settings.muted = settings.startup.muted;
 let events = load(KEY.events, []);
+// Every event needs a unique id for syncing. Older events (before sync) get a stable id from their content.
+const fnv = str => { let h = 0x811c9dc5; for(let i = 0; i < str.length; i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); } return (h >>> 0).toString(36); };
+if(events.some(e => !e.id)){
+  const seen = new Set();
+  for(const e of events) if(!e.id){ let id = 'h' + fnv(JSON.stringify(e)) + '-' + e.t; while(seen.has(id)) id += 'x'; e.id = id; seen.add(id); }
+  try { localStorage.setItem(KEY.events, JSON.stringify(events)); } catch(e){}
+}
+let evSeq = 0;
 let fixList = load(KEY.fix, []);
 const device = load(KEY.dev, null) || (() => { const d = 'web-' + Math.random().toString(36).slice(2, 8); save(KEY.dev, d); return d; })();
 
@@ -48,7 +61,12 @@ const today = () => dayKey();
 const cur = () => history[pos];
 
 function refreshStates(){ states = computeStates(events.filter(e => e.m !== 'quiz'), byId, settings.ladder); }
-function logEvent(e){ events.push({ t: Date.now(), d: device, m: 'reel', ...e }); save(KEY.events, events); }
+function logEvent(e){
+  const t = Date.now();
+  events.push({ t, d: device, m: 'reel', ...e, id: `${device}-${t.toString(36)}-${(++evSeq).toString(36)}` });
+  save(KEY.events, events);
+  sync?.soon();
+}
 
 /* ---------------- choosing cards ---------------- */
 const forced = new URLSearchParams(location.search).get('ph');   // ?ph=p0059 opens that phrase first (for testing)
@@ -309,12 +327,37 @@ function openMenu(){
     <button class="mb" id="m1">${ic('settings')}Reel settings</button>
     <button class="mb" id="m2">${ic('flag')}Fix list (${fixList.length})</button>
     <button class="mb" id="m3">${ic('download')}Export my progress (backup file)</button>
-    <p class="faint" style="margin-top:14px">Library: ${lib.counts.ok} phrases · built ${lib.version.slice(0, 10)}. Progress is saved in this browser only until sync arrives (Phase 3).</p>`);
+    <div class="grp">Sync</div><div id="syncbox"></div>
+    <p class="faint" style="margin-top:14px">Library: ${lib.counts.ok} phrases · built ${lib.version.slice(0, 10)}.</p>`);
+  renderSyncBox(); const off = sync.on(() => { if($('syncbox')) renderSyncBox(); else off(); });
   $('m1').onclick = openSettings; $('m2').onclick = openFixList;
   $('m3').onclick = () => {
     const blob = new Blob([JSON.stringify({ exported: new Date().toISOString(), device, settings, events, fixList }, null, 1)], { type: 'application/json' });
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `phrase-reel-backup-${today()}.json`; a.click();
   };
+}
+function renderSyncBox(){
+  const box = $('syncbox'); if(!box) return;
+  const I = sync.info();
+  const when = I.last ? new Date(I.last).toLocaleString([], { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short' }) : 'not yet';
+  if(I.signedIn){
+    const line = { syncing: 'Syncing…', ok: `Up to date · last synced ${when}`, offline: `Offline · ${I.pending} waiting to upload`,
+                   error: `Couldn't sync (${esc(I.lastError)}) · will retry`, idle: 'Starting…' }[I.status] || '';
+    box.innerHTML = `<p class="muted" style="margin:4px 0">Signed in as <b>${esc(I.email)}</b><br>${line}${I.pending && I.status === 'ok' ? ` · ${I.pending} waiting` : ''}</p>
+      <button class="mb" id="sy_now">${ic('refresh')}Sync now</button><button class="mb muted" id="sy_out">Sign out of sync on this device</button>`;
+    $('sy_now').onclick = () => sync.run();
+    $('sy_out').onclick = () => { sync.signOut(); toast('Signed out — progress stays on this device'); };
+  } else {
+    box.innerHTML = `<p class="muted" style="margin:4px 0">Sign in to keep your progress safe and the same on all your devices. We email you a link — no password.</p>
+      <div style="display:flex;gap:6px"><input id="sy_email" type="email" placeholder="your email" style="flex:1;font:inherit;padding:8px;border-radius:8px;border:0.5px solid var(--line2);background:var(--bg);color:var(--text)">
+      <button id="sy_send">Send link</button></div><p class="faint" id="sy_msg"></p>`;
+    $('sy_send').onclick = async () => {
+      const email = $('sy_email').value.trim(); if(!/^\S+@\S+\.\S+$/.test(email)){ $('sy_msg').textContent = 'Enter your email address'; return; }
+      $('sy_send').disabled = true; $('sy_msg').textContent = 'Sending…';
+      try { await sync.sendLink(email); $('sy_msg').textContent = `Link sent to ${email}. Open it on this device to sign in (check spam if it's not there in a minute).`; }
+      catch(e){ $('sy_msg').textContent = 'Could not send: ' + e.message; $('sy_send').disabled = false; }
+    };
+  }
 }
 function openFixList(){
   openSheet(`<div class="head"><h3>Fix list</h3>${closeBtn}</div>` + (fixList.length
@@ -458,6 +501,13 @@ async function init(){
   await initQuiz({ lib, byId, getEvents: () => events, logEvent, load, save, ladder: () => settings.ladder, openSheet, closeSheet, toast,
     startup: () => settings.startup, setStartup: (k, v) => { settings.startup[k] = v; save(KEY.settings, settings); }, startupHTML, wireStartup });
   wireInput();
+  sync = createSync({ getEvents: () => events, load, save, toast,
+    onPulled: n => { refreshStates(); renderAll(); toast(`${n} answer${n > 1 ? 's' : ''} synced from your other devices`); },
+    onSettings: remote => {        // newer settings from another device: take them and restart once
+      try { localStorage.setItem(KEY.settings, JSON.stringify(remote.reel)); if(remote.quiz) localStorage.setItem('spr.quiz', JSON.stringify(remote.quiz)); } catch(e){}
+      location.reload();
+    } });
+  sync.start();
   startVoiceWatch(lib, refreshQuizVoices);         // small pink strip while new voices are being made
   // open straight onto the first card (no start screen)
   history.push(newCard()); pos = 0; loadCurrent(); renderAll();
